@@ -22,7 +22,7 @@ export class LeftNav{
     THEN
     CUBE: height:1, width: 33, depth:7;
     ELSE
-    CUBE: height:3, width: 2, depth:1;
+    CUBE: height:999, width: 999, depth:999;
     END IF
     CUBE: height: 12,width:2, depth:34;
     COLOR: fill: red;
@@ -50,7 +50,7 @@ export class LeftNav{
     var tree = parser.commandChain();
     var htmlVizRep = new HtmlVizRepListener(input);
     antlr4.tree.ParseTreeWalker.DEFAULT.walk(htmlVizRep, tree);
-    console.log("response from parser: " + htmlVizRep.Res);  
+    //console.log("response from parser: " + htmlVizRep.Res);  
   }
 
 }
