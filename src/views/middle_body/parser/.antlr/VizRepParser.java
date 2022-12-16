@@ -1,4 +1,4 @@
-// Generated from c:\Users\jonas\OneDrive\Dokumente\MSC_Wirtschaftsinformatik\semester_4\master_thesis\sandboxApplication\fuckshit\src\views\left_nav\parser\VizRep.g4 by ANTLR 4.9.2
+// Generated from c:\Users\jonas\OneDrive\Dokumente\MSC_Wirtschaftsinformatik\semester_4\master_thesis\masterThesis\src\views\middle_body\parser\VizRep.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -1160,8 +1160,8 @@ public class VizRepParser extends Parser {
 		public RelSphereContext relSphere() {
 			return getRuleContext(RelSphereContext.class,0);
 		}
-		public PlaneContext plane() {
-			return getRuleContext(PlaneContext.class,0);
+		public RelPaneContext relPane() {
+			return getRuleContext(RelPaneContext.class,0);
 		}
 		public RelTextContext relText() {
 			return getRuleContext(RelTextContext.class,0);
@@ -1197,7 +1197,7 @@ public class VizRepParser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(221);
-				plane();
+				relPane();
 				}
 				break;
 			case T__14:
@@ -3020,7 +3020,7 @@ public class VizRepParser extends Parser {
 		"\2\2\2\u00d6\u00d3\3\2\2\2\u00d6\u00d4\3\2\2\2\u00d6\u00d5\3\2\2\2\u00d7"+
 		"\25\3\2\2\2\u00d8\u00dc\5H%\2\u00d9\u00dc\5N(\2\u00da\u00dc\5B\"\2\u00db"+
 		"\u00d8\3\2\2\2\u00db\u00d9\3\2\2\2\u00db\u00da\3\2\2\2\u00dc\27\3\2\2"+
-		"\2\u00dd\u00e2\5\36\20\2\u00de\u00e2\5&\24\2\u00df\u00e2\5,\27\2\u00e0"+
+		"\2\u00dd\u00e2\5\36\20\2\u00de\u00e2\5&\24\2\u00df\u00e2\5.\30\2\u00e0"+
 		"\u00e2\5\66\34\2\u00e1\u00dd\3\2\2\2\u00e1\u00de\3\2\2\2\u00e1\u00df\3"+
 		"\2\2\2\u00e1\u00e0\3\2\2\2\u00e2\31\3\2\2\2\u00e3\u00e8\5\36\20\2\u00e4"+
 		"\u00e8\5&\24\2\u00e5\u00e8\5.\30\2\u00e6\u00e8\5\66\34\2\u00e7\u00e3\3"+

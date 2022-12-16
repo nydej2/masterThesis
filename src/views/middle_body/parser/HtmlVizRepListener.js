@@ -14,6 +14,7 @@ export class HtmlVizRepListener extends VizRepListener {
 
 enterCommandChain(ctx){
   this.Res = "function vizRep(gc){";
+  this.addZeilenUmbruch();
   }
 
 exitCommandChain(ctx){
@@ -74,73 +75,109 @@ enterRelCommandFrom(ctx){
       console.log("its a regular shape");
     }
   }
+
+enterRelCommandTo(ctx){
+  if(ctx.getText().includes('TEXT')){
+    this.Res = this.Res + "rel_graphic_text_to("
+    console.log("its a text");
+  } else {
+    this.Res = this.Res + "rel_to_object(";
+    console.log("its a regular shape");
+  }
+}
   
 exitRelCommandFrom(ctx){
     this.Res = this.Res + ");";
+    this.addZeilenUmbruch();
   }
+
+exitRelCommandTo(ctx){
+    this.Res = this.Res + ");";
+    this.addZeilenUmbruch();
+  }
+
+/**
+ * CUBE CREATION FUNCTIONS 
+ */
 
 exitCube(ctx){
-
-    var dimensions = [];
-    for(var i=0; i < ctx.DIGITS().length; i++){
-      var dimension = ctx.DIMENSION3D()[i].getText();
-      var dimensionValue = ctx.DIGITS()[i].getText();
-      dimensions.push({dimension: dimension, dimensionValue :dimensionValue})
-    }
-
-    this.Res = this.Res
-    + "gc.graphic_cube(" 
-    + this.widthString + ": " + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
-    + this.heightString + ": " + dimensions.find(o => o.dimension === this.heightString).dimensionValue + ","
-    + this.depthString + ": " + dimensions.find(o => o.dimension === this.depthString).dimensionValue ; 
-
-    if(this.color){
-      this.Res = this.Res + ", color: \"" + this.color + "\"";
-    } 
-    if (this.map){
-      this.Res = this.Res + ", map: \"" + this.map + "\""; 
-    }
-
-    this.Res = this.Res + ");"
-  }
-
-exitRelCube(ctx){
-    var dimensions = [];
-    for(var i=0; i < ctx.DIGITS().length; i++){
-      var dimension = ctx.DIMENSION3D()[i].getText();
-      var dimensionValue = ctx.DIGITS()[i].getText();
-      dimensions.push({dimension: dimension, dimensionValue :dimensionValue})
-    }
-  
-    this.Res = this.Res
-    + "graphic_cube(" 
-    + this.widthString + ": " + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
-    + this.heightString + ": " + dimensions.find(o => o.dimension === this.heightString).dimensionValue + ","
-    + this.depthString + ": " + dimensions.find(o => o.dimension === this.depthString).dimensionValue ; 
-  
-    if(this.color){
-      this.Res = this.Res + ", color: \"" + this.color + "\"";
-    } 
-    if (this.map){
-      this.Res = this.Res + ", map: \"" + this.map + "\""; 
-    }
-  
-    this.Res = this.Res + ")";
+  this.cubeCreation(ctx);
+  this.Res = this.Res + ";"
+  this.addZeilenUmbruch();
   }
 
 exitIfCube(ctx){
-  if(this.executeIfBlock){
-    this.exitCube(ctx);
+    if(this.executeIfBlock){
+      this.exitCube(ctx);
+    }
   }
+  
+exitElseCube(ctx){
+    if(this.executeElseBlock){
+      this.exitCube(ctx);
+    }
+  }
+
+exitRelCube(ctx){
+  this.cubeCreation(ctx);
+  }
+
+cubeCreation(ctx){
+  var dimensions = [];
+  for(var i=0; i < ctx.DIGITS().length; i++){
+    var dimension = ctx.DIMENSION3D()[i].getText();
+    var dimensionValue = ctx.DIGITS()[i].getText();
+    dimensions.push({dimension: dimension, dimensionValue :dimensionValue})
+  }
+
+  this.Res = this.Res
+  + "gc.graphic_cube(" 
+  + this.widthString + ": " + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
+  + this.heightString + ": " + dimensions.find(o => o.dimension === this.heightString).dimensionValue + ","
+  + this.depthString + ": " + dimensions.find(o => o.dimension === this.depthString).dimensionValue ; 
+
+  if(this.color){
+    this.Res = this.Res + ", color: \"" + this.color + "\"";
+  } 
+  if (this.map){
+    this.Res = this.Res + ", map: \"" + this.map + "\""; 
+  }
+
+  this.Res = this.Res + ")"
 }
 
-exitElseCube(ctx){
-  if(this.executeElseBlock){
-    this.exitCube(ctx);
-  }
-}
+/**
+ * SPHERE CREATION FUNCTIONS 
+ */
 
 exitSphere(ctx){
+  this.sphereCreation(ctx);
+  this.Res = this.Res + ";";
+  this.addZeilenUmbruch();
+}
+
+exitIfSphere(ctx){
+  if(this.executeIfBlock){
+  this.sphereCreation(ctx);  
+  this.Res = this.Res + ";";
+  this.addZeilenUmbruch();
+
+}
+}
+
+exitElseSphere(ctx){
+  if(this.executeElseBlock){
+    this.sphereCreation(ctx);
+    this.Res = this.Res + ";";
+    this.addZeilenUmbruch();
+  }
+}
+
+exitRelSphere(ctx){
+  this.sphereCreation(ctx);
+}
+
+sphereCreation(ctx){
   var dimensions = [];
   for(var i=0; i < ctx.DIGITS().length; i++){
     var dimension = ctx.SPHEREDIMENSIONS()[i].getText();
@@ -160,11 +197,41 @@ exitSphere(ctx){
   if (this.map){
     this.Res = this.Res + ", map: \"" + this.map + "\""; 
   }
+  this.Res = this.Res + ")"
 
-  this.Res = this.Res + ");"
 }
 
+/**
+ * PLANE CREATION FUNCTIONS 
+ */
+
 exitPlane(ctx){
+  this.planeCreation(ctx);
+  this.Res = this.Res + ";";
+  this.addZeilenUmbruch();
+}
+
+exitIfPlane(ctx){
+  if(this.executeIfBlock){
+    this.planeCreation(ctx);
+    this.Res = this.Res + ";";
+    this.addZeilenUmbruch();
+  }
+}
+
+exitElsePlane(ctx){
+  if(this.executeElseBlock){
+    this.planeCreation(ctx);
+    this.Res = this.Res + ";";
+    this.addZeilenUmbruch();
+  }
+}
+
+exitRelPane(ctx){
+  this.planeCreation(ctx);
+}
+
+planeCreation(ctx){
   var dimensions = [];
   for(var i=0; i < ctx.DIGITS().length; i++){
     var dimension = ctx.DIMENSION3D()[i].getText();
@@ -173,7 +240,7 @@ exitPlane(ctx){
   }
 
   this.Res = this.Res
-  + "graphic_plane(" 
+  + "gc.graphic_plane(" 
   + this.widthString + ": " + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
   + this.heightString + ": " + dimensions.find(o => o.dimension === this.heightString).dimensionValue
   if(this.color){
@@ -186,7 +253,30 @@ exitPlane(ctx){
   this.Res = this.Res + ")";
 }
 
+/**
+ * LINE CREATION FUNCTIONS 
+ */
+
 exitLine(ctx){
+  this.lineCreation(ctx);
+  this.addZeilenUmbruch();
+}
+
+exitIfLine(ctx){
+  if(this.executeIfBlock){
+    this.lineCreation(ctx);
+    this.addZeilenUmbruch();
+  }
+}
+
+exitElseLine(ctx){
+  if(this.executeElseBlock){
+    this.lineCreation(ctx);
+    this.addZeilenUmbruch();
+  }
+}
+
+lineCreation(ctx){
   this.Res = this.Res 
   + "gc.rel_graphic_line("
   + "color: \"" + this.color + "\","
@@ -197,35 +287,37 @@ exitLine(ctx){
   + "gap_size: " + this.gapSize + ");" 
 }
 
-exitText(ctx){
-  var textDimDigits = [];
-    for(var i=0; i < ctx.TEXTDIMDIGITS().length; i++){
-      var dimension = ctx.TEXTDIMDIGITS()[i].getText();
-      var dimensionValue = ctx.DIGITS()[i].getText();
-      textDimDigits.push({dimension: dimension, dimensionValue :dimensionValue})
-    }
+/**
+ * TEXT CREATION FUNCTIONS 
+ */
 
-  var textDimString = [];
-    for(var i=0; i < ctx.TEXTDIMSTRING().length; i++){
-      var dimension = ctx.TEXTDIMSTRING()[i].getText();
-      var dimensionValue = ctx.STRING()[i].getText();
-      textDimString.push({dimension: dimension, dimensionValue :dimensionValue})
-    }
-  
-  this.Res = this.Res
-  + "gc.graphic_text(" 
-  + "x_rel: " + textDimDigits.find(o => o.dimension === "xRel").dimensionValue + "," 
-  + "y_rel: " + textDimDigits.find(o => o.dimension === "yRel").dimensionValue + ","
-  + "z_rel: " + textDimDigits.find(o => o.dimension === "zRel").dimensionValue + ","
-  + "size: "  + textDimDigits.find(o => o.dimension === "size").dimensionValue + ","
-  + "text: "  + textDimString.find(o => o.dimension === "text").dimensionValue + ","
-  + "posNameX: "  + textDimString.find(o => o.dimension === "posNameX").dimensionValue + ","
-  + "posNameY: "  + textDimString.find(o => o.dimension === "posNameY").dimensionValue + ","
-  + "posNameZ: "  + textDimString.find(o => o.dimension === "posNameZ").dimensionValue + ");"
-  ; 
+exitText(ctx){
+ this.textCreation(ctx);
+ this.Res = this.Res + ";";
+ this.addZeilenUmbruch();
+}
+
+exitIfText(ctx){
+  if(this.executeIfBlock){
+    this.textCreation(ctx);
+    this.Res = this.Res + ";";
+    this.addZeilenUmbruch();
+  }
+}
+
+exitElseText(ctx){
+  if(this.executeElseBlock){
+    this.textCreation(ctx);
+    this.Res = this.Res + ";";
+    this.addZeilenUmbruch();
+  }
 }
 
 exitRelText(ctx){
+  this.textCreation(ctx);
+}
+
+textCreation(ctx){
   var textDimDigits = [];
     for(var i=0; i < ctx.TEXTDIMDIGITS().length; i++){
       var dimension = ctx.TEXTDIMDIGITS()[i].getText();
@@ -253,18 +345,71 @@ exitRelText(ctx){
   ; 
 }
 
+/**
+ * COLOR CREATION FUNCTIONS 
+ */
+
 exitColor(ctx){
     this.color = ctx.STRING();
     console.log("color set to: " + this.color);
+}
+
+exitIfColor(ctx){
+  if(this.executeIfBlock){
+  this.color = ctx.STRING();
+  console.log("color set to: " + this.color);
   }
+}
+
+exitElseColor(ctx){
+  if(this.executeElseBlock){
+  this.color = ctx.STRING();
+  console.log("color set to: " + this.color);
+  }
+}
+
+/**
+ * MAP CREATION FUNCTIONS 
+ */
 
 exitMap(ctx){
     this.map = ctx.STRING();
   }
 
+exitIfMap(ctx){
+  if(this.executeIfBlock){
+    this.map = ctx.STRING();
+  }
+}
+
+exitEleseMap(ctx){
+  if(this.executeElseBlock){
+    this.map = ctx.STRING();
+  }
+}
+
+/**
+ * PEN CREATION FUNCTIONS 
+ */
+
 exitPen(ctx){
+  this.createPen(ctx);
+}
+
+exitIfPen(ctx){
+  if(this.executeIfBlock){
+    this.createPen(ctx);
+  }
+}
+
+exitElsePen(ctx){
+  if(this.executeElseBlock){
+    this.createPen(ctx);
+  }
+}
+
+createPen(ctx){
   this.isDashed = ctx.STRING();
-  console.log(ctx.STRING());
   var penParams = [];
     for(var i=0; i < ctx.DIGITS().length; i++){
       var penParam = ctx.PENPARAMS()[i].getText();
@@ -279,4 +424,7 @@ exitPen(ctx){
   console.log("Pen setted to: isDashed: " + this.isDashed + ", dashScale: " + this.dashScale + ", gapSize: " + this.gapSize + ", dashSize: " + this.dashSize);
 }
 
+addZeilenUmbruch(){
+  this.Res = this.Res + "\n"
+}
 }

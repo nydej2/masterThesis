@@ -33,7 +33,7 @@ grammar VizRep;
 
  styleCommand   : color | map | pen;
 
- relCommandFrom : relCube | relSphere | plane | relText;
+ relCommandFrom : relCube | relSphere | relPane | relText;
 
  relCommandTo   : relCube | relSphere | relPane | relText;
  

@@ -95,7 +95,7 @@ const serializedATN = [4,1,33,613,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 0,212,208,1,0,0,0,212,209,1,0,0,0,212,210,1,0,0,0,212,211,1,0,0,0,213,19,
 1,0,0,0,214,218,3,70,35,0,215,218,3,76,38,0,216,218,3,64,32,0,217,214,1,
 0,0,0,217,215,1,0,0,0,217,216,1,0,0,0,218,21,1,0,0,0,219,224,3,28,14,0,220,
-224,3,36,18,0,221,224,3,42,21,0,222,224,3,52,26,0,223,219,1,0,0,0,223,220,
+224,3,36,18,0,221,224,3,44,22,0,222,224,3,52,26,0,223,219,1,0,0,0,223,220,
 1,0,0,0,223,221,1,0,0,0,223,222,1,0,0,0,224,23,1,0,0,0,225,230,3,28,14,0,
 226,230,3,36,18,0,227,230,3,44,22,0,228,230,3,52,26,0,229,225,1,0,0,0,229,
 226,1,0,0,0,229,227,1,0,0,0,229,228,1,0,0,0,230,25,1,0,0,0,231,232,5,9,0,
@@ -956,7 +956,7 @@ export default class VizRepParser extends antlr4.Parser {
 	        case 14:
 	            this.enterOuterAlt(localctx, 3);
 	            this.state = 221;
-	            this.plane();
+	            this.relPane();
 	            break;
 	        case 15:
 	            this.enterOuterAlt(localctx, 4);
@@ -3077,8 +3077,8 @@ class RelCommandFromContext extends antlr4.ParserRuleContext {
 	    return this.getTypedRuleContext(RelSphereContext,0);
 	};
 
-	plane() {
-	    return this.getTypedRuleContext(PlaneContext,0);
+	relPane() {
+	    return this.getTypedRuleContext(RelPaneContext,0);
 	};
 
 	relText() {
