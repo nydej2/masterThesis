@@ -4,13 +4,15 @@ grammar VizRep;
  * Parser Rules
  */
  
- commandChain	  : (command | NEWLINE | relation | condition)+ (EOF | NEWLINE);
+ commandChain	  : (command | NEWLINE | relation | condition | setVariable)+ (EOF | NEWLINE);
 
  relation       : line NEWLINE? 'START' NEWLINE? relCommandFrom NEWLINE? relCommandFrom? NEWLINE+? 'END' NEWLINE+? relCommandTo NEWLINE? relCommandTo?;
 
  relMiddle      : line NEWLINE+? 'START' NEWLINE+? shapeCommand shapeCommand? 'MIDDLE' NEWLINE+? text 'END' NEWLINE+? shapeCommand shapeCommand? ;
 
  condition      : 'IF(' DIGITS OPERATOR DIGITS ')' NEWLINE 'THEN' NEWLINE ifBlock NEWLINE 'ELSE' elseBlock 'END IF';
+
+ setVariable    : 'SET: ' STRING ':' SOMERULE ',' VARASSVALUES ':' BOOLEANSTRING ',' VARASSVALUES ':' BOOLEANSTRING  ';';
 
 /* The if and else block is necessary since otherwise there is no chance that the context 
  * of te child nodes are aware if they belong to a conditional statement
@@ -73,11 +75,11 @@ grammar VizRep;
  elseText        : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
                  ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ';';
 
- line           : 'LINE:' 'linewidth:' DIGITS ';';
+ line           : 'LINE:' 'lineWidth:' DIGITS ';';
 
- ifLine         : 'LINE:' 'linewidth:' DIGITS ';';
+ ifLine         : 'LINE:' 'lineWidth:' DIGITS ';';
 
- elseLine       : 'LINE:' 'linewidth:' DIGITS ';';  
+ elseLine       : 'LINE:' 'lineWidth:' DIGITS ';';  
 
  pen            : 'PEN:' PENPARAMSBOOL ':' STRING ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ';';
  
@@ -106,6 +108,8 @@ fragment LOWERCASE  : [a-z] ;
 
 fragment UPPERCASE  : [A-Z] ;
 
+BOOLEANSTRING   : ('True' | 'False');
+
 SPHEREDIMENSIONS: ('radius' | 'widthSegment' | 'heightSegment');
 
 DIMENSION3D			: (DIMENSION2D | 'depth');
@@ -120,6 +124,8 @@ PENPARAMSBOOL   : 'dashed';
 
 PENPARAMS       : ('dashScale'|'gapSize' | 'dashSize') ;
 
+VARASSVALUES    : ('instanceAdaptable' | 'isDynval');
+
 STRING 				  : (LOWERCASE | UPPERCASE)+;
 
 DIGITS				  : [0-9]+ ;
@@ -128,6 +134,7 @@ WHITESPACE      : (' ' | '\t')+  -> skip;
 
 NEWLINE         : ('\r'? '\n' | '\r')+ ;
 
-BOOLEANSTR      : ('true' | 'false') ;
-
 OPERATOR        : ('<=' | '==' | '>=' | '<' | '>');
+
+SOMERULE        : (STRING | DIGITS | '-')+;
+

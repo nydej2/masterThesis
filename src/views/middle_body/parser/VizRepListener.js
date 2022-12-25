@@ -41,6 +41,15 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by VizRepParser#setVariable.
+	enterSetVariable(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#setVariable.
+	exitSetVariable(ctx) {
+	}
+
+
 	// Enter a parse tree produced by VizRepParser#ifBlock.
 	enterIfBlock(ctx) {
 	}

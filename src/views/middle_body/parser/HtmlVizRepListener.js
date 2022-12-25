@@ -85,6 +85,38 @@ enterRelCommandTo(ctx){
     console.log("its a regular shape");
   }
 }
+
+exitSetVariable(ctx){
+
+  var variables = [];
+
+  var varName = ctx.STRING().getText();
+  var varValue = ctx.SOMERULE().getText();
+
+  for(var i=0; i < ctx.BOOLEANSTRING().length; i++){
+    var booleanName = ctx.VARASSVALUES()[i].getText();
+    var booleanValue = ctx.BOOLEANSTRING()[i].getText();
+    variables.push({booleanName: booleanName, booleanValue: booleanValue})
+  }
+
+  this.Res = this.Res 
+  + "gc.setVariable('" 
+  + varName 
+  + "',";
+
+  if(variables.find(o => o.booleanName === "isDynval").booleanValue == 'True'){
+    this.Res  = this.Res 
+    +"gc.dynval('" + varValue + "', gc.get_current_class_instance_uuid()),"
+  } else {
+    this.Res = this.Res 
+    + varValue + ",";
+  }
+  
+  this.Res = this.Res
+  + variables.find(o => o.booleanName === "instanceAdaptable").booleanValue.toLowerCase() + ");"
+
+  this.addZeilenUmbruch();
+}
   
 exitRelCommandFrom(ctx){
     this.Res = this.Res + ");";
@@ -426,5 +458,9 @@ createPen(ctx){
 
 addZeilenUmbruch(){
   this.Res = this.Res + "\n"
+}
+
+exitVarAssignment(ctx){
+
 }
 }
