@@ -13,7 +13,7 @@ export class HtmlVizRepListener extends VizRepListener {
   }
 
 enterCommandChain(ctx){
-  this.Res = "function vizRep(gc){";
+  this.Res = "async function vizRep(gc){";
   this.addZeilenUmbruch();
   }
 
@@ -68,20 +68,21 @@ enterCondition(ctx){
 enterRelCommandFrom(ctx){
 
     if(ctx.getText().includes('TEXT')){
-      this.Res = this.Res + "rel_graphic_text_from("
+      this.Res = this.Res + "await gc.rel_graphic_text_from("
       console.log("its a text");
     } else {
-      this.Res = this.Res + "rel_from_object(";
+      this.addAwait();
+      this.Res = this.Res + "gc.rel_from_object(";
       console.log("its a regular shape");
     }
   }
 
 enterRelCommandTo(ctx){
   if(ctx.getText().includes('TEXT')){
-    this.Res = this.Res + "rel_graphic_text_to("
-    console.log("its a text");
+    this.Res = this.Res + "await gc.rel_graphic_text_to("
   } else {
-    this.Res = this.Res + "rel_to_object(";
+    this.addAwait();
+    this.Res = this.Res + "gc.rel_to_object(";
     console.log("its a regular shape");
   }
 }
@@ -90,8 +91,20 @@ exitSetVariable(ctx){
 
   var variables = [];
 
-  var varName = ctx.STRING().getText();
-  var varValue = ctx.SOMERULE().getText();
+  var varName = ctx.STRING()[0].getText();
+
+  //Workaround for assigning value dynamically depending on input type.
+  if(ctx.STRING()[1]){
+    console.log("yeeet " + ctx.STRING()[1]);
+    var varValue = ctx.STRING()[1];
+  }
+
+  if(ctx.DIGITS()){
+    var varValue = ctx.DIGITS();
+  }
+  if(ctx.SOMERULE()){
+    var varValue = ctx.SOMERULE().getText();
+  }
 
   for(var i=0; i < ctx.BOOLEANSTRING().length; i++){
     var booleanName = ctx.VARASSVALUES()[i].getText();
@@ -100,13 +113,13 @@ exitSetVariable(ctx){
   }
 
   this.Res = this.Res 
-  + "gc.setVariable('" 
+  + "await gc.setVariable('" 
   + varName 
   + "',";
 
   if(variables.find(o => o.booleanName === "isDynval").booleanValue == 'True'){
     this.Res  = this.Res 
-    +"gc.dynval('" + varValue + "', gc.get_current_class_instance_uuid()),"
+    +"await gc.dynval('" + varValue + "', await gc.get_current_class_instance_uuid()),"
   } else {
     this.Res = this.Res 
     + varValue + ",";
@@ -162,17 +175,18 @@ cubeCreation(ctx){
     dimensions.push({dimension: dimension, dimensionValue :dimensionValue})
   }
 
+  this.addAwait();
   this.Res = this.Res
   + "gc.graphic_cube(" 
-  + this.widthString + ": " + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
-  + this.heightString + ": " + dimensions.find(o => o.dimension === this.heightString).dimensionValue + ","
-  + this.depthString + ": " + dimensions.find(o => o.dimension === this.depthString).dimensionValue ; 
+  + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
+  + dimensions.find(o => o.dimension === this.heightString).dimensionValue + ","
+  + dimensions.find(o => o.dimension === this.depthString).dimensionValue ; 
 
   if(this.color){
-    this.Res = this.Res + ", color: \"" + this.color + "\"";
+    this.Res = this.Res + ",\'" + this.color + "\'";
   } 
   if (this.map){
-    this.Res = this.Res + ", map: \"" + this.map + "\""; 
+    this.Res = this.Res + ", \'" + this.map + "\'"; 
   }
 
   this.Res = this.Res + ")"
@@ -290,6 +304,7 @@ planeCreation(ctx){
  */
 
 exitLine(ctx){
+  console.log("lineWidth" + ctx.DIGITS());
   this.lineCreation(ctx);
   this.addZeilenUmbruch();
 }
@@ -309,14 +324,15 @@ exitElseLine(ctx){
 }
 
 lineCreation(ctx){
+  this.addAwait();
   this.Res = this.Res 
   + "gc.rel_graphic_line("
-  + "color: \"" + this.color + "\","
-  + "line_width: " + ctx.DIGITS() + ","
-  + "dashed: " + this.isDashed + ","
-  + "dash_scale: " + this.dashScale + ","
-  + "dash_size: " + this.dashSize + ","
-  + "gap_size: " + this.gapSize + ");" 
+  + "\'" + this.color + "\',"
+  + ctx.DIGITS() + ","
+  + this.isDashed + ","
+  + this.dashScale + ","
+  + this.dashSize + ","
+  + this.gapSize + ");" 
 }
 
 /**
@@ -365,15 +381,25 @@ textCreation(ctx){
     }
   
   this.Res = this.Res
-  + "gc.graphic_text(" 
-  + "x_rel: " + textDimDigits.find(o => o.dimension === "xRel").dimensionValue + "," 
-  + "y_rel: " + textDimDigits.find(o => o.dimension === "yRel").dimensionValue + ","
-  + "z_rel: " + textDimDigits.find(o => o.dimension === "zRel").dimensionValue + ","
-  + "size: "  + textDimDigits.find(o => o.dimension === "size").dimensionValue + ","
-  + "text: "  + textDimString.find(o => o.dimension === "text").dimensionValue + ","
-  + "posNameX: "  + textDimString.find(o => o.dimension === "posNameX").dimensionValue + ","
-  + "posNameY: "  + textDimString.find(o => o.dimension === "posNameY").dimensionValue + ","
-  + "posNameZ: "  + textDimString.find(o => o.dimension === "posNameZ").dimensionValue + ")"
+  + "await gc.graphic_text(" 
+  + textDimDigits.find(o => o.dimension === "xRel").dimensionValue + "," 
+  + textDimDigits.find(o => o.dimension === "yRel").dimensionValue + ","
+  + textDimDigits.find(o => o.dimension === "zRel").dimensionValue + ","
+  + textDimDigits.find(o => o.dimension === "size").dimensionValue + ","
+  + "\'" +textDimString.find(o => o.dimension === "text").dimensionValue + "\'";
+  
+
+  //Optional parameters
+  if(textDimString.find(o => o.dimension === "posNameX")){
+    this.Res = this.Res + "," + textDimString.find(o => o.dimension === "posNameX").dimensionValue;
+  }
+  if(textDimString.find(o => o.dimension === "posNameY")){
+    this.Res = this.Res + "," + textDimString.find(o => o.dimension === "posNameY").dimensionValue 
+  }
+  if(textDimString.find(o => o.dimension === "posNameZ")){
+    this.Res = this.Res + "," + textDimString.find(o => o.dimension === "posNameZ").dimensionValue
+  }
+  this.Res = this.Res + ")";
   ; 
 }
 
@@ -458,6 +484,10 @@ createPen(ctx){
 
 addZeilenUmbruch(){
   this.Res = this.Res + "\n"
+}
+
+addAwait(){
+  this.Res = this.Res + "await ";
 }
 
 exitVarAssignment(ctx){

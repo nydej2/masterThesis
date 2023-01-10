@@ -6,13 +6,13 @@ grammar VizRep;
  
  commandChain	  : (command | NEWLINE | relation | condition | setVariable)+ (EOF | NEWLINE);
 
- relation       : line NEWLINE? 'START' NEWLINE? relCommandFrom NEWLINE? relCommandFrom? NEWLINE+? 'END' NEWLINE+? relCommandTo NEWLINE? relCommandTo?;
+ relation       : line NEWLINE? 'START' NEWLINE? color? NEWLINE? relCommandFrom NEWLINE? relCommandFrom? NEWLINE+? 'END' NEWLINE? color? NEWLINE+? relCommandTo NEWLINE? relCommandTo?;
 
  relMiddle      : line NEWLINE+? 'START' NEWLINE+? shapeCommand shapeCommand? 'MIDDLE' NEWLINE+? text 'END' NEWLINE+? shapeCommand shapeCommand? ;
 
  condition      : 'IF(' DIGITS OPERATOR DIGITS ')' NEWLINE 'THEN' NEWLINE ifBlock NEWLINE 'ELSE' elseBlock 'END IF';
 
- setVariable    : 'SET: ' STRING ':' SOMERULE ',' VARASSVALUES ':' BOOLEANSTRING ',' VARASSVALUES ':' BOOLEANSTRING  ';';
+ setVariable    : 'SET: ' STRING ':' (SOMERULE | STRING | DIGITS) ',' VARASSVALUES ':' BOOLEANSTRING ',' VARASSVALUES ':' BOOLEANSTRING  ';';
 
 /* The if and else block is necessary since otherwise there is no chance that the context 
  * of te child nodes are aware if they belong to a conditional statement
@@ -64,16 +64,16 @@ grammar VizRep;
  elsePlane      : 'PLANE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
 
  text           : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ';';
+                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)?';';
 
  relText        : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ';';
+                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)?';';
 
  ifText        : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ';';
+                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)?';';
 
  elseText        : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ',' TEXTDIMSTRING ':' STRING ';';
+                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? ';';
 
  line           : 'LINE:' 'lineWidth:' DIGITS ';';
 
@@ -126,9 +126,9 @@ PENPARAMS       : ('dashScale'|'gapSize' | 'dashSize') ;
 
 VARASSVALUES    : ('instanceAdaptable' | 'isDynval');
 
-STRING 				  : (LOWERCASE | UPPERCASE)+;
+STRING 				  : (LOWERCASE | UPPERCASE | '_')+;
 
-DIGITS				  : [0-9]+ ;
+DIGITS				  : [0-9.-]+;
 
 WHITESPACE      : (' ' | '\t')+  -> skip;
 
