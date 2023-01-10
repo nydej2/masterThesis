@@ -39,7 +39,8 @@ grammar VizRep;
 
  relCommandTo   : relCube | relSphere | relPane | relText;
  
- cube	    	    : 'CUBE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
+ /*It is necessary to distinct between regular DIMENSION3D and dynamic DIMENSION3DDYN becaue we must be able to distinct in the in the semantic actions(i.e. HtmlVizRepLinstener) */
+ cube	    	    : 'CUBE:' ((DIMENSION3D ':' DIGITS) | (DIMENSION3DDYN ':' 'GET:' STRING)) ',' ((DIMENSION3D ':' DIGITS) | (DIMENSION3DDYN ':' 'GET:' STRING)) ',' ((DIMENSION3D ':' DIGITS) | (DIMENSION3DDYN ':' 'GET:' STRING)) ';';
 
  relCube        : 'CUBE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
 
@@ -93,7 +94,7 @@ grammar VizRep;
 
  elseColor      : 'COLOR: fill:' STRING ';'; 
 
- map            : 'MAP: map:' STRING ';';
+ map            : 'MAP: map:' MAP ';';
 
  ifMap          : 'MAP: map:' STRING ';';
 
@@ -114,6 +115,8 @@ SPHEREDIMENSIONS: ('radius' | 'widthSegment' | 'heightSegment');
 
 DIMENSION3D			: (DIMENSION2D | 'depth');
 
+DIMENSION3DDYN  : ('heightDyn' | 'depthDyn' | 'widthDyn');
+
 DIMENSION2D			: ('height' | 'width');
 
 TEXTDIMDIGITS   : ('xRel' | 'yRel' | 'zRel' | 'size');
@@ -126,9 +129,11 @@ PENPARAMS       : ('dashScale'|'gapSize' | 'dashSize') ;
 
 VARASSVALUES    : ('instanceAdaptable' | 'isDynval');
 
+DIGITS				  : [0-9.-]+;
+
 STRING 				  : (LOWERCASE | UPPERCASE | '_')+;
 
-DIGITS				  : [0-9.-]+;
+MAP             : ([a-zA-Z0-9_/.+=])+;
 
 WHITESPACE      : (' ' | '\t')+  -> skip;
 
@@ -137,4 +142,3 @@ NEWLINE         : ('\r'? '\n' | '\r')+ ;
 OPERATOR        : ('<=' | '==' | '>=' | '<' | '>');
 
 SOMERULE        : (STRING | DIGITS | '-')+;
-

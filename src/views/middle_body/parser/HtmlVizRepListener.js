@@ -130,6 +130,11 @@ exitSetVariable(ctx){
 
   this.addZeilenUmbruch();
 }
+
+exitGetVariable(ctx){
+    console.log(ctx.STRING());
+}
+
   
 exitRelCommandFrom(ctx){
     this.Res = this.Res + ");";
@@ -175,12 +180,36 @@ cubeCreation(ctx){
     dimensions.push({dimension: dimension, dimensionValue :dimensionValue})
   }
 
+  var dimensionsDyn = [];
+  if(ctx.STRING){
+    for(var i=0; i < ctx.STRING().length; i++){
+      var dimensionDyn = ctx.DIMENSION3DDYN()[i].getText();
+      var dimensionDynValue = ctx.STRING()[i].getText();
+      dimensionsDyn.push({dimensionDyn: dimensionDyn, dimensionDynValue: dimensionDynValue});
+    }
+  }
+
   this.addAwait();
   this.Res = this.Res
-  + "gc.graphic_cube(" 
-  + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
-  + dimensions.find(o => o.dimension === this.heightString).dimensionValue + ","
-  + dimensions.find(o => o.dimension === this.depthString).dimensionValue ; 
+  + "gc.graphic_cube("; 
+  if(dimensions.find(o => o.dimension === this.widthString)){
+    this.Res = this.Res + dimensions.find(o => o.dimension === this.widthString).dimensionValue + ",";
+  } else if (dimensionsDyn.find(o => o.dimensionDyn === 'widthDyn')){
+    this.Res = this.Res + "await gc.getVariableValue(\'" + dimensionsDyn.find(o => o.dimensionDyn === 'widthDyn').dimensionDynValue + "\'),";
+  }
+
+  if(dimensions.find(o => o.dimension === this.heightString)){
+    this.Res = this.Res + dimensions.find(o => o.dimension === this.heightString).dimensionValue + ",";
+  } else if(dimensionsDyn.find(o => o.dimensionDyn === 'heightDyn')){
+    this.Res = this.Res + "await gc.getVariableValue(\'" + dimensionsDyn.find(o => o.dimensionDyn === 'heightDyn').dimensionDynValue + "\'),";
+  }
+
+  if(dimensions.find(o => o.dimension === this.depthString)){
+    this.Res = this.Res + dimensions.find(o => o.dimension === this.depthString).dimensionValue;
+  } else if(dimensionsDyn.find(o => o.dimensionDyn === 'depthDyn')){
+    this.Res = this.Res + "await gc.getVariableValue(\'" + dimensionsDyn.find(o => o.dimensionDyn === 'depthDyn').dimensionDynValue + "\')";
+
+  }
 
   if(this.color){
     this.Res = this.Res + ",\'" + this.color + "\'";
@@ -431,7 +460,9 @@ exitElseColor(ctx){
  */
 
 exitMap(ctx){
-    this.map = ctx.STRING();
+    this.map = "data:image/png;base64,";
+    this.map = this.map + ctx.MAP
+    ();
   }
 
 exitIfMap(ctx){
