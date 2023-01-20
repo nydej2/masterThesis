@@ -14,6 +14,15 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by VizRepParser#command.
+	enterCommand(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#command.
+	exitCommand(ctx) {
+	}
+
+
 	// Enter a parse tree produced by VizRepParser#relation.
 	enterRelation(ctx) {
 	}
@@ -23,12 +32,21 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by VizRepParser#relMiddle.
-	enterRelMiddle(ctx) {
+	// Enter a parse tree produced by VizRepParser#relCommandFrom.
+	enterRelCommandFrom(ctx) {
 	}
 
-	// Exit a parse tree produced by VizRepParser#relMiddle.
-	exitRelMiddle(ctx) {
+	// Exit a parse tree produced by VizRepParser#relCommandFrom.
+	exitRelCommandFrom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by VizRepParser#relCommandTo.
+	enterRelCommandTo(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#relCommandTo.
+	exitRelCommandTo(ctx) {
 	}
 
 
@@ -38,15 +56,6 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by VizRepParser#condition.
 	exitCondition(ctx) {
-	}
-
-
-	// Enter a parse tree produced by VizRepParser#setVariable.
-	enterSetVariable(ctx) {
-	}
-
-	// Exit a parse tree produced by VizRepParser#setVariable.
-	exitSetVariable(ctx) {
 	}
 
 
@@ -86,12 +95,12 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by VizRepParser#command.
-	enterCommand(ctx) {
+	// Enter a parse tree produced by VizRepParser#setVariable.
+	enterSetVariable(ctx) {
 	}
 
-	// Exit a parse tree produced by VizRepParser#command.
-	exitCommand(ctx) {
+	// Exit a parse tree produced by VizRepParser#setVariable.
+	exitSetVariable(ctx) {
 	}
 
 
@@ -110,24 +119,6 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by VizRepParser#styleCommand.
 	exitStyleCommand(ctx) {
-	}
-
-
-	// Enter a parse tree produced by VizRepParser#relCommandFrom.
-	enterRelCommandFrom(ctx) {
-	}
-
-	// Exit a parse tree produced by VizRepParser#relCommandFrom.
-	exitRelCommandFrom(ctx) {
-	}
-
-
-	// Enter a parse tree produced by VizRepParser#relCommandTo.
-	enterRelCommandTo(ctx) {
-	}
-
-	// Exit a parse tree produced by VizRepParser#relCommandTo.
-	exitRelCommandTo(ctx) {
 	}
 
 
@@ -302,33 +293,6 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by VizRepParser#pen.
-	enterPen(ctx) {
-	}
-
-	// Exit a parse tree produced by VizRepParser#pen.
-	exitPen(ctx) {
-	}
-
-
-	// Enter a parse tree produced by VizRepParser#ifPen.
-	enterIfPen(ctx) {
-	}
-
-	// Exit a parse tree produced by VizRepParser#ifPen.
-	exitIfPen(ctx) {
-	}
-
-
-	// Enter a parse tree produced by VizRepParser#elsePen.
-	enterElsePen(ctx) {
-	}
-
-	// Exit a parse tree produced by VizRepParser#elsePen.
-	exitElsePen(ctx) {
-	}
-
-
 	// Enter a parse tree produced by VizRepParser#color.
 	enterColor(ctx) {
 	}
@@ -356,6 +320,33 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by VizRepParser#pen.
+	enterPen(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#pen.
+	exitPen(ctx) {
+	}
+
+
+	// Enter a parse tree produced by VizRepParser#ifPen.
+	enterIfPen(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#ifPen.
+	exitIfPen(ctx) {
+	}
+
+
+	// Enter a parse tree produced by VizRepParser#elsePen.
+	enterElsePen(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#elsePen.
+	exitElsePen(ctx) {
+	}
+
+
 	// Enter a parse tree produced by VizRepParser#map.
 	enterMap(ctx) {
 	}
@@ -380,6 +371,24 @@ export default class VizRepListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by VizRepParser#elseMap.
 	exitElseMap(ctx) {
+	}
+
+
+	// Enter a parse tree produced by VizRepParser#dimInput.
+	enterDimInput(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#dimInput.
+	exitDimInput(ctx) {
+	}
+
+
+	// Enter a parse tree produced by VizRepParser#sphereDimInput.
+	enterSphereDimInput(ctx) {
+	}
+
+	// Exit a parse tree produced by VizRepParser#sphereDimInput.
+	exitSphereDimInput(ctx) {
 	}
 
 

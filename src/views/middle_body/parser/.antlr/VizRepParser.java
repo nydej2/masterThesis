@@ -18,51 +18,51 @@ public class VizRepParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, BOOLEANSTRING=23, SPHEREDIMENSIONS=24, 
-		DIMENSION3D=25, DIMENSION3DDYN=26, DIMENSION2D=27, TEXTDIMDIGITS=28, TEXTDIMSTRING=29, 
-		PENPARAMSBOOL=30, PENPARAMS=31, VARASSVALUES=32, DIGITS=33, STRING=34, 
-		MAP=35, WHITESPACE=36, NEWLINE=37, OPERATOR=38, SOMERULE=39;
+		T__17=18, T__18=19, T__19=20, BOOLEANSTRING=21, SPHEREPARAMS=22, DIMENSION3D=23, 
+		DIMENSION2D=24, TEXTPARAMDIGITS=25, TEXTPARAMSTRING=26, PENPARAMSBOOL=27, 
+		PENPARAMS=28, VARASSPARAMS=29, DIGITS=30, STRING=31, MAPLEXER=32, WHITESPACE=33, 
+		NEWLINE=34, OPERATOR=35, DYNVALSTRING=36, DYNINPUT=37;
 	public static final int
-		RULE_commandChain = 0, RULE_relation = 1, RULE_relMiddle = 2, RULE_condition = 3, 
-		RULE_setVariable = 4, RULE_ifBlock = 5, RULE_elseBlock = 6, RULE_ifCommand = 7, 
-		RULE_elseCommand = 8, RULE_command = 9, RULE_shapeCommand = 10, RULE_styleCommand = 11, 
-		RULE_relCommandFrom = 12, RULE_relCommandTo = 13, RULE_cube = 14, RULE_relCube = 15, 
-		RULE_ifCube = 16, RULE_elseCube = 17, RULE_sphere = 18, RULE_relSphere = 19, 
-		RULE_ifSphere = 20, RULE_elseSphere = 21, RULE_plane = 22, RULE_relPane = 23, 
-		RULE_ifPlane = 24, RULE_elsePlane = 25, RULE_text = 26, RULE_relText = 27, 
-		RULE_ifText = 28, RULE_elseText = 29, RULE_line = 30, RULE_ifLine = 31, 
-		RULE_elseLine = 32, RULE_pen = 33, RULE_ifPen = 34, RULE_elsePen = 35, 
-		RULE_color = 36, RULE_ifColor = 37, RULE_elseColor = 38, RULE_map = 39, 
-		RULE_ifMap = 40, RULE_elseMap = 41;
+		RULE_commandChain = 0, RULE_command = 1, RULE_relation = 2, RULE_relCommandFrom = 3, 
+		RULE_relCommandTo = 4, RULE_condition = 5, RULE_ifBlock = 6, RULE_elseBlock = 7, 
+		RULE_ifCommand = 8, RULE_elseCommand = 9, RULE_setVariable = 10, RULE_shapeCommand = 11, 
+		RULE_styleCommand = 12, RULE_cube = 13, RULE_relCube = 14, RULE_ifCube = 15, 
+		RULE_elseCube = 16, RULE_sphere = 17, RULE_relSphere = 18, RULE_ifSphere = 19, 
+		RULE_elseSphere = 20, RULE_plane = 21, RULE_relPane = 22, RULE_ifPlane = 23, 
+		RULE_elsePlane = 24, RULE_text = 25, RULE_relText = 26, RULE_ifText = 27, 
+		RULE_elseText = 28, RULE_line = 29, RULE_ifLine = 30, RULE_elseLine = 31, 
+		RULE_color = 32, RULE_ifColor = 33, RULE_elseColor = 34, RULE_pen = 35, 
+		RULE_ifPen = 36, RULE_elsePen = 37, RULE_map = 38, RULE_ifMap = 39, RULE_elseMap = 40, 
+		RULE_dimInput = 41, RULE_sphereDimInput = 42;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"commandChain", "relation", "relMiddle", "condition", "setVariable", 
-			"ifBlock", "elseBlock", "ifCommand", "elseCommand", "command", "shapeCommand", 
-			"styleCommand", "relCommandFrom", "relCommandTo", "cube", "relCube", 
-			"ifCube", "elseCube", "sphere", "relSphere", "ifSphere", "elseSphere", 
-			"plane", "relPane", "ifPlane", "elsePlane", "text", "relText", "ifText", 
-			"elseText", "line", "ifLine", "elseLine", "pen", "ifPen", "elsePen", 
-			"color", "ifColor", "elseColor", "map", "ifMap", "elseMap"
+			"commandChain", "command", "relation", "relCommandFrom", "relCommandTo", 
+			"condition", "ifBlock", "elseBlock", "ifCommand", "elseCommand", "setVariable", 
+			"shapeCommand", "styleCommand", "cube", "relCube", "ifCube", "elseCube", 
+			"sphere", "relSphere", "ifSphere", "elseSphere", "plane", "relPane", 
+			"ifPlane", "elsePlane", "text", "relText", "ifText", "elseText", "line", 
+			"ifLine", "elseLine", "color", "ifColor", "elseColor", "pen", "ifPen", 
+			"elsePen", "map", "ifMap", "elseMap", "dimInput", "sphereDimInput"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'START'", "'END'", "'MIDDLE'", "'IF('", "')'", "'THEN'", "'ELSE'", 
-			"'END IF'", "'SET: '", "':'", "','", "';'", "'CUBE:'", "'GET:'", "'SPHERE:'", 
-			"'PLANE:'", "'TEXT:'", "'LINE:'", "'lineWidth:'", "'PEN:'", "'COLOR: fill:'", 
-			"'MAP: map:'", null, null, null, null, null, null, null, "'dashed'"
+			null, "'START'", "'END'", "'IF('", "')'", "'THEN'", "'ELSE'", "'END IF'", 
+			"'SET: '", "':'", "','", "';'", "'CUBE:'", "'SPHERE:'", "'PLANE:'", "'TEXT:'", 
+			"'LINE:'", "'lineWidth:'", "'COLOR: fill:'", "'PEN:'", "'MAP: map:'", 
+			null, null, null, null, null, null, "'dashed'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, null, null, "BOOLEANSTRING", 
-			"SPHEREDIMENSIONS", "DIMENSION3D", "DIMENSION3DDYN", "DIMENSION2D", "TEXTDIMDIGITS", 
-			"TEXTDIMSTRING", "PENPARAMSBOOL", "PENPARAMS", "VARASSVALUES", "DIGITS", 
-			"STRING", "MAP", "WHITESPACE", "NEWLINE", "OPERATOR", "SOMERULE"
+			null, null, null, null, null, null, null, null, null, "BOOLEANSTRING", 
+			"SPHEREPARAMS", "DIMENSION3D", "DIMENSION2D", "TEXTPARAMDIGITS", "TEXTPARAMSTRING", 
+			"PENPARAMSBOOL", "PENPARAMS", "VARASSPARAMS", "DIGITS", "STRING", "MAPLEXER", 
+			"WHITESPACE", "NEWLINE", "OPERATOR", "DYNVALSTRING", "DYNINPUT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -160,50 +160,50 @@ public class VizRepParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(89); 
+			setState(91); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
 				switch (_alt) {
 				case 1:
 					{
-					setState(89);
+					setState(91);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
+					case T__11:
 					case T__12:
+					case T__13:
 					case T__14:
-					case T__15:
-					case T__16:
+					case T__17:
+					case T__18:
 					case T__19:
-					case T__20:
-					case T__21:
 						{
-						setState(84);
+						setState(86);
 						command();
+						}
+						break;
+					case T__15:
+						{
+						setState(87);
+						relation();
+						}
+						break;
+					case T__2:
+						{
+						setState(88);
+						condition();
+						}
+						break;
+					case T__7:
+						{
+						setState(89);
+						setVariable();
 						}
 						break;
 					case NEWLINE:
 						{
-						setState(85);
+						setState(90);
 						match(NEWLINE);
-						}
-						break;
-					case T__17:
-						{
-						setState(86);
-						relation();
-						}
-						break;
-					case T__3:
-						{
-						setState(87);
-						condition();
-						}
-						break;
-					case T__8:
-						{
-						setState(88);
-						setVariable();
 						}
 						break;
 					default:
@@ -214,11 +214,11 @@ public class VizRepParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(91); 
+				setState(93); 
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(93);
+			setState(95);
 			_la = _input.LA(1);
 			if ( !(_la==EOF || _la==NEWLINE) ) {
 			_errHandler.recoverInline(this);
@@ -241,21 +241,78 @@ public class VizRepParser extends Parser {
 		return _localctx;
 	}
 
+	public static class CommandContext extends ParserRuleContext {
+		public ShapeCommandContext shapeCommand() {
+			return getRuleContext(ShapeCommandContext.class,0);
+		}
+		public StyleCommandContext styleCommand() {
+			return getRuleContext(StyleCommandContext.class,0);
+		}
+		public TextContext text() {
+			return getRuleContext(TextContext.class,0);
+		}
+		public CommandContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_command; }
+	}
+
+	public final CommandContext command() throws RecognitionException {
+		CommandContext _localctx = new CommandContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_command);
+		try {
+			setState(100);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__11:
+			case T__12:
+			case T__13:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(97);
+				shapeCommand();
+				}
+				break;
+			case T__17:
+			case T__18:
+			case T__19:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(98);
+				styleCommand();
+				}
+				break;
+			case T__14:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(99);
+				text();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class RelationContext extends ParserRuleContext {
 		public LineContext line() {
 			return getRuleContext(LineContext.class,0);
 		}
-		public List<RelCommandFromContext> relCommandFrom() {
-			return getRuleContexts(RelCommandFromContext.class);
+		public RelCommandFromContext relCommandFrom() {
+			return getRuleContext(RelCommandFromContext.class,0);
 		}
-		public RelCommandFromContext relCommandFrom(int i) {
-			return getRuleContext(RelCommandFromContext.class,i);
-		}
-		public List<RelCommandToContext> relCommandTo() {
-			return getRuleContexts(RelCommandToContext.class);
-		}
-		public RelCommandToContext relCommandTo(int i) {
-			return getRuleContext(RelCommandToContext.class,i);
+		public RelCommandToContext relCommandTo() {
+			return getRuleContext(RelCommandToContext.class,0);
 		}
 		public List<TerminalNode> NEWLINE() { return getTokens(VizRepParser.NEWLINE); }
 		public TerminalNode NEWLINE(int i) {
@@ -267,6 +324,12 @@ public class VizRepParser extends Parser {
 		public ColorContext color(int i) {
 			return getRuleContext(ColorContext.class,i);
 		}
+		public List<TextContext> text() {
+			return getRuleContexts(TextContext.class);
+		}
+		public TextContext text(int i) {
+			return getRuleContext(TextContext.class,i);
+		}
 		public RelationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -275,79 +338,79 @@ public class VizRepParser extends Parser {
 
 	public final RelationContext relation() throws RecognitionException {
 		RelationContext _localctx = new RelationContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_relation);
+		enterRule(_localctx, 4, RULE_relation);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(95);
+			setState(102);
 			line();
-			setState(97);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==NEWLINE) {
-				{
-				setState(96);
-				match(NEWLINE);
-				}
-			}
-
-			setState(99);
-			match(T__0);
-			setState(101);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
-			case 1:
-				{
-				setState(100);
-				match(NEWLINE);
-				}
-				break;
-			}
 			setState(104);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__20) {
+			if (_la==NEWLINE) {
 				{
 				setState(103);
+				match(NEWLINE);
+				}
+			}
+
+			setState(106);
+			match(T__0);
+			setState(108);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			case 1:
+				{
+				setState(107);
+				match(NEWLINE);
+				}
+				break;
+			}
+			setState(111);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T__17) {
+				{
+				setState(110);
 				color();
 				}
 			}
 
-			setState(107);
+			setState(114);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NEWLINE) {
 				{
-				setState(106);
+				setState(113);
 				match(NEWLINE);
 				}
 			}
 
-			setState(109);
+			setState(116);
 			relCommandFrom();
-			setState(111);
+			setState(118);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				{
-				setState(110);
+				setState(117);
 				match(NEWLINE);
 				}
 				break;
 			}
-			setState(114);
+			setState(121);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__12) | (1L << T__14) | (1L << T__15) | (1L << T__16))) != 0)) {
+			if (_la==T__14) {
 				{
-				setState(113);
-				relCommandFrom();
+				setState(120);
+				text();
 				}
 			}
 
-			setState(117); 
+			setState(124); 
 			_errHandler.sync(this);
 			_alt = 1+1;
 			do {
@@ -355,7 +418,7 @@ public class VizRepParser extends Parser {
 				case 1+1:
 					{
 					{
-					setState(116);
+					setState(123);
 					match(NEWLINE);
 					}
 					}
@@ -363,33 +426,33 @@ public class VizRepParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(119); 
+				setState(126); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
 			} while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(121);
+			setState(128);
 			match(T__1);
-			setState(123);
+			setState(130);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				{
-				setState(122);
+				setState(129);
 				match(NEWLINE);
 				}
 				break;
 			}
-			setState(126);
+			setState(133);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__20) {
+			if (_la==T__17) {
 				{
-				setState(125);
+				setState(132);
 				color();
 				}
 			}
 
-			setState(129); 
+			setState(136); 
 			_errHandler.sync(this);
 			_alt = 1+1;
 			do {
@@ -397,7 +460,7 @@ public class VizRepParser extends Parser {
 				case 1+1:
 					{
 					{
-					setState(128);
+					setState(135);
 					match(NEWLINE);
 					}
 					}
@@ -405,29 +468,29 @@ public class VizRepParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(131); 
+				setState(138); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
 			} while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(133);
+			setState(140);
 			relCommandTo();
-			setState(135);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
-			case 1:
-				{
-				setState(134);
-				match(NEWLINE);
-				}
-				break;
-			}
-			setState(138);
+			setState(142);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				{
-				setState(137);
-				relCommandTo();
+				setState(141);
+				match(NEWLINE);
+				}
+				break;
+			}
+			setState(145);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
+			case 1:
+				{
+				setState(144);
+				text();
 				}
 				break;
 			}
@@ -444,151 +507,131 @@ public class VizRepParser extends Parser {
 		return _localctx;
 	}
 
-	public static class RelMiddleContext extends ParserRuleContext {
-		public LineContext line() {
-			return getRuleContext(LineContext.class,0);
+	public static class RelCommandFromContext extends ParserRuleContext {
+		public RelCubeContext relCube() {
+			return getRuleContext(RelCubeContext.class,0);
 		}
-		public List<ShapeCommandContext> shapeCommand() {
-			return getRuleContexts(ShapeCommandContext.class);
+		public RelSphereContext relSphere() {
+			return getRuleContext(RelSphereContext.class,0);
 		}
-		public ShapeCommandContext shapeCommand(int i) {
-			return getRuleContext(ShapeCommandContext.class,i);
+		public RelPaneContext relPane() {
+			return getRuleContext(RelPaneContext.class,0);
 		}
-		public TextContext text() {
-			return getRuleContext(TextContext.class,0);
+		public RelTextContext relText() {
+			return getRuleContext(RelTextContext.class,0);
 		}
-		public List<TerminalNode> NEWLINE() { return getTokens(VizRepParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(VizRepParser.NEWLINE, i);
-		}
-		public RelMiddleContext(ParserRuleContext parent, int invokingState) {
+		public RelCommandFromContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_relMiddle; }
+		@Override public int getRuleIndex() { return RULE_relCommandFrom; }
 	}
 
-	public final RelMiddleContext relMiddle() throws RecognitionException {
-		RelMiddleContext _localctx = new RelMiddleContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_relMiddle);
-		int _la;
+	public final RelCommandFromContext relCommandFrom() throws RecognitionException {
+		RelCommandFromContext _localctx = new RelCommandFromContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_relCommandFrom);
 		try {
-			int _alt;
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(140);
-			line();
-			setState(142); 
+			setState(151);
 			_errHandler.sync(this);
-			_alt = 1+1;
-			do {
-				switch (_alt) {
-				case 1+1:
-					{
-					{
-					setState(141);
-					match(NEWLINE);
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+			switch (_input.LA(1)) {
+			case T__11:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(147);
+				relCube();
 				}
-				setState(144); 
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
-			} while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(146);
-			match(T__0);
-			setState(148); 
-			_errHandler.sync(this);
-			_alt = 1+1;
-			do {
-				switch (_alt) {
-				case 1+1:
-					{
-					{
-					setState(147);
-					match(NEWLINE);
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				break;
+			case T__12:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(148);
+				relSphere();
 				}
-				setState(150); 
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
-			} while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(152);
-			shapeCommand();
-			setState(154);
+				break;
+			case T__13:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(149);
+				relPane();
+				}
+				break;
+			case T__14:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(150);
+				relText();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class RelCommandToContext extends ParserRuleContext {
+		public RelCubeContext relCube() {
+			return getRuleContext(RelCubeContext.class,0);
+		}
+		public RelSphereContext relSphere() {
+			return getRuleContext(RelSphereContext.class,0);
+		}
+		public RelPaneContext relPane() {
+			return getRuleContext(RelPaneContext.class,0);
+		}
+		public RelTextContext relText() {
+			return getRuleContext(RelTextContext.class,0);
+		}
+		public RelCommandToContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_relCommandTo; }
+	}
+
+	public final RelCommandToContext relCommandTo() throws RecognitionException {
+		RelCommandToContext _localctx = new RelCommandToContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_relCommandTo);
+		try {
+			setState(157);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__12) | (1L << T__14) | (1L << T__15) | (1L << T__16))) != 0)) {
+			switch (_input.LA(1)) {
+			case T__11:
+				enterOuterAlt(_localctx, 1);
 				{
 				setState(153);
-				shapeCommand();
+				relCube();
 				}
-			}
-
-			setState(156);
-			match(T__2);
-			setState(158); 
-			_errHandler.sync(this);
-			_alt = 1+1;
-			do {
-				switch (_alt) {
-				case 1+1:
-					{
-					{
-					setState(157);
-					match(NEWLINE);
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				setState(160); 
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,17,_ctx);
-			} while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(162);
-			text();
-			setState(163);
-			match(T__1);
-			setState(165); 
-			_errHandler.sync(this);
-			_alt = 1+1;
-			do {
-				switch (_alt) {
-				case 1+1:
-					{
-					{
-					setState(164);
-					match(NEWLINE);
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				setState(167); 
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,18,_ctx);
-			} while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(169);
-			shapeCommand();
-			setState(171);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__12) | (1L << T__14) | (1L << T__15) | (1L << T__16))) != 0)) {
+				break;
+			case T__12:
+				enterOuterAlt(_localctx, 2);
 				{
-				setState(170);
-				shapeCommand();
+				setState(154);
+				relSphere();
 				}
-			}
-
+				break;
+			case T__13:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(155);
+				relPane();
+				}
+				break;
+			case T__14:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(156);
+				relText();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -626,111 +669,36 @@ public class VizRepParser extends Parser {
 
 	public final ConditionContext condition() throws RecognitionException {
 		ConditionContext _localctx = new ConditionContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_condition);
+		enterRule(_localctx, 10, RULE_condition);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(173);
-			match(T__3);
-			setState(174);
+			setState(159);
+			match(T__2);
+			setState(160);
 			match(DIGITS);
-			setState(175);
+			setState(161);
 			match(OPERATOR);
-			setState(176);
+			setState(162);
 			match(DIGITS);
-			setState(177);
+			setState(163);
+			match(T__3);
+			setState(164);
+			match(NEWLINE);
+			setState(165);
 			match(T__4);
-			setState(178);
+			setState(166);
 			match(NEWLINE);
-			setState(179);
-			match(T__5);
-			setState(180);
-			match(NEWLINE);
-			setState(181);
+			setState(167);
 			ifBlock();
-			setState(182);
+			setState(168);
 			match(NEWLINE);
-			setState(183);
-			match(T__6);
-			setState(184);
+			setState(169);
+			match(T__5);
+			setState(170);
 			elseBlock();
-			setState(185);
-			match(T__7);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class SetVariableContext extends ParserRuleContext {
-		public List<TerminalNode> STRING() { return getTokens(VizRepParser.STRING); }
-		public TerminalNode STRING(int i) {
-			return getToken(VizRepParser.STRING, i);
-		}
-		public List<TerminalNode> VARASSVALUES() { return getTokens(VizRepParser.VARASSVALUES); }
-		public TerminalNode VARASSVALUES(int i) {
-			return getToken(VizRepParser.VARASSVALUES, i);
-		}
-		public List<TerminalNode> BOOLEANSTRING() { return getTokens(VizRepParser.BOOLEANSTRING); }
-		public TerminalNode BOOLEANSTRING(int i) {
-			return getToken(VizRepParser.BOOLEANSTRING, i);
-		}
-		public TerminalNode SOMERULE() { return getToken(VizRepParser.SOMERULE, 0); }
-		public TerminalNode DIGITS() { return getToken(VizRepParser.DIGITS, 0); }
-		public SetVariableContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_setVariable; }
-	}
-
-	public final SetVariableContext setVariable() throws RecognitionException {
-		SetVariableContext _localctx = new SetVariableContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_setVariable);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(187);
-			match(T__8);
-			setState(188);
-			match(STRING);
-			setState(189);
-			match(T__9);
-			setState(190);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIGITS) | (1L << STRING) | (1L << SOMERULE))) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			setState(191);
-			match(T__10);
-			setState(192);
-			match(VARASSVALUES);
-			setState(193);
-			match(T__9);
-			setState(194);
-			match(BOOLEANSTRING);
-			setState(195);
-			match(T__10);
-			setState(196);
-			match(VARASSVALUES);
-			setState(197);
-			match(T__9);
-			setState(198);
-			match(BOOLEANSTRING);
-			setState(199);
-			match(T__11);
+			setState(171);
+			match(T__6);
 			}
 		}
 		catch (RecognitionException re) {
@@ -769,42 +737,42 @@ public class VizRepParser extends Parser {
 
 	public final IfBlockContext ifBlock() throws RecognitionException {
 		IfBlockContext _localctx = new IfBlockContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_ifBlock);
+		enterRule(_localctx, 12, RULE_ifBlock);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(204); 
+			setState(176); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
 				switch (_alt) {
 				case 1:
 					{
-					setState(204);
+					setState(176);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
+					case T__11:
 					case T__12:
+					case T__13:
 					case T__14:
-					case T__15:
-					case T__16:
+					case T__17:
+					case T__18:
 					case T__19:
-					case T__20:
-					case T__21:
 						{
-						setState(201);
+						setState(173);
 						ifCommand();
 						}
 						break;
-					case T__17:
+					case T__15:
 						{
-						setState(202);
+						setState(174);
 						relation();
 						}
 						break;
 					case NEWLINE:
 						{
-						setState(203);
+						setState(175);
 						match(NEWLINE);
 						}
 						break;
@@ -816,9 +784,9 @@ public class VizRepParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(206); 
+				setState(178); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,21,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,18,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -858,40 +826,40 @@ public class VizRepParser extends Parser {
 
 	public final ElseBlockContext elseBlock() throws RecognitionException {
 		ElseBlockContext _localctx = new ElseBlockContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_elseBlock);
+		enterRule(_localctx, 14, RULE_elseBlock);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(211); 
+			setState(183); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				setState(211);
+				setState(183);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
+				case T__11:
 				case T__12:
+				case T__13:
 				case T__14:
-				case T__15:
-				case T__16:
+				case T__17:
+				case T__18:
 				case T__19:
-				case T__20:
-				case T__21:
 					{
-					setState(208);
+					setState(180);
 					elseCommand();
 					}
 					break;
-				case T__17:
+				case T__15:
 					{
-					setState(209);
+					setState(181);
 					relation();
 					}
 					break;
 				case NEWLINE:
 					{
-					setState(210);
+					setState(182);
 					match(NEWLINE);
 					}
 					break;
@@ -899,10 +867,10 @@ public class VizRepParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(213); 
+				setState(185); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__12) | (1L << T__14) | (1L << T__15) | (1L << T__16) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << NEWLINE))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__14) | (1L << T__15) | (1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << NEWLINE))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -946,52 +914,52 @@ public class VizRepParser extends Parser {
 
 	public final IfCommandContext ifCommand() throws RecognitionException {
 		IfCommandContext _localctx = new IfCommandContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_ifCommand);
+		enterRule(_localctx, 16, RULE_ifCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(222);
+			setState(194);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
+			case T__11:
+				{
+				setState(187);
+				ifCube();
+				}
+				break;
 			case T__12:
 				{
-				setState(215);
-				ifCube();
+				setState(188);
+				ifSphere();
+				}
+				break;
+			case T__13:
+				{
+				setState(189);
+				ifPlane();
 				}
 				break;
 			case T__14:
 				{
-				setState(216);
-				ifSphere();
-				}
-				break;
-			case T__15:
-				{
-				setState(217);
-				ifPlane();
-				}
-				break;
-			case T__16:
-				{
-				setState(218);
+				setState(190);
 				ifText();
 				}
 				break;
-			case T__20:
+			case T__17:
 				{
-				setState(219);
+				setState(191);
 				ifColor();
-				}
-				break;
-			case T__21:
-				{
-				setState(220);
-				ifMap();
 				}
 				break;
 			case T__19:
 				{
-				setState(221);
+				setState(192);
+				ifMap();
+				}
+				break;
+			case T__18:
+				{
+				setState(193);
 				ifPen();
 				}
 				break;
@@ -1041,52 +1009,52 @@ public class VizRepParser extends Parser {
 
 	public final ElseCommandContext elseCommand() throws RecognitionException {
 		ElseCommandContext _localctx = new ElseCommandContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_elseCommand);
+		enterRule(_localctx, 18, RULE_elseCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(231);
+			setState(203);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
+			case T__11:
+				{
+				setState(196);
+				elseCube();
+				}
+				break;
 			case T__12:
 				{
-				setState(224);
-				elseCube();
+				setState(197);
+				elseSphere();
+				}
+				break;
+			case T__13:
+				{
+				setState(198);
+				elsePlane();
 				}
 				break;
 			case T__14:
 				{
-				setState(225);
-				elseSphere();
-				}
-				break;
-			case T__15:
-				{
-				setState(226);
-				elsePlane();
-				}
-				break;
-			case T__16:
-				{
-				setState(227);
+				setState(199);
 				elseText();
 				}
 				break;
-			case T__20:
+			case T__17:
 				{
-				setState(228);
+				setState(200);
 				elseColor();
-				}
-				break;
-			case T__21:
-				{
-				setState(229);
-				elseMap();
 				}
 				break;
 			case T__19:
 				{
-				setState(230);
+				setState(201);
+				elseMap();
+				}
+				break;
+			case T__18:
+				{
+				setState(202);
 				elsePen();
 				}
 				break;
@@ -1106,47 +1074,68 @@ public class VizRepParser extends Parser {
 		return _localctx;
 	}
 
-	public static class CommandContext extends ParserRuleContext {
-		public ShapeCommandContext shapeCommand() {
-			return getRuleContext(ShapeCommandContext.class,0);
+	public static class SetVariableContext extends ParserRuleContext {
+		public List<TerminalNode> STRING() { return getTokens(VizRepParser.STRING); }
+		public TerminalNode STRING(int i) {
+			return getToken(VizRepParser.STRING, i);
 		}
-		public StyleCommandContext styleCommand() {
-			return getRuleContext(StyleCommandContext.class,0);
+		public List<TerminalNode> VARASSPARAMS() { return getTokens(VizRepParser.VARASSPARAMS); }
+		public TerminalNode VARASSPARAMS(int i) {
+			return getToken(VizRepParser.VARASSPARAMS, i);
 		}
-		public CommandContext(ParserRuleContext parent, int invokingState) {
+		public List<TerminalNode> BOOLEANSTRING() { return getTokens(VizRepParser.BOOLEANSTRING); }
+		public TerminalNode BOOLEANSTRING(int i) {
+			return getToken(VizRepParser.BOOLEANSTRING, i);
+		}
+		public TerminalNode DYNVALSTRING() { return getToken(VizRepParser.DYNVALSTRING, 0); }
+		public TerminalNode DIGITS() { return getToken(VizRepParser.DIGITS, 0); }
+		public SetVariableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_command; }
+		@Override public int getRuleIndex() { return RULE_setVariable; }
 	}
 
-	public final CommandContext command() throws RecognitionException {
-		CommandContext _localctx = new CommandContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_command);
+	public final SetVariableContext setVariable() throws RecognitionException {
+		SetVariableContext _localctx = new SetVariableContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_setVariable);
+		int _la;
 		try {
-			setState(235);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__12:
-			case T__14:
-			case T__15:
-			case T__16:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(233);
-				shapeCommand();
-				}
-				break;
-			case T__19:
-			case T__20:
-			case T__21:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(234);
-				styleCommand();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(205);
+			match(T__7);
+			setState(206);
+			match(STRING);
+			setState(207);
+			match(T__8);
+			setState(208);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIGITS) | (1L << STRING) | (1L << DYNVALSTRING))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			setState(209);
+			match(T__9);
+			setState(210);
+			match(VARASSPARAMS);
+			setState(211);
+			match(T__8);
+			setState(212);
+			match(BOOLEANSTRING);
+			setState(213);
+			match(T__9);
+			setState(214);
+			match(VARASSPARAMS);
+			setState(215);
+			match(T__8);
+			setState(216);
+			match(BOOLEANSTRING);
+			setState(217);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1170,9 +1159,6 @@ public class VizRepParser extends Parser {
 		public PlaneContext plane() {
 			return getRuleContext(PlaneContext.class,0);
 		}
-		public TextContext text() {
-			return getRuleContext(TextContext.class,0);
-		}
 		public ShapeCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1181,37 +1167,30 @@ public class VizRepParser extends Parser {
 
 	public final ShapeCommandContext shapeCommand() throws RecognitionException {
 		ShapeCommandContext _localctx = new ShapeCommandContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_shapeCommand);
+		enterRule(_localctx, 22, RULE_shapeCommand);
 		try {
-			setState(241);
+			setState(222);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__12:
+			case T__11:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(237);
+				setState(219);
 				cube();
 				}
 				break;
-			case T__14:
+			case T__12:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(238);
+				setState(220);
 				sphere();
 				}
 				break;
-			case T__15:
+			case T__13:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(239);
+				setState(221);
 				plane();
-				}
-				break;
-			case T__16:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(240);
-				text();
 				}
 				break;
 			default:
@@ -1247,29 +1226,29 @@ public class VizRepParser extends Parser {
 
 	public final StyleCommandContext styleCommand() throws RecognitionException {
 		StyleCommandContext _localctx = new StyleCommandContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_styleCommand);
+		enterRule(_localctx, 24, RULE_styleCommand);
 		try {
-			setState(246);
+			setState(227);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__20:
+			case T__17:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(243);
+				setState(224);
 				color();
 				}
 				break;
-			case T__21:
+			case T__19:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(244);
+				setState(225);
 				map();
 				}
 				break;
-			case T__19:
+			case T__18:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(245);
+				setState(226);
 				pen();
 				}
 				break;
@@ -1288,160 +1267,12 @@ public class VizRepParser extends Parser {
 		return _localctx;
 	}
 
-	public static class RelCommandFromContext extends ParserRuleContext {
-		public RelCubeContext relCube() {
-			return getRuleContext(RelCubeContext.class,0);
-		}
-		public RelSphereContext relSphere() {
-			return getRuleContext(RelSphereContext.class,0);
-		}
-		public RelPaneContext relPane() {
-			return getRuleContext(RelPaneContext.class,0);
-		}
-		public RelTextContext relText() {
-			return getRuleContext(RelTextContext.class,0);
-		}
-		public RelCommandFromContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_relCommandFrom; }
-	}
-
-	public final RelCommandFromContext relCommandFrom() throws RecognitionException {
-		RelCommandFromContext _localctx = new RelCommandFromContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_relCommandFrom);
-		try {
-			setState(252);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__12:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(248);
-				relCube();
-				}
-				break;
-			case T__14:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(249);
-				relSphere();
-				}
-				break;
-			case T__15:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(250);
-				relPane();
-				}
-				break;
-			case T__16:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(251);
-				relText();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class RelCommandToContext extends ParserRuleContext {
-		public RelCubeContext relCube() {
-			return getRuleContext(RelCubeContext.class,0);
-		}
-		public RelSphereContext relSphere() {
-			return getRuleContext(RelSphereContext.class,0);
-		}
-		public RelPaneContext relPane() {
-			return getRuleContext(RelPaneContext.class,0);
-		}
-		public RelTextContext relText() {
-			return getRuleContext(RelTextContext.class,0);
-		}
-		public RelCommandToContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_relCommandTo; }
-	}
-
-	public final RelCommandToContext relCommandTo() throws RecognitionException {
-		RelCommandToContext _localctx = new RelCommandToContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_relCommandTo);
-		try {
-			setState(258);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__12:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(254);
-				relCube();
-				}
-				break;
-			case T__14:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(255);
-				relSphere();
-				}
-				break;
-			case T__15:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(256);
-				relPane();
-				}
-				break;
-			case T__16:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(257);
-				relText();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public static class CubeContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
-		}
-		public List<TerminalNode> DIMENSION3DDYN() { return getTokens(VizRepParser.DIMENSION3DDYN); }
-		public TerminalNode DIMENSION3DDYN(int i) {
-			return getToken(VizRepParser.DIMENSION3DDYN, i);
-		}
-		public List<TerminalNode> STRING() { return getTokens(VizRepParser.STRING); }
-		public TerminalNode STRING(int i) {
-			return getToken(VizRepParser.STRING, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public CubeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1451,114 +1282,24 @@ public class VizRepParser extends Parser {
 
 	public final CubeContext cube() throws RecognitionException {
 		CubeContext _localctx = new CubeContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_cube);
+		enterRule(_localctx, 26, RULE_cube);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(260);
-			match(T__12);
-			setState(268);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case DIMENSION3D:
-				{
-				{
-				setState(261);
-				match(DIMENSION3D);
-				setState(262);
-				match(T__9);
-				setState(263);
-				match(DIGITS);
-				}
-				}
-				break;
-			case DIMENSION3DDYN:
-				{
-				{
-				setState(264);
-				match(DIMENSION3DDYN);
-				setState(265);
-				match(T__9);
-				setState(266);
-				match(T__13);
-				setState(267);
-				match(STRING);
-				}
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(270);
-			match(T__10);
-			setState(278);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case DIMENSION3D:
-				{
-				{
-				setState(271);
-				match(DIMENSION3D);
-				setState(272);
-				match(T__9);
-				setState(273);
-				match(DIGITS);
-				}
-				}
-				break;
-			case DIMENSION3DDYN:
-				{
-				{
-				setState(274);
-				match(DIMENSION3DDYN);
-				setState(275);
-				match(T__9);
-				setState(276);
-				match(T__13);
-				setState(277);
-				match(STRING);
-				}
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(280);
-			match(T__10);
-			setState(288);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case DIMENSION3D:
-				{
-				{
-				setState(281);
-				match(DIMENSION3D);
-				setState(282);
-				match(T__9);
-				setState(283);
-				match(DIGITS);
-				}
-				}
-				break;
-			case DIMENSION3DDYN:
-				{
-				{
-				setState(284);
-				match(DIMENSION3DDYN);
-				setState(285);
-				match(T__9);
-				setState(286);
-				match(T__13);
-				setState(287);
-				match(STRING);
-				}
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(290);
+			setState(229);
 			match(T__11);
+			setState(230);
+			dimInput();
+			setState(231);
+			match(T__9);
+			setState(232);
+			dimInput();
+			setState(233);
+			match(T__9);
+			setState(234);
+			dimInput();
+			setState(235);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1573,13 +1314,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class RelCubeContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public RelCubeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1589,36 +1328,24 @@ public class VizRepParser extends Parser {
 
 	public final RelCubeContext relCube() throws RecognitionException {
 		RelCubeContext _localctx = new RelCubeContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_relCube);
+		enterRule(_localctx, 28, RULE_relCube);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(292);
-			match(T__12);
-			setState(293);
-			match(DIMENSION3D);
-			setState(294);
-			match(T__9);
-			setState(295);
-			match(DIGITS);
-			setState(296);
-			match(T__10);
-			setState(297);
-			match(DIMENSION3D);
-			setState(298);
-			match(T__9);
-			setState(299);
-			match(DIGITS);
-			setState(300);
-			match(T__10);
-			setState(301);
-			match(DIMENSION3D);
-			setState(302);
-			match(T__9);
-			setState(303);
-			match(DIGITS);
-			setState(304);
+			setState(237);
 			match(T__11);
+			setState(238);
+			dimInput();
+			setState(239);
+			match(T__9);
+			setState(240);
+			dimInput();
+			setState(241);
+			match(T__9);
+			setState(242);
+			dimInput();
+			setState(243);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1633,13 +1360,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class IfCubeContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public IfCubeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1649,36 +1374,24 @@ public class VizRepParser extends Parser {
 
 	public final IfCubeContext ifCube() throws RecognitionException {
 		IfCubeContext _localctx = new IfCubeContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_ifCube);
+		enterRule(_localctx, 30, RULE_ifCube);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(306);
-			match(T__12);
-			setState(307);
-			match(DIMENSION3D);
-			setState(308);
-			match(T__9);
-			setState(309);
-			match(DIGITS);
-			setState(310);
-			match(T__10);
-			setState(311);
-			match(DIMENSION3D);
-			setState(312);
-			match(T__9);
-			setState(313);
-			match(DIGITS);
-			setState(314);
-			match(T__10);
-			setState(315);
-			match(DIMENSION3D);
-			setState(316);
-			match(T__9);
-			setState(317);
-			match(DIGITS);
-			setState(318);
+			setState(245);
 			match(T__11);
+			setState(246);
+			dimInput();
+			setState(247);
+			match(T__9);
+			setState(248);
+			dimInput();
+			setState(249);
+			match(T__9);
+			setState(250);
+			dimInput();
+			setState(251);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1693,13 +1406,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class ElseCubeContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public ElseCubeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1709,36 +1420,24 @@ public class VizRepParser extends Parser {
 
 	public final ElseCubeContext elseCube() throws RecognitionException {
 		ElseCubeContext _localctx = new ElseCubeContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_elseCube);
+		enterRule(_localctx, 32, RULE_elseCube);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(320);
-			match(T__12);
-			setState(321);
-			match(DIMENSION3D);
-			setState(322);
-			match(T__9);
-			setState(323);
-			match(DIGITS);
-			setState(324);
-			match(T__10);
-			setState(325);
-			match(DIMENSION3D);
-			setState(326);
-			match(T__9);
-			setState(327);
-			match(DIGITS);
-			setState(328);
-			match(T__10);
-			setState(329);
-			match(DIMENSION3D);
-			setState(330);
-			match(T__9);
-			setState(331);
-			match(DIGITS);
-			setState(332);
+			setState(253);
 			match(T__11);
+			setState(254);
+			dimInput();
+			setState(255);
+			match(T__9);
+			setState(256);
+			dimInput();
+			setState(257);
+			match(T__9);
+			setState(258);
+			dimInput();
+			setState(259);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1753,13 +1452,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class SphereContext extends ParserRuleContext {
-		public List<TerminalNode> SPHEREDIMENSIONS() { return getTokens(VizRepParser.SPHEREDIMENSIONS); }
-		public TerminalNode SPHEREDIMENSIONS(int i) {
-			return getToken(VizRepParser.SPHEREDIMENSIONS, i);
+		public List<SphereDimInputContext> sphereDimInput() {
+			return getRuleContexts(SphereDimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public SphereDimInputContext sphereDimInput(int i) {
+			return getRuleContext(SphereDimInputContext.class,i);
 		}
 		public SphereContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1769,36 +1466,24 @@ public class VizRepParser extends Parser {
 
 	public final SphereContext sphere() throws RecognitionException {
 		SphereContext _localctx = new SphereContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_sphere);
+		enterRule(_localctx, 34, RULE_sphere);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(334);
-			match(T__14);
-			setState(335);
-			match(SPHEREDIMENSIONS);
-			setState(336);
+			setState(261);
+			match(T__12);
+			setState(262);
+			sphereDimInput();
+			setState(263);
 			match(T__9);
-			setState(337);
-			match(DIGITS);
-			setState(338);
+			setState(264);
+			sphereDimInput();
+			setState(265);
+			match(T__9);
+			setState(266);
+			sphereDimInput();
+			setState(267);
 			match(T__10);
-			setState(339);
-			match(SPHEREDIMENSIONS);
-			setState(340);
-			match(T__9);
-			setState(341);
-			match(DIGITS);
-			setState(342);
-			match(T__10);
-			setState(343);
-			match(SPHEREDIMENSIONS);
-			setState(344);
-			match(T__9);
-			setState(345);
-			match(DIGITS);
-			setState(346);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1813,13 +1498,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class RelSphereContext extends ParserRuleContext {
-		public List<TerminalNode> SPHEREDIMENSIONS() { return getTokens(VizRepParser.SPHEREDIMENSIONS); }
-		public TerminalNode SPHEREDIMENSIONS(int i) {
-			return getToken(VizRepParser.SPHEREDIMENSIONS, i);
+		public List<SphereDimInputContext> sphereDimInput() {
+			return getRuleContexts(SphereDimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public SphereDimInputContext sphereDimInput(int i) {
+			return getRuleContext(SphereDimInputContext.class,i);
 		}
 		public RelSphereContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1829,36 +1512,24 @@ public class VizRepParser extends Parser {
 
 	public final RelSphereContext relSphere() throws RecognitionException {
 		RelSphereContext _localctx = new RelSphereContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_relSphere);
+		enterRule(_localctx, 36, RULE_relSphere);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(348);
-			match(T__14);
-			setState(349);
-			match(SPHEREDIMENSIONS);
-			setState(350);
+			setState(269);
+			match(T__12);
+			setState(270);
+			sphereDimInput();
+			setState(271);
 			match(T__9);
-			setState(351);
-			match(DIGITS);
-			setState(352);
+			setState(272);
+			sphereDimInput();
+			setState(273);
+			match(T__9);
+			setState(274);
+			sphereDimInput();
+			setState(275);
 			match(T__10);
-			setState(353);
-			match(SPHEREDIMENSIONS);
-			setState(354);
-			match(T__9);
-			setState(355);
-			match(DIGITS);
-			setState(356);
-			match(T__10);
-			setState(357);
-			match(SPHEREDIMENSIONS);
-			setState(358);
-			match(T__9);
-			setState(359);
-			match(DIGITS);
-			setState(360);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1873,13 +1544,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class IfSphereContext extends ParserRuleContext {
-		public List<TerminalNode> SPHEREDIMENSIONS() { return getTokens(VizRepParser.SPHEREDIMENSIONS); }
-		public TerminalNode SPHEREDIMENSIONS(int i) {
-			return getToken(VizRepParser.SPHEREDIMENSIONS, i);
+		public List<SphereDimInputContext> sphereDimInput() {
+			return getRuleContexts(SphereDimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public SphereDimInputContext sphereDimInput(int i) {
+			return getRuleContext(SphereDimInputContext.class,i);
 		}
 		public IfSphereContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1889,36 +1558,24 @@ public class VizRepParser extends Parser {
 
 	public final IfSphereContext ifSphere() throws RecognitionException {
 		IfSphereContext _localctx = new IfSphereContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_ifSphere);
+		enterRule(_localctx, 38, RULE_ifSphere);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(362);
-			match(T__14);
-			setState(363);
-			match(SPHEREDIMENSIONS);
-			setState(364);
+			setState(277);
+			match(T__12);
+			setState(278);
+			sphereDimInput();
+			setState(279);
 			match(T__9);
-			setState(365);
-			match(DIGITS);
-			setState(366);
+			setState(280);
+			sphereDimInput();
+			setState(281);
+			match(T__9);
+			setState(282);
+			sphereDimInput();
+			setState(283);
 			match(T__10);
-			setState(367);
-			match(SPHEREDIMENSIONS);
-			setState(368);
-			match(T__9);
-			setState(369);
-			match(DIGITS);
-			setState(370);
-			match(T__10);
-			setState(371);
-			match(SPHEREDIMENSIONS);
-			setState(372);
-			match(T__9);
-			setState(373);
-			match(DIGITS);
-			setState(374);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1933,13 +1590,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class ElseSphereContext extends ParserRuleContext {
-		public List<TerminalNode> SPHEREDIMENSIONS() { return getTokens(VizRepParser.SPHEREDIMENSIONS); }
-		public TerminalNode SPHEREDIMENSIONS(int i) {
-			return getToken(VizRepParser.SPHEREDIMENSIONS, i);
+		public List<SphereDimInputContext> sphereDimInput() {
+			return getRuleContexts(SphereDimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public SphereDimInputContext sphereDimInput(int i) {
+			return getRuleContext(SphereDimInputContext.class,i);
 		}
 		public ElseSphereContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1949,36 +1604,24 @@ public class VizRepParser extends Parser {
 
 	public final ElseSphereContext elseSphere() throws RecognitionException {
 		ElseSphereContext _localctx = new ElseSphereContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_elseSphere);
+		enterRule(_localctx, 40, RULE_elseSphere);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(376);
-			match(T__14);
-			setState(377);
-			match(SPHEREDIMENSIONS);
-			setState(378);
+			setState(285);
+			match(T__12);
+			setState(286);
+			sphereDimInput();
+			setState(287);
 			match(T__9);
-			setState(379);
-			match(DIGITS);
-			setState(380);
+			setState(288);
+			sphereDimInput();
+			setState(289);
+			match(T__9);
+			setState(290);
+			sphereDimInput();
+			setState(291);
 			match(T__10);
-			setState(381);
-			match(SPHEREDIMENSIONS);
-			setState(382);
-			match(T__9);
-			setState(383);
-			match(DIGITS);
-			setState(384);
-			match(T__10);
-			setState(385);
-			match(SPHEREDIMENSIONS);
-			setState(386);
-			match(T__9);
-			setState(387);
-			match(DIGITS);
-			setState(388);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1993,13 +1636,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class PlaneContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public PlaneContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2009,28 +1650,20 @@ public class VizRepParser extends Parser {
 
 	public final PlaneContext plane() throws RecognitionException {
 		PlaneContext _localctx = new PlaneContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_plane);
+		enterRule(_localctx, 42, RULE_plane);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(390);
-			match(T__15);
-			setState(391);
-			match(DIMENSION3D);
-			setState(392);
+			setState(293);
+			match(T__13);
+			setState(294);
+			dimInput();
+			setState(295);
 			match(T__9);
-			setState(393);
-			match(DIGITS);
-			setState(394);
+			setState(296);
+			dimInput();
+			setState(297);
 			match(T__10);
-			setState(395);
-			match(DIMENSION3D);
-			setState(396);
-			match(T__9);
-			setState(397);
-			match(DIGITS);
-			setState(398);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2045,13 +1678,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class RelPaneContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public RelPaneContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2061,28 +1692,20 @@ public class VizRepParser extends Parser {
 
 	public final RelPaneContext relPane() throws RecognitionException {
 		RelPaneContext _localctx = new RelPaneContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_relPane);
+		enterRule(_localctx, 44, RULE_relPane);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(400);
-			match(T__15);
-			setState(401);
-			match(DIMENSION3D);
-			setState(402);
+			setState(299);
+			match(T__13);
+			setState(300);
+			dimInput();
+			setState(301);
 			match(T__9);
-			setState(403);
-			match(DIGITS);
-			setState(404);
+			setState(302);
+			dimInput();
+			setState(303);
 			match(T__10);
-			setState(405);
-			match(DIMENSION3D);
-			setState(406);
-			match(T__9);
-			setState(407);
-			match(DIGITS);
-			setState(408);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2097,13 +1720,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class IfPlaneContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public IfPlaneContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2113,28 +1734,20 @@ public class VizRepParser extends Parser {
 
 	public final IfPlaneContext ifPlane() throws RecognitionException {
 		IfPlaneContext _localctx = new IfPlaneContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_ifPlane);
+		enterRule(_localctx, 46, RULE_ifPlane);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(410);
-			match(T__15);
-			setState(411);
-			match(DIMENSION3D);
-			setState(412);
+			setState(305);
+			match(T__13);
+			setState(306);
+			dimInput();
+			setState(307);
 			match(T__9);
-			setState(413);
-			match(DIGITS);
-			setState(414);
+			setState(308);
+			dimInput();
+			setState(309);
 			match(T__10);
-			setState(415);
-			match(DIMENSION3D);
-			setState(416);
-			match(T__9);
-			setState(417);
-			match(DIGITS);
-			setState(418);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2149,13 +1762,11 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class ElsePlaneContext extends ParserRuleContext {
-		public List<TerminalNode> DIMENSION3D() { return getTokens(VizRepParser.DIMENSION3D); }
-		public TerminalNode DIMENSION3D(int i) {
-			return getToken(VizRepParser.DIMENSION3D, i);
+		public List<DimInputContext> dimInput() {
+			return getRuleContexts(DimInputContext.class);
 		}
-		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
-		public TerminalNode DIGITS(int i) {
-			return getToken(VizRepParser.DIGITS, i);
+		public DimInputContext dimInput(int i) {
+			return getRuleContext(DimInputContext.class,i);
 		}
 		public ElsePlaneContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2165,28 +1776,20 @@ public class VizRepParser extends Parser {
 
 	public final ElsePlaneContext elsePlane() throws RecognitionException {
 		ElsePlaneContext _localctx = new ElsePlaneContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_elsePlane);
+		enterRule(_localctx, 48, RULE_elsePlane);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(420);
-			match(T__15);
-			setState(421);
-			match(DIMENSION3D);
-			setState(422);
+			setState(311);
+			match(T__13);
+			setState(312);
+			dimInput();
+			setState(313);
 			match(T__9);
-			setState(423);
-			match(DIGITS);
-			setState(424);
+			setState(314);
+			dimInput();
+			setState(315);
 			match(T__10);
-			setState(425);
-			match(DIMENSION3D);
-			setState(426);
-			match(T__9);
-			setState(427);
-			match(DIGITS);
-			setState(428);
-			match(T__11);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2201,17 +1804,17 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class TextContext extends ParserRuleContext {
-		public List<TerminalNode> TEXTDIMDIGITS() { return getTokens(VizRepParser.TEXTDIMDIGITS); }
-		public TerminalNode TEXTDIMDIGITS(int i) {
-			return getToken(VizRepParser.TEXTDIMDIGITS, i);
+		public List<TerminalNode> TEXTPARAMDIGITS() { return getTokens(VizRepParser.TEXTPARAMDIGITS); }
+		public TerminalNode TEXTPARAMDIGITS(int i) {
+			return getToken(VizRepParser.TEXTPARAMDIGITS, i);
 		}
 		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
 		public TerminalNode DIGITS(int i) {
 			return getToken(VizRepParser.DIGITS, i);
 		}
-		public List<TerminalNode> TEXTDIMSTRING() { return getTokens(VizRepParser.TEXTDIMSTRING); }
-		public TerminalNode TEXTDIMSTRING(int i) {
-			return getToken(VizRepParser.TEXTDIMSTRING, i);
+		public List<TerminalNode> TEXTPARAMSTRING() { return getTokens(VizRepParser.TEXTPARAMSTRING); }
+		public TerminalNode TEXTPARAMSTRING(int i) {
+			return getToken(VizRepParser.TEXTPARAMSTRING, i);
 		}
 		public List<TerminalNode> STRING() { return getTokens(VizRepParser.STRING); }
 		public TerminalNode STRING(int i) {
@@ -2225,101 +1828,101 @@ public class VizRepParser extends Parser {
 
 	public final TextContext text() throws RecognitionException {
 		TextContext _localctx = new TextContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_text);
+		enterRule(_localctx, 50, RULE_text);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(430);
-			match(T__16);
-			setState(431);
-			match(TEXTDIMDIGITS);
-			setState(432);
-			match(T__9);
-			setState(433);
+			setState(317);
+			match(T__14);
+			setState(318);
+			match(TEXTPARAMDIGITS);
+			setState(319);
+			match(T__8);
+			setState(320);
 			match(DIGITS);
-			setState(434);
-			match(T__10);
-			setState(435);
-			match(TEXTDIMDIGITS);
-			setState(436);
+			setState(321);
 			match(T__9);
-			setState(437);
+			setState(322);
+			match(TEXTPARAMDIGITS);
+			setState(323);
+			match(T__8);
+			setState(324);
 			match(DIGITS);
-			setState(438);
-			match(T__10);
-			setState(439);
-			match(TEXTDIMDIGITS);
-			setState(440);
+			setState(325);
 			match(T__9);
-			setState(441);
+			setState(326);
+			match(TEXTPARAMDIGITS);
+			setState(327);
+			match(T__8);
+			setState(328);
 			match(DIGITS);
-			setState(442);
-			match(T__10);
-			setState(443);
-			match(TEXTDIMDIGITS);
-			setState(444);
+			setState(329);
 			match(T__9);
-			setState(445);
+			setState(330);
+			match(TEXTPARAMDIGITS);
+			setState(331);
+			match(T__8);
+			setState(332);
 			match(DIGITS);
-			setState(446);
-			match(T__10);
-			setState(447);
-			match(TEXTDIMSTRING);
-			setState(448);
+			setState(333);
 			match(T__9);
-			setState(449);
+			setState(334);
+			match(TEXTPARAMSTRING);
+			setState(335);
+			match(T__8);
+			setState(336);
 			match(STRING);
-			setState(454);
+			setState(341);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
 			case 1:
 				{
-				setState(450);
-				match(T__10);
-				setState(451);
-				match(TEXTDIMSTRING);
-				setState(452);
+				setState(337);
 				match(T__9);
-				setState(453);
+				setState(338);
+				match(TEXTPARAMSTRING);
+				setState(339);
+				match(T__8);
+				setState(340);
 				match(STRING);
 				}
 				break;
 			}
-			setState(460);
+			setState(347);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,35,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
 			case 1:
 				{
-				setState(456);
-				match(T__10);
-				setState(457);
-				match(TEXTDIMSTRING);
-				setState(458);
+				setState(343);
 				match(T__9);
-				setState(459);
+				setState(344);
+				match(TEXTPARAMSTRING);
+				setState(345);
+				match(T__8);
+				setState(346);
 				match(STRING);
 				}
 				break;
 			}
-			setState(466);
+			setState(353);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__10) {
+			if (_la==T__9) {
 				{
-				setState(462);
-				match(T__10);
-				setState(463);
-				match(TEXTDIMSTRING);
-				setState(464);
+				setState(349);
 				match(T__9);
-				setState(465);
+				setState(350);
+				match(TEXTPARAMSTRING);
+				setState(351);
+				match(T__8);
+				setState(352);
 				match(STRING);
 				}
 			}
 
-			setState(468);
-			match(T__11);
+			setState(355);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2334,17 +1937,17 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class RelTextContext extends ParserRuleContext {
-		public List<TerminalNode> TEXTDIMDIGITS() { return getTokens(VizRepParser.TEXTDIMDIGITS); }
-		public TerminalNode TEXTDIMDIGITS(int i) {
-			return getToken(VizRepParser.TEXTDIMDIGITS, i);
+		public List<TerminalNode> TEXTPARAMDIGITS() { return getTokens(VizRepParser.TEXTPARAMDIGITS); }
+		public TerminalNode TEXTPARAMDIGITS(int i) {
+			return getToken(VizRepParser.TEXTPARAMDIGITS, i);
 		}
 		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
 		public TerminalNode DIGITS(int i) {
 			return getToken(VizRepParser.DIGITS, i);
 		}
-		public List<TerminalNode> TEXTDIMSTRING() { return getTokens(VizRepParser.TEXTDIMSTRING); }
-		public TerminalNode TEXTDIMSTRING(int i) {
-			return getToken(VizRepParser.TEXTDIMSTRING, i);
+		public List<TerminalNode> TEXTPARAMSTRING() { return getTokens(VizRepParser.TEXTPARAMSTRING); }
+		public TerminalNode TEXTPARAMSTRING(int i) {
+			return getToken(VizRepParser.TEXTPARAMSTRING, i);
 		}
 		public List<TerminalNode> STRING() { return getTokens(VizRepParser.STRING); }
 		public TerminalNode STRING(int i) {
@@ -2358,101 +1961,101 @@ public class VizRepParser extends Parser {
 
 	public final RelTextContext relText() throws RecognitionException {
 		RelTextContext _localctx = new RelTextContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_relText);
+		enterRule(_localctx, 52, RULE_relText);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(470);
-			match(T__16);
-			setState(471);
-			match(TEXTDIMDIGITS);
-			setState(472);
-			match(T__9);
-			setState(473);
+			setState(357);
+			match(T__14);
+			setState(358);
+			match(TEXTPARAMDIGITS);
+			setState(359);
+			match(T__8);
+			setState(360);
 			match(DIGITS);
-			setState(474);
-			match(T__10);
-			setState(475);
-			match(TEXTDIMDIGITS);
-			setState(476);
+			setState(361);
 			match(T__9);
-			setState(477);
+			setState(362);
+			match(TEXTPARAMDIGITS);
+			setState(363);
+			match(T__8);
+			setState(364);
 			match(DIGITS);
-			setState(478);
-			match(T__10);
-			setState(479);
-			match(TEXTDIMDIGITS);
-			setState(480);
+			setState(365);
 			match(T__9);
-			setState(481);
+			setState(366);
+			match(TEXTPARAMDIGITS);
+			setState(367);
+			match(T__8);
+			setState(368);
 			match(DIGITS);
-			setState(482);
-			match(T__10);
-			setState(483);
-			match(TEXTDIMDIGITS);
-			setState(484);
+			setState(369);
 			match(T__9);
-			setState(485);
+			setState(370);
+			match(TEXTPARAMDIGITS);
+			setState(371);
+			match(T__8);
+			setState(372);
 			match(DIGITS);
-			setState(486);
-			match(T__10);
-			setState(487);
-			match(TEXTDIMSTRING);
-			setState(488);
+			setState(373);
 			match(T__9);
-			setState(489);
+			setState(374);
+			match(TEXTPARAMSTRING);
+			setState(375);
+			match(T__8);
+			setState(376);
 			match(STRING);
-			setState(494);
+			setState(381);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,37,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
 			case 1:
 				{
-				setState(490);
-				match(T__10);
-				setState(491);
-				match(TEXTDIMSTRING);
-				setState(492);
+				setState(377);
 				match(T__9);
-				setState(493);
+				setState(378);
+				match(TEXTPARAMSTRING);
+				setState(379);
+				match(T__8);
+				setState(380);
 				match(STRING);
 				}
 				break;
 			}
-			setState(500);
+			setState(387);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,38,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
 			case 1:
 				{
-				setState(496);
-				match(T__10);
-				setState(497);
-				match(TEXTDIMSTRING);
-				setState(498);
+				setState(383);
 				match(T__9);
-				setState(499);
+				setState(384);
+				match(TEXTPARAMSTRING);
+				setState(385);
+				match(T__8);
+				setState(386);
 				match(STRING);
 				}
 				break;
 			}
-			setState(506);
+			setState(393);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__10) {
+			if (_la==T__9) {
 				{
-				setState(502);
-				match(T__10);
-				setState(503);
-				match(TEXTDIMSTRING);
-				setState(504);
+				setState(389);
 				match(T__9);
-				setState(505);
+				setState(390);
+				match(TEXTPARAMSTRING);
+				setState(391);
+				match(T__8);
+				setState(392);
 				match(STRING);
 				}
 			}
 
-			setState(508);
-			match(T__11);
+			setState(395);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2467,17 +2070,17 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class IfTextContext extends ParserRuleContext {
-		public List<TerminalNode> TEXTDIMDIGITS() { return getTokens(VizRepParser.TEXTDIMDIGITS); }
-		public TerminalNode TEXTDIMDIGITS(int i) {
-			return getToken(VizRepParser.TEXTDIMDIGITS, i);
+		public List<TerminalNode> TEXTPARAMDIGITS() { return getTokens(VizRepParser.TEXTPARAMDIGITS); }
+		public TerminalNode TEXTPARAMDIGITS(int i) {
+			return getToken(VizRepParser.TEXTPARAMDIGITS, i);
 		}
 		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
 		public TerminalNode DIGITS(int i) {
 			return getToken(VizRepParser.DIGITS, i);
 		}
-		public List<TerminalNode> TEXTDIMSTRING() { return getTokens(VizRepParser.TEXTDIMSTRING); }
-		public TerminalNode TEXTDIMSTRING(int i) {
-			return getToken(VizRepParser.TEXTDIMSTRING, i);
+		public List<TerminalNode> TEXTPARAMSTRING() { return getTokens(VizRepParser.TEXTPARAMSTRING); }
+		public TerminalNode TEXTPARAMSTRING(int i) {
+			return getToken(VizRepParser.TEXTPARAMSTRING, i);
 		}
 		public List<TerminalNode> STRING() { return getTokens(VizRepParser.STRING); }
 		public TerminalNode STRING(int i) {
@@ -2491,101 +2094,101 @@ public class VizRepParser extends Parser {
 
 	public final IfTextContext ifText() throws RecognitionException {
 		IfTextContext _localctx = new IfTextContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_ifText);
+		enterRule(_localctx, 54, RULE_ifText);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(510);
-			match(T__16);
-			setState(511);
-			match(TEXTDIMDIGITS);
-			setState(512);
-			match(T__9);
-			setState(513);
+			setState(397);
+			match(T__14);
+			setState(398);
+			match(TEXTPARAMDIGITS);
+			setState(399);
+			match(T__8);
+			setState(400);
 			match(DIGITS);
-			setState(514);
-			match(T__10);
-			setState(515);
-			match(TEXTDIMDIGITS);
-			setState(516);
+			setState(401);
 			match(T__9);
-			setState(517);
+			setState(402);
+			match(TEXTPARAMDIGITS);
+			setState(403);
+			match(T__8);
+			setState(404);
 			match(DIGITS);
-			setState(518);
-			match(T__10);
-			setState(519);
-			match(TEXTDIMDIGITS);
-			setState(520);
+			setState(405);
 			match(T__9);
-			setState(521);
+			setState(406);
+			match(TEXTPARAMDIGITS);
+			setState(407);
+			match(T__8);
+			setState(408);
 			match(DIGITS);
-			setState(522);
-			match(T__10);
-			setState(523);
-			match(TEXTDIMDIGITS);
-			setState(524);
+			setState(409);
 			match(T__9);
-			setState(525);
+			setState(410);
+			match(TEXTPARAMDIGITS);
+			setState(411);
+			match(T__8);
+			setState(412);
 			match(DIGITS);
-			setState(526);
-			match(T__10);
-			setState(527);
-			match(TEXTDIMSTRING);
-			setState(528);
+			setState(413);
 			match(T__9);
-			setState(529);
+			setState(414);
+			match(TEXTPARAMSTRING);
+			setState(415);
+			match(T__8);
+			setState(416);
 			match(STRING);
-			setState(534);
+			setState(421);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,40,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
 			case 1:
 				{
-				setState(530);
-				match(T__10);
-				setState(531);
-				match(TEXTDIMSTRING);
-				setState(532);
+				setState(417);
 				match(T__9);
-				setState(533);
+				setState(418);
+				match(TEXTPARAMSTRING);
+				setState(419);
+				match(T__8);
+				setState(420);
 				match(STRING);
 				}
 				break;
 			}
-			setState(540);
+			setState(427);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,41,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
 			case 1:
 				{
-				setState(536);
-				match(T__10);
-				setState(537);
-				match(TEXTDIMSTRING);
-				setState(538);
+				setState(423);
 				match(T__9);
-				setState(539);
+				setState(424);
+				match(TEXTPARAMSTRING);
+				setState(425);
+				match(T__8);
+				setState(426);
 				match(STRING);
 				}
 				break;
 			}
-			setState(546);
+			setState(433);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__10) {
+			if (_la==T__9) {
 				{
-				setState(542);
-				match(T__10);
-				setState(543);
-				match(TEXTDIMSTRING);
-				setState(544);
+				setState(429);
 				match(T__9);
-				setState(545);
+				setState(430);
+				match(TEXTPARAMSTRING);
+				setState(431);
+				match(T__8);
+				setState(432);
 				match(STRING);
 				}
 			}
 
-			setState(548);
-			match(T__11);
+			setState(435);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2600,17 +2203,17 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class ElseTextContext extends ParserRuleContext {
-		public List<TerminalNode> TEXTDIMDIGITS() { return getTokens(VizRepParser.TEXTDIMDIGITS); }
-		public TerminalNode TEXTDIMDIGITS(int i) {
-			return getToken(VizRepParser.TEXTDIMDIGITS, i);
+		public List<TerminalNode> TEXTPARAMDIGITS() { return getTokens(VizRepParser.TEXTPARAMDIGITS); }
+		public TerminalNode TEXTPARAMDIGITS(int i) {
+			return getToken(VizRepParser.TEXTPARAMDIGITS, i);
 		}
 		public List<TerminalNode> DIGITS() { return getTokens(VizRepParser.DIGITS); }
 		public TerminalNode DIGITS(int i) {
 			return getToken(VizRepParser.DIGITS, i);
 		}
-		public List<TerminalNode> TEXTDIMSTRING() { return getTokens(VizRepParser.TEXTDIMSTRING); }
-		public TerminalNode TEXTDIMSTRING(int i) {
-			return getToken(VizRepParser.TEXTDIMSTRING, i);
+		public List<TerminalNode> TEXTPARAMSTRING() { return getTokens(VizRepParser.TEXTPARAMSTRING); }
+		public TerminalNode TEXTPARAMSTRING(int i) {
+			return getToken(VizRepParser.TEXTPARAMSTRING, i);
 		}
 		public List<TerminalNode> STRING() { return getTokens(VizRepParser.STRING); }
 		public TerminalNode STRING(int i) {
@@ -2624,101 +2227,101 @@ public class VizRepParser extends Parser {
 
 	public final ElseTextContext elseText() throws RecognitionException {
 		ElseTextContext _localctx = new ElseTextContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_elseText);
+		enterRule(_localctx, 56, RULE_elseText);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(550);
-			match(T__16);
-			setState(551);
-			match(TEXTDIMDIGITS);
-			setState(552);
-			match(T__9);
-			setState(553);
+			setState(437);
+			match(T__14);
+			setState(438);
+			match(TEXTPARAMDIGITS);
+			setState(439);
+			match(T__8);
+			setState(440);
 			match(DIGITS);
-			setState(554);
-			match(T__10);
-			setState(555);
-			match(TEXTDIMDIGITS);
-			setState(556);
+			setState(441);
 			match(T__9);
-			setState(557);
+			setState(442);
+			match(TEXTPARAMDIGITS);
+			setState(443);
+			match(T__8);
+			setState(444);
 			match(DIGITS);
-			setState(558);
-			match(T__10);
-			setState(559);
-			match(TEXTDIMDIGITS);
-			setState(560);
+			setState(445);
 			match(T__9);
-			setState(561);
+			setState(446);
+			match(TEXTPARAMDIGITS);
+			setState(447);
+			match(T__8);
+			setState(448);
 			match(DIGITS);
-			setState(562);
-			match(T__10);
-			setState(563);
-			match(TEXTDIMDIGITS);
-			setState(564);
+			setState(449);
 			match(T__9);
-			setState(565);
+			setState(450);
+			match(TEXTPARAMDIGITS);
+			setState(451);
+			match(T__8);
+			setState(452);
 			match(DIGITS);
-			setState(566);
-			match(T__10);
-			setState(567);
-			match(TEXTDIMSTRING);
-			setState(568);
+			setState(453);
 			match(T__9);
-			setState(569);
+			setState(454);
+			match(TEXTPARAMSTRING);
+			setState(455);
+			match(T__8);
+			setState(456);
 			match(STRING);
-			setState(574);
+			setState(461);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,43,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
 			case 1:
 				{
-				setState(570);
-				match(T__10);
-				setState(571);
-				match(TEXTDIMSTRING);
-				setState(572);
+				setState(457);
 				match(T__9);
-				setState(573);
+				setState(458);
+				match(TEXTPARAMSTRING);
+				setState(459);
+				match(T__8);
+				setState(460);
 				match(STRING);
 				}
 				break;
 			}
-			setState(580);
+			setState(467);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,44,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,35,_ctx) ) {
 			case 1:
 				{
-				setState(576);
-				match(T__10);
-				setState(577);
-				match(TEXTDIMSTRING);
-				setState(578);
+				setState(463);
 				match(T__9);
-				setState(579);
+				setState(464);
+				match(TEXTPARAMSTRING);
+				setState(465);
+				match(T__8);
+				setState(466);
 				match(STRING);
 				}
 				break;
 			}
-			setState(586);
+			setState(473);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__10) {
+			if (_la==T__9) {
 				{
-				setState(582);
-				match(T__10);
-				setState(583);
-				match(TEXTDIMSTRING);
-				setState(584);
+				setState(469);
 				match(T__9);
-				setState(585);
+				setState(470);
+				match(TEXTPARAMSTRING);
+				setState(471);
+				match(T__8);
+				setState(472);
 				match(STRING);
 				}
 			}
 
-			setState(588);
-			match(T__11);
+			setState(475);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2742,18 +2345,18 @@ public class VizRepParser extends Parser {
 
 	public final LineContext line() throws RecognitionException {
 		LineContext _localctx = new LineContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_line);
+		enterRule(_localctx, 58, RULE_line);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(590);
-			match(T__17);
-			setState(591);
-			match(T__18);
-			setState(592);
+			setState(477);
+			match(T__15);
+			setState(478);
+			match(T__16);
+			setState(479);
 			match(DIGITS);
-			setState(593);
-			match(T__11);
+			setState(480);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2777,18 +2380,18 @@ public class VizRepParser extends Parser {
 
 	public final IfLineContext ifLine() throws RecognitionException {
 		IfLineContext _localctx = new IfLineContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_ifLine);
+		enterRule(_localctx, 60, RULE_ifLine);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(595);
-			match(T__17);
-			setState(596);
-			match(T__18);
-			setState(597);
+			setState(482);
+			match(T__15);
+			setState(483);
+			match(T__16);
+			setState(484);
 			match(DIGITS);
-			setState(598);
-			match(T__11);
+			setState(485);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2812,18 +2415,117 @@ public class VizRepParser extends Parser {
 
 	public final ElseLineContext elseLine() throws RecognitionException {
 		ElseLineContext _localctx = new ElseLineContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_elseLine);
+		enterRule(_localctx, 62, RULE_elseLine);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(600);
-			match(T__17);
-			setState(601);
-			match(T__18);
-			setState(602);
+			setState(487);
+			match(T__15);
+			setState(488);
+			match(T__16);
+			setState(489);
 			match(DIGITS);
-			setState(603);
-			match(T__11);
+			setState(490);
+			match(T__10);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ColorContext extends ParserRuleContext {
+		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
+		public ColorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_color; }
+	}
+
+	public final ColorContext color() throws RecognitionException {
+		ColorContext _localctx = new ColorContext(_ctx, getState());
+		enterRule(_localctx, 64, RULE_color);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(492);
+			match(T__17);
+			setState(493);
+			match(STRING);
+			setState(494);
+			match(T__10);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class IfColorContext extends ParserRuleContext {
+		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
+		public IfColorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_ifColor; }
+	}
+
+	public final IfColorContext ifColor() throws RecognitionException {
+		IfColorContext _localctx = new IfColorContext(_ctx, getState());
+		enterRule(_localctx, 66, RULE_ifColor);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(496);
+			match(T__17);
+			setState(497);
+			match(STRING);
+			setState(498);
+			match(T__10);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ElseColorContext extends ParserRuleContext {
+		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
+		public ElseColorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_elseColor; }
+	}
+
+	public final ElseColorContext elseColor() throws RecognitionException {
+		ElseColorContext _localctx = new ElseColorContext(_ctx, getState());
+		enterRule(_localctx, 68, RULE_elseColor);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(500);
+			match(T__17);
+			setState(501);
+			match(STRING);
+			setState(502);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2856,44 +2558,44 @@ public class VizRepParser extends Parser {
 
 	public final PenContext pen() throws RecognitionException {
 		PenContext _localctx = new PenContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_pen);
+		enterRule(_localctx, 70, RULE_pen);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(605);
-			match(T__19);
-			setState(606);
+			setState(504);
+			match(T__18);
+			setState(505);
 			match(PENPARAMSBOOL);
-			setState(607);
-			match(T__9);
-			setState(608);
+			setState(506);
+			match(T__8);
+			setState(507);
 			match(STRING);
-			setState(609);
-			match(T__10);
-			setState(610);
-			match(PENPARAMS);
-			setState(611);
+			setState(508);
 			match(T__9);
-			setState(612);
-			match(DIGITS);
-			setState(613);
-			match(T__10);
-			setState(614);
+			setState(509);
 			match(PENPARAMS);
-			setState(615);
-			match(T__9);
-			setState(616);
+			setState(510);
+			match(T__8);
+			setState(511);
 			match(DIGITS);
-			setState(617);
-			match(T__10);
-			setState(618);
+			setState(512);
+			match(T__9);
+			setState(513);
 			match(PENPARAMS);
-			setState(619);
-			match(T__9);
-			setState(620);
+			setState(514);
+			match(T__8);
+			setState(515);
 			match(DIGITS);
-			setState(621);
-			match(T__11);
+			setState(516);
+			match(T__9);
+			setState(517);
+			match(PENPARAMS);
+			setState(518);
+			match(T__8);
+			setState(519);
+			match(DIGITS);
+			setState(520);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2926,44 +2628,44 @@ public class VizRepParser extends Parser {
 
 	public final IfPenContext ifPen() throws RecognitionException {
 		IfPenContext _localctx = new IfPenContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_ifPen);
+		enterRule(_localctx, 72, RULE_ifPen);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(623);
-			match(T__19);
-			setState(624);
+			setState(522);
+			match(T__18);
+			setState(523);
 			match(PENPARAMSBOOL);
-			setState(625);
-			match(T__9);
-			setState(626);
+			setState(524);
+			match(T__8);
+			setState(525);
 			match(STRING);
-			setState(627);
-			match(T__10);
-			setState(628);
-			match(PENPARAMS);
-			setState(629);
+			setState(526);
 			match(T__9);
-			setState(630);
-			match(DIGITS);
-			setState(631);
-			match(T__10);
-			setState(632);
+			setState(527);
 			match(PENPARAMS);
-			setState(633);
-			match(T__9);
-			setState(634);
+			setState(528);
+			match(T__8);
+			setState(529);
 			match(DIGITS);
-			setState(635);
-			match(T__10);
-			setState(636);
+			setState(530);
+			match(T__9);
+			setState(531);
 			match(PENPARAMS);
-			setState(637);
-			match(T__9);
-			setState(638);
+			setState(532);
+			match(T__8);
+			setState(533);
 			match(DIGITS);
-			setState(639);
-			match(T__11);
+			setState(534);
+			match(T__9);
+			setState(535);
+			match(PENPARAMS);
+			setState(536);
+			match(T__8);
+			setState(537);
+			match(DIGITS);
+			setState(538);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2996,143 +2698,44 @@ public class VizRepParser extends Parser {
 
 	public final ElsePenContext elsePen() throws RecognitionException {
 		ElsePenContext _localctx = new ElsePenContext(_ctx, getState());
-		enterRule(_localctx, 70, RULE_elsePen);
+		enterRule(_localctx, 74, RULE_elsePen);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(641);
-			match(T__19);
-			setState(642);
+			setState(540);
+			match(T__18);
+			setState(541);
 			match(PENPARAMSBOOL);
-			setState(643);
-			match(T__9);
-			setState(644);
+			setState(542);
+			match(T__8);
+			setState(543);
 			match(STRING);
-			setState(645);
-			match(T__10);
-			setState(646);
+			setState(544);
+			match(T__9);
+			setState(545);
 			match(PENPARAMS);
-			setState(647);
-			match(T__9);
-			setState(648);
+			setState(546);
+			match(T__8);
+			setState(547);
 			match(DIGITS);
-			setState(649);
-			match(T__10);
-			setState(650);
+			setState(548);
+			match(T__9);
+			setState(549);
 			match(PENPARAMS);
-			setState(651);
-			match(T__9);
-			setState(652);
+			setState(550);
+			match(T__8);
+			setState(551);
 			match(DIGITS);
-			setState(653);
-			match(T__10);
-			setState(654);
+			setState(552);
+			match(T__9);
+			setState(553);
 			match(PENPARAMS);
-			setState(655);
-			match(T__9);
-			setState(656);
+			setState(554);
+			match(T__8);
+			setState(555);
 			match(DIGITS);
-			setState(657);
-			match(T__11);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ColorContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
-		public ColorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_color; }
-	}
-
-	public final ColorContext color() throws RecognitionException {
-		ColorContext _localctx = new ColorContext(_ctx, getState());
-		enterRule(_localctx, 72, RULE_color);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(659);
-			match(T__20);
-			setState(660);
-			match(STRING);
-			setState(661);
-			match(T__11);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class IfColorContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
-		public IfColorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_ifColor; }
-	}
-
-	public final IfColorContext ifColor() throws RecognitionException {
-		IfColorContext _localctx = new IfColorContext(_ctx, getState());
-		enterRule(_localctx, 74, RULE_ifColor);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(663);
-			match(T__20);
-			setState(664);
-			match(STRING);
-			setState(665);
-			match(T__11);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ElseColorContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
-		public ElseColorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_elseColor; }
-	}
-
-	public final ElseColorContext elseColor() throws RecognitionException {
-		ElseColorContext _localctx = new ElseColorContext(_ctx, getState());
-		enterRule(_localctx, 76, RULE_elseColor);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(667);
-			match(T__20);
-			setState(668);
-			match(STRING);
-			setState(669);
-			match(T__11);
+			setState(556);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3147,7 +2750,7 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class MapContext extends ParserRuleContext {
-		public TerminalNode MAP() { return getToken(VizRepParser.MAP, 0); }
+		public TerminalNode MAPLEXER() { return getToken(VizRepParser.MAPLEXER, 0); }
 		public MapContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3156,16 +2759,16 @@ public class VizRepParser extends Parser {
 
 	public final MapContext map() throws RecognitionException {
 		MapContext _localctx = new MapContext(_ctx, getState());
-		enterRule(_localctx, 78, RULE_map);
+		enterRule(_localctx, 76, RULE_map);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(671);
-			match(T__21);
-			setState(672);
-			match(MAP);
-			setState(673);
-			match(T__11);
+			setState(558);
+			match(T__19);
+			setState(559);
+			match(MAPLEXER);
+			setState(560);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3180,7 +2783,7 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class IfMapContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
+		public TerminalNode MAPLEXER() { return getToken(VizRepParser.MAPLEXER, 0); }
 		public IfMapContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3189,16 +2792,16 @@ public class VizRepParser extends Parser {
 
 	public final IfMapContext ifMap() throws RecognitionException {
 		IfMapContext _localctx = new IfMapContext(_ctx, getState());
-		enterRule(_localctx, 80, RULE_ifMap);
+		enterRule(_localctx, 78, RULE_ifMap);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(675);
-			match(T__21);
-			setState(676);
-			match(STRING);
-			setState(677);
-			match(T__11);
+			setState(562);
+			match(T__19);
+			setState(563);
+			match(MAPLEXER);
+			setState(564);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3213,7 +2816,7 @@ public class VizRepParser extends Parser {
 	}
 
 	public static class ElseMapContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(VizRepParser.STRING, 0); }
+		public TerminalNode MAPLEXER() { return getToken(VizRepParser.MAPLEXER, 0); }
 		public ElseMapContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3222,16 +2825,104 @@ public class VizRepParser extends Parser {
 
 	public final ElseMapContext elseMap() throws RecognitionException {
 		ElseMapContext _localctx = new ElseMapContext(_ctx, getState());
-		enterRule(_localctx, 82, RULE_elseMap);
+		enterRule(_localctx, 80, RULE_elseMap);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(679);
-			match(T__21);
-			setState(680);
-			match(STRING);
-			setState(681);
-			match(T__11);
+			setState(566);
+			match(T__19);
+			setState(567);
+			match(MAPLEXER);
+			setState(568);
+			match(T__10);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class DimInputContext extends ParserRuleContext {
+		public TerminalNode DIMENSION3D() { return getToken(VizRepParser.DIMENSION3D, 0); }
+		public TerminalNode DYNINPUT() { return getToken(VizRepParser.DYNINPUT, 0); }
+		public TerminalNode DIGITS() { return getToken(VizRepParser.DIGITS, 0); }
+		public DimInputContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_dimInput; }
+	}
+
+	public final DimInputContext dimInput() throws RecognitionException {
+		DimInputContext _localctx = new DimInputContext(_ctx, getState());
+		enterRule(_localctx, 82, RULE_dimInput);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(570);
+			match(DIMENSION3D);
+			setState(571);
+			match(T__8);
+			setState(572);
+			_la = _input.LA(1);
+			if ( !(_la==DIGITS || _la==DYNINPUT) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class SphereDimInputContext extends ParserRuleContext {
+		public TerminalNode SPHEREPARAMS() { return getToken(VizRepParser.SPHEREPARAMS, 0); }
+		public TerminalNode DYNINPUT() { return getToken(VizRepParser.DYNINPUT, 0); }
+		public TerminalNode DIGITS() { return getToken(VizRepParser.DIGITS, 0); }
+		public SphereDimInputContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_sphereDimInput; }
+	}
+
+	public final SphereDimInputContext sphereDimInput() throws RecognitionException {
+		SphereDimInputContext _localctx = new SphereDimInputContext(_ctx, getState());
+		enterRule(_localctx, 84, RULE_sphereDimInput);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(574);
+			match(SPHEREPARAMS);
+			setState(575);
+			match(T__8);
+			setState(576);
+			_la = _input.LA(1);
+			if ( !(_la==DIGITS || _la==DYNINPUT) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -3246,248 +2937,206 @@ public class VizRepParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)\u02ae\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\'\u0245\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
-		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\4)\t)\4*\t*\4+\t+\3"+
-		"\2\3\2\3\2\3\2\3\2\6\2\\\n\2\r\2\16\2]\3\2\3\2\3\3\3\3\5\3d\n\3\3\3\3"+
-		"\3\5\3h\n\3\3\3\5\3k\n\3\3\3\5\3n\n\3\3\3\3\3\5\3r\n\3\3\3\5\3u\n\3\3"+
-		"\3\6\3x\n\3\r\3\16\3y\3\3\3\3\5\3~\n\3\3\3\5\3\u0081\n\3\3\3\6\3\u0084"+
-		"\n\3\r\3\16\3\u0085\3\3\3\3\5\3\u008a\n\3\3\3\5\3\u008d\n\3\3\4\3\4\6"+
-		"\4\u0091\n\4\r\4\16\4\u0092\3\4\3\4\6\4\u0097\n\4\r\4\16\4\u0098\3\4\3"+
-		"\4\5\4\u009d\n\4\3\4\3\4\6\4\u00a1\n\4\r\4\16\4\u00a2\3\4\3\4\3\4\6\4"+
-		"\u00a8\n\4\r\4\16\4\u00a9\3\4\3\4\5\4\u00ae\n\4\3\5\3\5\3\5\3\5\3\5\3"+
-		"\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\6\7\u00cf\n\7\r\7\16\7\u00d0\3\b\3\b"+
-		"\3\b\6\b\u00d6\n\b\r\b\16\b\u00d7\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\t\u00e1"+
-		"\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\n\u00ea\n\n\3\13\3\13\5\13\u00ee\n"+
-		"\13\3\f\3\f\3\f\3\f\5\f\u00f4\n\f\3\r\3\r\3\r\5\r\u00f9\n\r\3\16\3\16"+
-		"\3\16\3\16\5\16\u00ff\n\16\3\17\3\17\3\17\3\17\5\17\u0105\n\17\3\20\3"+
-		"\20\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u010f\n\20\3\20\3\20\3\20\3\20"+
-		"\3\20\3\20\3\20\3\20\5\20\u0119\n\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20"+
-		"\3\20\5\20\u0123\n\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21"+
-		"\3\21\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22"+
-		"\3\22\3\22\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
-		"\3\23\3\23\3\23\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24"+
-		"\3\24\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25"+
-		"\3\25\3\25\3\25\3\25\3\25\3\25\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27"+
-		"\3\27\3\27\3\27\3\27\3\27\3\27\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30"+
-		"\3\30\3\30\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\32\3\32"+
-		"\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3\33\3\33"+
-		"\3\33\3\33\3\33\3\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34"+
+		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\4)\t)\4*\t*\4+\t+\4"+
+		",\t,\3\2\3\2\3\2\3\2\3\2\6\2^\n\2\r\2\16\2_\3\2\3\2\3\3\3\3\3\3\5\3g\n"+
+		"\3\3\4\3\4\5\4k\n\4\3\4\3\4\5\4o\n\4\3\4\5\4r\n\4\3\4\5\4u\n\4\3\4\3\4"+
+		"\5\4y\n\4\3\4\5\4|\n\4\3\4\6\4\177\n\4\r\4\16\4\u0080\3\4\3\4\5\4\u0085"+
+		"\n\4\3\4\5\4\u0088\n\4\3\4\6\4\u008b\n\4\r\4\16\4\u008c\3\4\3\4\5\4\u0091"+
+		"\n\4\3\4\5\4\u0094\n\4\3\5\3\5\3\5\3\5\5\5\u009a\n\5\3\6\3\6\3\6\3\6\5"+
+		"\6\u00a0\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3"+
+		"\b\3\b\3\b\6\b\u00b3\n\b\r\b\16\b\u00b4\3\t\3\t\3\t\6\t\u00ba\n\t\r\t"+
+		"\16\t\u00bb\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\n\u00c5\n\n\3\13\3\13\3\13\3"+
+		"\13\3\13\3\13\3\13\5\13\u00ce\n\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f"+
+		"\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r\5\r\u00e1\n\r\3\16\3\16\3\16\5\16\u00e6"+
+		"\n\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20"+
+		"\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\22"+
+		"\3\22\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\24"+
+		"\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\25"+
+		"\3\25\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27"+
+		"\3\27\3\30\3\30\3\30\3\30\3\30\3\30\3\31\3\31\3\31\3\31\3\31\3\31\3\32"+
+		"\3\32\3\32\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
+		"\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
+		"\3\33\5\33\u0158\n\33\3\33\3\33\3\33\3\33\5\33\u015e\n\33\3\33\3\33\3"+
+		"\33\3\33\5\33\u0164\n\33\3\33\3\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34"+
 		"\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34"+
-		"\5\34\u01c9\n\34\3\34\3\34\3\34\3\34\5\34\u01cf\n\34\3\34\3\34\3\34\3"+
-		"\34\5\34\u01d5\n\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35"+
+		"\3\34\3\34\3\34\5\34\u0180\n\34\3\34\3\34\3\34\3\34\5\34\u0186\n\34\3"+
+		"\34\3\34\3\34\3\34\5\34\u018c\n\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35"+
 		"\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35"+
-		"\3\35\3\35\5\35\u01f1\n\35\3\35\3\35\3\35\3\35\5\35\u01f7\n\35\3\35\3"+
-		"\35\3\35\3\35\5\35\u01fd\n\35\3\35\3\35\3\36\3\36\3\36\3\36\3\36\3\36"+
+		"\3\35\3\35\3\35\3\35\3\35\5\35\u01a8\n\35\3\35\3\35\3\35\3\35\5\35\u01ae"+
+		"\n\35\3\35\3\35\3\35\3\35\5\35\u01b4\n\35\3\35\3\35\3\36\3\36\3\36\3\36"+
 		"\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36"+
-		"\3\36\3\36\3\36\3\36\5\36\u0219\n\36\3\36\3\36\3\36\3\36\5\36\u021f\n"+
-		"\36\3\36\3\36\3\36\3\36\5\36\u0225\n\36\3\36\3\36\3\37\3\37\3\37\3\37"+
-		"\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37"+
-		"\3\37\3\37\3\37\3\37\3\37\3\37\5\37\u0241\n\37\3\37\3\37\3\37\3\37\5\37"+
-		"\u0247\n\37\3\37\3\37\3\37\3\37\5\37\u024d\n\37\3\37\3\37\3 \3 \3 \3 "+
-		"\3 \3!\3!\3!\3!\3!\3\"\3\"\3\"\3\"\3\"\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3"+
-		"#\3#\3#\3#\3#\3#\3#\3#\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3"+
-		"$\3$\3$\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3&\3&\3"+
-		"&\3&\3\'\3\'\3\'\3\'\3(\3(\3(\3(\3)\3)\3)\3)\3*\3*\3*\3*\3+\3+\3+\3+\3"+
-		"+\by\u0085\u0092\u0098\u00a2\u00a9\2,\2\4\6\b\n\f\16\20\22\24\26\30\32"+
-		"\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRT\2\4\3\3\'\'\4\2#$))\2\u02c7"+
-		"\2[\3\2\2\2\4a\3\2\2\2\6\u008e\3\2\2\2\b\u00af\3\2\2\2\n\u00bd\3\2\2\2"+
-		"\f\u00ce\3\2\2\2\16\u00d5\3\2\2\2\20\u00e0\3\2\2\2\22\u00e9\3\2\2\2\24"+
-		"\u00ed\3\2\2\2\26\u00f3\3\2\2\2\30\u00f8\3\2\2\2\32\u00fe\3\2\2\2\34\u0104"+
-		"\3\2\2\2\36\u0106\3\2\2\2 \u0126\3\2\2\2\"\u0134\3\2\2\2$\u0142\3\2\2"+
-		"\2&\u0150\3\2\2\2(\u015e\3\2\2\2*\u016c\3\2\2\2,\u017a\3\2\2\2.\u0188"+
-		"\3\2\2\2\60\u0192\3\2\2\2\62\u019c\3\2\2\2\64\u01a6\3\2\2\2\66\u01b0\3"+
-		"\2\2\28\u01d8\3\2\2\2:\u0200\3\2\2\2<\u0228\3\2\2\2>\u0250\3\2\2\2@\u0255"+
-		"\3\2\2\2B\u025a\3\2\2\2D\u025f\3\2\2\2F\u0271\3\2\2\2H\u0283\3\2\2\2J"+
-		"\u0295\3\2\2\2L\u0299\3\2\2\2N\u029d\3\2\2\2P\u02a1\3\2\2\2R\u02a5\3\2"+
-		"\2\2T\u02a9\3\2\2\2V\\\5\24\13\2W\\\7\'\2\2X\\\5\4\3\2Y\\\5\b\5\2Z\\\5"+
-		"\n\6\2[V\3\2\2\2[W\3\2\2\2[X\3\2\2\2[Y\3\2\2\2[Z\3\2\2\2\\]\3\2\2\2]["+
-		"\3\2\2\2]^\3\2\2\2^_\3\2\2\2_`\t\2\2\2`\3\3\2\2\2ac\5> \2bd\7\'\2\2cb"+
-		"\3\2\2\2cd\3\2\2\2de\3\2\2\2eg\7\3\2\2fh\7\'\2\2gf\3\2\2\2gh\3\2\2\2h"+
-		"j\3\2\2\2ik\5J&\2ji\3\2\2\2jk\3\2\2\2km\3\2\2\2ln\7\'\2\2ml\3\2\2\2mn"+
-		"\3\2\2\2no\3\2\2\2oq\5\32\16\2pr\7\'\2\2qp\3\2\2\2qr\3\2\2\2rt\3\2\2\2"+
-		"su\5\32\16\2ts\3\2\2\2tu\3\2\2\2uw\3\2\2\2vx\7\'\2\2wv\3\2\2\2xy\3\2\2"+
-		"\2yz\3\2\2\2yw\3\2\2\2z{\3\2\2\2{}\7\4\2\2|~\7\'\2\2}|\3\2\2\2}~\3\2\2"+
-		"\2~\u0080\3\2\2\2\177\u0081\5J&\2\u0080\177\3\2\2\2\u0080\u0081\3\2\2"+
-		"\2\u0081\u0083\3\2\2\2\u0082\u0084\7\'\2\2\u0083\u0082\3\2\2\2\u0084\u0085"+
-		"\3\2\2\2\u0085\u0086\3\2\2\2\u0085\u0083\3\2\2\2\u0086\u0087\3\2\2\2\u0087"+
-		"\u0089\5\34\17\2\u0088\u008a\7\'\2\2\u0089\u0088\3\2\2\2\u0089\u008a\3"+
-		"\2\2\2\u008a\u008c\3\2\2\2\u008b\u008d\5\34\17\2\u008c\u008b\3\2\2\2\u008c"+
-		"\u008d\3\2\2\2\u008d\5\3\2\2\2\u008e\u0090\5> \2\u008f\u0091\7\'\2\2\u0090"+
-		"\u008f\3\2\2\2\u0091\u0092\3\2\2\2\u0092\u0093\3\2\2\2\u0092\u0090\3\2"+
-		"\2\2\u0093\u0094\3\2\2\2\u0094\u0096\7\3\2\2\u0095\u0097\7\'\2\2\u0096"+
-		"\u0095\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u0099\3\2\2\2\u0098\u0096\3\2"+
-		"\2\2\u0099\u009a\3\2\2\2\u009a\u009c\5\26\f\2\u009b\u009d\5\26\f\2\u009c"+
-		"\u009b\3\2\2\2\u009c\u009d\3\2\2\2\u009d\u009e\3\2\2\2\u009e\u00a0\7\5"+
-		"\2\2\u009f\u00a1\7\'\2\2\u00a0\u009f\3\2\2\2\u00a1\u00a2\3\2\2\2\u00a2"+
-		"\u00a3\3\2\2\2\u00a2\u00a0\3\2\2\2\u00a3\u00a4\3\2\2\2\u00a4\u00a5\5\66"+
-		"\34\2\u00a5\u00a7\7\4\2\2\u00a6\u00a8\7\'\2\2\u00a7\u00a6\3\2\2\2\u00a8"+
-		"\u00a9\3\2\2\2\u00a9\u00aa\3\2\2\2\u00a9\u00a7\3\2\2\2\u00aa\u00ab\3\2"+
-		"\2\2\u00ab\u00ad\5\26\f\2\u00ac\u00ae\5\26\f\2\u00ad\u00ac\3\2\2\2\u00ad"+
-		"\u00ae\3\2\2\2\u00ae\7\3\2\2\2\u00af\u00b0\7\6\2\2\u00b0\u00b1\7#\2\2"+
-		"\u00b1\u00b2\7(\2\2\u00b2\u00b3\7#\2\2\u00b3\u00b4\7\7\2\2\u00b4\u00b5"+
-		"\7\'\2\2\u00b5\u00b6\7\b\2\2\u00b6\u00b7\7\'\2\2\u00b7\u00b8\5\f\7\2\u00b8"+
-		"\u00b9\7\'\2\2\u00b9\u00ba\7\t\2\2\u00ba\u00bb\5\16\b\2\u00bb\u00bc\7"+
-		"\n\2\2\u00bc\t\3\2\2\2\u00bd\u00be\7\13\2\2\u00be\u00bf\7$\2\2\u00bf\u00c0"+
-		"\7\f\2\2\u00c0\u00c1\t\3\2\2\u00c1\u00c2\7\r\2\2\u00c2\u00c3\7\"\2\2\u00c3"+
-		"\u00c4\7\f\2\2\u00c4\u00c5\7\31\2\2\u00c5\u00c6\7\r\2\2\u00c6\u00c7\7"+
-		"\"\2\2\u00c7\u00c8\7\f\2\2\u00c8\u00c9\7\31\2\2\u00c9\u00ca\7\16\2\2\u00ca"+
-		"\13\3\2\2\2\u00cb\u00cf\5\20\t\2\u00cc\u00cf\5\4\3\2\u00cd\u00cf\7\'\2"+
-		"\2\u00ce\u00cb\3\2\2\2\u00ce\u00cc\3\2\2\2\u00ce\u00cd\3\2\2\2\u00cf\u00d0"+
-		"\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d0\u00d1\3\2\2\2\u00d1\r\3\2\2\2\u00d2"+
-		"\u00d6\5\22\n\2\u00d3\u00d6\5\4\3\2\u00d4\u00d6\7\'\2\2\u00d5\u00d2\3"+
-		"\2\2\2\u00d5\u00d3\3\2\2\2\u00d5\u00d4\3\2\2\2\u00d6\u00d7\3\2\2\2\u00d7"+
-		"\u00d5\3\2\2\2\u00d7\u00d8\3\2\2\2\u00d8\17\3\2\2\2\u00d9\u00e1\5\"\22"+
-		"\2\u00da\u00e1\5*\26\2\u00db\u00e1\5\62\32\2\u00dc\u00e1\5:\36\2\u00dd"+
-		"\u00e1\5L\'\2\u00de\u00e1\5R*\2\u00df\u00e1\5F$\2\u00e0\u00d9\3\2\2\2"+
-		"\u00e0\u00da\3\2\2\2\u00e0\u00db\3\2\2\2\u00e0\u00dc\3\2\2\2\u00e0\u00dd"+
-		"\3\2\2\2\u00e0\u00de\3\2\2\2\u00e0\u00df\3\2\2\2\u00e1\21\3\2\2\2\u00e2"+
-		"\u00ea\5$\23\2\u00e3\u00ea\5,\27\2\u00e4\u00ea\5\64\33\2\u00e5\u00ea\5"+
-		"<\37\2\u00e6\u00ea\5N(\2\u00e7\u00ea\5T+\2\u00e8\u00ea\5H%\2\u00e9\u00e2"+
-		"\3\2\2\2\u00e9\u00e3\3\2\2\2\u00e9\u00e4\3\2\2\2\u00e9\u00e5\3\2\2\2\u00e9"+
-		"\u00e6\3\2\2\2\u00e9\u00e7\3\2\2\2\u00e9\u00e8\3\2\2\2\u00ea\23\3\2\2"+
-		"\2\u00eb\u00ee\5\26\f\2\u00ec\u00ee\5\30\r\2\u00ed\u00eb\3\2\2\2\u00ed"+
-		"\u00ec\3\2\2\2\u00ee\25\3\2\2\2\u00ef\u00f4\5\36\20\2\u00f0\u00f4\5&\24"+
-		"\2\u00f1\u00f4\5.\30\2\u00f2\u00f4\5\66\34\2\u00f3\u00ef\3\2\2\2\u00f3"+
-		"\u00f0\3\2\2\2\u00f3\u00f1\3\2\2\2\u00f3\u00f2\3\2\2\2\u00f4\27\3\2\2"+
-		"\2\u00f5\u00f9\5J&\2\u00f6\u00f9\5P)\2\u00f7\u00f9\5D#\2\u00f8\u00f5\3"+
-		"\2\2\2\u00f8\u00f6\3\2\2\2\u00f8\u00f7\3\2\2\2\u00f9\31\3\2\2\2\u00fa"+
-		"\u00ff\5 \21\2\u00fb\u00ff\5(\25\2\u00fc\u00ff\5\60\31\2\u00fd\u00ff\5"+
-		"8\35\2\u00fe\u00fa\3\2\2\2\u00fe\u00fb\3\2\2\2\u00fe\u00fc\3\2\2\2\u00fe"+
-		"\u00fd\3\2\2\2\u00ff\33\3\2\2\2\u0100\u0105\5 \21\2\u0101\u0105\5(\25"+
-		"\2\u0102\u0105\5\60\31\2\u0103\u0105\58\35\2\u0104\u0100\3\2\2\2\u0104"+
-		"\u0101\3\2\2\2\u0104\u0102\3\2\2\2\u0104\u0103\3\2\2\2\u0105\35\3\2\2"+
-		"\2\u0106\u010e\7\17\2\2\u0107\u0108\7\33\2\2\u0108\u0109\7\f\2\2\u0109"+
-		"\u010f\7#\2\2\u010a\u010b\7\34\2\2\u010b\u010c\7\f\2\2\u010c\u010d\7\20"+
-		"\2\2\u010d\u010f\7$\2\2\u010e\u0107\3\2\2\2\u010e\u010a\3\2\2\2\u010f"+
-		"\u0110\3\2\2\2\u0110\u0118\7\r\2\2\u0111\u0112\7\33\2\2\u0112\u0113\7"+
-		"\f\2\2\u0113\u0119\7#\2\2\u0114\u0115\7\34\2\2\u0115\u0116\7\f\2\2\u0116"+
-		"\u0117\7\20\2\2\u0117\u0119\7$\2\2\u0118\u0111\3\2\2\2\u0118\u0114\3\2"+
-		"\2\2\u0119\u011a\3\2\2\2\u011a\u0122\7\r\2\2\u011b\u011c\7\33\2\2\u011c"+
-		"\u011d\7\f\2\2\u011d\u0123\7#\2\2\u011e\u011f\7\34\2\2\u011f\u0120\7\f"+
-		"\2\2\u0120\u0121\7\20\2\2\u0121\u0123\7$\2\2\u0122\u011b\3\2\2\2\u0122"+
-		"\u011e\3\2\2\2\u0123\u0124\3\2\2\2\u0124\u0125\7\16\2\2\u0125\37\3\2\2"+
-		"\2\u0126\u0127\7\17\2\2\u0127\u0128\7\33\2\2\u0128\u0129\7\f\2\2\u0129"+
-		"\u012a\7#\2\2\u012a\u012b\7\r\2\2\u012b\u012c\7\33\2\2\u012c\u012d\7\f"+
-		"\2\2\u012d\u012e\7#\2\2\u012e\u012f\7\r\2\2\u012f\u0130\7\33\2\2\u0130"+
-		"\u0131\7\f\2\2\u0131\u0132\7#\2\2\u0132\u0133\7\16\2\2\u0133!\3\2\2\2"+
-		"\u0134\u0135\7\17\2\2\u0135\u0136\7\33\2\2\u0136\u0137\7\f\2\2\u0137\u0138"+
-		"\7#\2\2\u0138\u0139\7\r\2\2\u0139\u013a\7\33\2\2\u013a\u013b\7\f\2\2\u013b"+
-		"\u013c\7#\2\2\u013c\u013d\7\r\2\2\u013d\u013e\7\33\2\2\u013e\u013f\7\f"+
-		"\2\2\u013f\u0140\7#\2\2\u0140\u0141\7\16\2\2\u0141#\3\2\2\2\u0142\u0143"+
-		"\7\17\2\2\u0143\u0144\7\33\2\2\u0144\u0145\7\f\2\2\u0145\u0146\7#\2\2"+
-		"\u0146\u0147\7\r\2\2\u0147\u0148\7\33\2\2\u0148\u0149\7\f\2\2\u0149\u014a"+
-		"\7#\2\2\u014a\u014b\7\r\2\2\u014b\u014c\7\33\2\2\u014c\u014d\7\f\2\2\u014d"+
-		"\u014e\7#\2\2\u014e\u014f\7\16\2\2\u014f%\3\2\2\2\u0150\u0151\7\21\2\2"+
-		"\u0151\u0152\7\32\2\2\u0152\u0153\7\f\2\2\u0153\u0154\7#\2\2\u0154\u0155"+
-		"\7\r\2\2\u0155\u0156\7\32\2\2\u0156\u0157\7\f\2\2\u0157\u0158\7#\2\2\u0158"+
-		"\u0159\7\r\2\2\u0159\u015a\7\32\2\2\u015a\u015b\7\f\2\2\u015b\u015c\7"+
-		"#\2\2\u015c\u015d\7\16\2\2\u015d\'\3\2\2\2\u015e\u015f\7\21\2\2\u015f"+
-		"\u0160\7\32\2\2\u0160\u0161\7\f\2\2\u0161\u0162\7#\2\2\u0162\u0163\7\r"+
-		"\2\2\u0163\u0164\7\32\2\2\u0164\u0165\7\f\2\2\u0165\u0166\7#\2\2\u0166"+
-		"\u0167\7\r\2\2\u0167\u0168\7\32\2\2\u0168\u0169\7\f\2\2\u0169\u016a\7"+
-		"#\2\2\u016a\u016b\7\16\2\2\u016b)\3\2\2\2\u016c\u016d\7\21\2\2\u016d\u016e"+
-		"\7\32\2\2\u016e\u016f\7\f\2\2\u016f\u0170\7#\2\2\u0170\u0171\7\r\2\2\u0171"+
-		"\u0172\7\32\2\2\u0172\u0173\7\f\2\2\u0173\u0174\7#\2\2\u0174\u0175\7\r"+
-		"\2\2\u0175\u0176\7\32\2\2\u0176\u0177\7\f\2\2\u0177\u0178\7#\2\2\u0178"+
-		"\u0179\7\16\2\2\u0179+\3\2\2\2\u017a\u017b\7\21\2\2\u017b\u017c\7\32\2"+
-		"\2\u017c\u017d\7\f\2\2\u017d\u017e\7#\2\2\u017e\u017f\7\r\2\2\u017f\u0180"+
-		"\7\32\2\2\u0180\u0181\7\f\2\2\u0181\u0182\7#\2\2\u0182\u0183\7\r\2\2\u0183"+
-		"\u0184\7\32\2\2\u0184\u0185\7\f\2\2\u0185\u0186\7#\2\2\u0186\u0187\7\16"+
-		"\2\2\u0187-\3\2\2\2\u0188\u0189\7\22\2\2\u0189\u018a\7\33\2\2\u018a\u018b"+
-		"\7\f\2\2\u018b\u018c\7#\2\2\u018c\u018d\7\r\2\2\u018d\u018e\7\33\2\2\u018e"+
-		"\u018f\7\f\2\2\u018f\u0190\7#\2\2\u0190\u0191\7\16\2\2\u0191/\3\2\2\2"+
-		"\u0192\u0193\7\22\2\2\u0193\u0194\7\33\2\2\u0194\u0195\7\f\2\2\u0195\u0196"+
-		"\7#\2\2\u0196\u0197\7\r\2\2\u0197\u0198\7\33\2\2\u0198\u0199\7\f\2\2\u0199"+
-		"\u019a\7#\2\2\u019a\u019b\7\16\2\2\u019b\61\3\2\2\2\u019c\u019d\7\22\2"+
-		"\2\u019d\u019e\7\33\2\2\u019e\u019f\7\f\2\2\u019f\u01a0\7#\2\2\u01a0\u01a1"+
-		"\7\r\2\2\u01a1\u01a2\7\33\2\2\u01a2\u01a3\7\f\2\2\u01a3\u01a4\7#\2\2\u01a4"+
-		"\u01a5\7\16\2\2\u01a5\63\3\2\2\2\u01a6\u01a7\7\22\2\2\u01a7\u01a8\7\33"+
-		"\2\2\u01a8\u01a9\7\f\2\2\u01a9\u01aa\7#\2\2\u01aa\u01ab\7\r\2\2\u01ab"+
-		"\u01ac\7\33\2\2\u01ac\u01ad\7\f\2\2\u01ad\u01ae\7#\2\2\u01ae\u01af\7\16"+
-		"\2\2\u01af\65\3\2\2\2\u01b0\u01b1\7\23\2\2\u01b1\u01b2\7\36\2\2\u01b2"+
-		"\u01b3\7\f\2\2\u01b3\u01b4\7#\2\2\u01b4\u01b5\7\r\2\2\u01b5\u01b6\7\36"+
-		"\2\2\u01b6\u01b7\7\f\2\2\u01b7\u01b8\7#\2\2\u01b8\u01b9\7\r\2\2\u01b9"+
-		"\u01ba\7\36\2\2\u01ba\u01bb\7\f\2\2\u01bb\u01bc\7#\2\2\u01bc\u01bd\7\r"+
-		"\2\2\u01bd\u01be\7\36\2\2\u01be\u01bf\7\f\2\2\u01bf\u01c0\7#\2\2\u01c0"+
-		"\u01c1\7\r\2\2\u01c1\u01c2\7\37\2\2\u01c2\u01c3\7\f\2\2\u01c3\u01c8\7"+
-		"$\2\2\u01c4\u01c5\7\r\2\2\u01c5\u01c6\7\37\2\2\u01c6\u01c7\7\f\2\2\u01c7"+
-		"\u01c9\7$\2\2\u01c8\u01c4\3\2\2\2\u01c8\u01c9\3\2\2\2\u01c9\u01ce\3\2"+
-		"\2\2\u01ca\u01cb\7\r\2\2\u01cb\u01cc\7\37\2\2\u01cc\u01cd\7\f\2\2\u01cd"+
-		"\u01cf\7$\2\2\u01ce\u01ca\3\2\2\2\u01ce\u01cf\3\2\2\2\u01cf\u01d4\3\2"+
-		"\2\2\u01d0\u01d1\7\r\2\2\u01d1\u01d2\7\37\2\2\u01d2\u01d3\7\f\2\2\u01d3"+
-		"\u01d5\7$\2\2\u01d4\u01d0\3\2\2\2\u01d4\u01d5\3\2\2\2\u01d5\u01d6\3\2"+
-		"\2\2\u01d6\u01d7\7\16\2\2\u01d7\67\3\2\2\2\u01d8\u01d9\7\23\2\2\u01d9"+
-		"\u01da\7\36\2\2\u01da\u01db\7\f\2\2\u01db\u01dc\7#\2\2\u01dc\u01dd\7\r"+
-		"\2\2\u01dd\u01de\7\36\2\2\u01de\u01df\7\f\2\2\u01df\u01e0\7#\2\2\u01e0"+
-		"\u01e1\7\r\2\2\u01e1\u01e2\7\36\2\2\u01e2\u01e3\7\f\2\2\u01e3\u01e4\7"+
-		"#\2\2\u01e4\u01e5\7\r\2\2\u01e5\u01e6\7\36\2\2\u01e6\u01e7\7\f\2\2\u01e7"+
-		"\u01e8\7#\2\2\u01e8\u01e9\7\r\2\2\u01e9\u01ea\7\37\2\2\u01ea\u01eb\7\f"+
-		"\2\2\u01eb\u01f0\7$\2\2\u01ec\u01ed\7\r\2\2\u01ed\u01ee\7\37\2\2\u01ee"+
-		"\u01ef\7\f\2\2\u01ef\u01f1\7$\2\2\u01f0\u01ec\3\2\2\2\u01f0\u01f1\3\2"+
-		"\2\2\u01f1\u01f6\3\2\2\2\u01f2\u01f3\7\r\2\2\u01f3\u01f4\7\37\2\2\u01f4"+
-		"\u01f5\7\f\2\2\u01f5\u01f7\7$\2\2\u01f6\u01f2\3\2\2\2\u01f6\u01f7\3\2"+
-		"\2\2\u01f7\u01fc\3\2\2\2\u01f8\u01f9\7\r\2\2\u01f9\u01fa\7\37\2\2\u01fa"+
-		"\u01fb\7\f\2\2\u01fb\u01fd\7$\2\2\u01fc\u01f8\3\2\2\2\u01fc\u01fd\3\2"+
-		"\2\2\u01fd\u01fe\3\2\2\2\u01fe\u01ff\7\16\2\2\u01ff9\3\2\2\2\u0200\u0201"+
-		"\7\23\2\2\u0201\u0202\7\36\2\2\u0202\u0203\7\f\2\2\u0203\u0204\7#\2\2"+
-		"\u0204\u0205\7\r\2\2\u0205\u0206\7\36\2\2\u0206\u0207\7\f\2\2\u0207\u0208"+
-		"\7#\2\2\u0208\u0209\7\r\2\2\u0209\u020a\7\36\2\2\u020a\u020b\7\f\2\2\u020b"+
-		"\u020c\7#\2\2\u020c\u020d\7\r\2\2\u020d\u020e\7\36\2\2\u020e\u020f\7\f"+
-		"\2\2\u020f\u0210\7#\2\2\u0210\u0211\7\r\2\2\u0211\u0212\7\37\2\2\u0212"+
-		"\u0213\7\f\2\2\u0213\u0218\7$\2\2\u0214\u0215\7\r\2\2\u0215\u0216\7\37"+
-		"\2\2\u0216\u0217\7\f\2\2\u0217\u0219\7$\2\2\u0218\u0214\3\2\2\2\u0218"+
-		"\u0219\3\2\2\2\u0219\u021e\3\2\2\2\u021a\u021b\7\r\2\2\u021b\u021c\7\37"+
-		"\2\2\u021c\u021d\7\f\2\2\u021d\u021f\7$\2\2\u021e\u021a\3\2\2\2\u021e"+
-		"\u021f\3\2\2\2\u021f\u0224\3\2\2\2\u0220\u0221\7\r\2\2\u0221\u0222\7\37"+
-		"\2\2\u0222\u0223\7\f\2\2\u0223\u0225\7$\2\2\u0224\u0220\3\2\2\2\u0224"+
-		"\u0225\3\2\2\2\u0225\u0226\3\2\2\2\u0226\u0227\7\16\2\2\u0227;\3\2\2\2"+
-		"\u0228\u0229\7\23\2\2\u0229\u022a\7\36\2\2\u022a\u022b\7\f\2\2\u022b\u022c"+
-		"\7#\2\2\u022c\u022d\7\r\2\2\u022d\u022e\7\36\2\2\u022e\u022f\7\f\2\2\u022f"+
-		"\u0230\7#\2\2\u0230\u0231\7\r\2\2\u0231\u0232\7\36\2\2\u0232\u0233\7\f"+
-		"\2\2\u0233\u0234\7#\2\2\u0234\u0235\7\r\2\2\u0235\u0236\7\36\2\2\u0236"+
-		"\u0237\7\f\2\2\u0237\u0238\7#\2\2\u0238\u0239\7\r\2\2\u0239\u023a\7\37"+
-		"\2\2\u023a\u023b\7\f\2\2\u023b\u0240\7$\2\2\u023c\u023d\7\r\2\2\u023d"+
-		"\u023e\7\37\2\2\u023e\u023f\7\f\2\2\u023f\u0241\7$\2\2\u0240\u023c\3\2"+
-		"\2\2\u0240\u0241\3\2\2\2\u0241\u0246\3\2\2\2\u0242\u0243\7\r\2\2\u0243"+
-		"\u0244\7\37\2\2\u0244\u0245\7\f\2\2\u0245\u0247\7$\2\2\u0246\u0242\3\2"+
-		"\2\2\u0246\u0247\3\2\2\2\u0247\u024c\3\2\2\2\u0248\u0249\7\r\2\2\u0249"+
-		"\u024a\7\37\2\2\u024a\u024b\7\f\2\2\u024b\u024d\7$\2\2\u024c\u0248\3\2"+
-		"\2\2\u024c\u024d\3\2\2\2\u024d\u024e\3\2\2\2\u024e\u024f\7\16\2\2\u024f"+
-		"=\3\2\2\2\u0250\u0251\7\24\2\2\u0251\u0252\7\25\2\2\u0252\u0253\7#\2\2"+
-		"\u0253\u0254\7\16\2\2\u0254?\3\2\2\2\u0255\u0256\7\24\2\2\u0256\u0257"+
-		"\7\25\2\2\u0257\u0258\7#\2\2\u0258\u0259\7\16\2\2\u0259A\3\2\2\2\u025a"+
-		"\u025b\7\24\2\2\u025b\u025c\7\25\2\2\u025c\u025d\7#\2\2\u025d\u025e\7"+
-		"\16\2\2\u025eC\3\2\2\2\u025f\u0260\7\26\2\2\u0260\u0261\7 \2\2\u0261\u0262"+
-		"\7\f\2\2\u0262\u0263\7$\2\2\u0263\u0264\7\r\2\2\u0264\u0265\7!\2\2\u0265"+
-		"\u0266\7\f\2\2\u0266\u0267\7#\2\2\u0267\u0268\7\r\2\2\u0268\u0269\7!\2"+
-		"\2\u0269\u026a\7\f\2\2\u026a\u026b\7#\2\2\u026b\u026c\7\r\2\2\u026c\u026d"+
-		"\7!\2\2\u026d\u026e\7\f\2\2\u026e\u026f\7#\2\2\u026f\u0270\7\16\2\2\u0270"+
-		"E\3\2\2\2\u0271\u0272\7\26\2\2\u0272\u0273\7 \2\2\u0273\u0274\7\f\2\2"+
-		"\u0274\u0275\7$\2\2\u0275\u0276\7\r\2\2\u0276\u0277\7!\2\2\u0277\u0278"+
-		"\7\f\2\2\u0278\u0279\7#\2\2\u0279\u027a\7\r\2\2\u027a\u027b\7!\2\2\u027b"+
-		"\u027c\7\f\2\2\u027c\u027d\7#\2\2\u027d\u027e\7\r\2\2\u027e\u027f\7!\2"+
-		"\2\u027f\u0280\7\f\2\2\u0280\u0281\7#\2\2\u0281\u0282\7\16\2\2\u0282G"+
-		"\3\2\2\2\u0283\u0284\7\26\2\2\u0284\u0285\7 \2\2\u0285\u0286\7\f\2\2\u0286"+
-		"\u0287\7$\2\2\u0287\u0288\7\r\2\2\u0288\u0289\7!\2\2\u0289\u028a\7\f\2"+
-		"\2\u028a\u028b\7#\2\2\u028b\u028c\7\r\2\2\u028c\u028d\7!\2\2\u028d\u028e"+
-		"\7\f\2\2\u028e\u028f\7#\2\2\u028f\u0290\7\r\2\2\u0290\u0291\7!\2\2\u0291"+
-		"\u0292\7\f\2\2\u0292\u0293\7#\2\2\u0293\u0294\7\16\2\2\u0294I\3\2\2\2"+
-		"\u0295\u0296\7\27\2\2\u0296\u0297\7$\2\2\u0297\u0298\7\16\2\2\u0298K\3"+
-		"\2\2\2\u0299\u029a\7\27\2\2\u029a\u029b\7$\2\2\u029b\u029c\7\16\2\2\u029c"+
-		"M\3\2\2\2\u029d\u029e\7\27\2\2\u029e\u029f\7$\2\2\u029f\u02a0\7\16\2\2"+
-		"\u02a0O\3\2\2\2\u02a1\u02a2\7\30\2\2\u02a2\u02a3\7%\2\2\u02a3\u02a4\7"+
-		"\16\2\2\u02a4Q\3\2\2\2\u02a5\u02a6\7\30\2\2\u02a6\u02a7\7$\2\2\u02a7\u02a8"+
-		"\7\16\2\2\u02a8S\3\2\2\2\u02a9\u02aa\7\30\2\2\u02aa\u02ab\7$\2\2\u02ab"+
-		"\u02ac\7\16\2\2\u02acU\3\2\2\2\60[]cgjmqty}\u0080\u0085\u0089\u008c\u0092"+
-		"\u0098\u009c\u00a2\u00a9\u00ad\u00ce\u00d0\u00d5\u00d7\u00e0\u00e9\u00ed"+
-		"\u00f3\u00f8\u00fe\u0104\u010e\u0118\u0122\u01c8\u01ce\u01d4\u01f0\u01f6"+
-		"\u01fc\u0218\u021e\u0224\u0240\u0246\u024c";
+		"\3\36\3\36\3\36\3\36\3\36\3\36\5\36\u01d0\n\36\3\36\3\36\3\36\3\36\5\36"+
+		"\u01d6\n\36\3\36\3\36\3\36\3\36\5\36\u01dc\n\36\3\36\3\36\3\37\3\37\3"+
+		"\37\3\37\3\37\3 \3 \3 \3 \3 \3!\3!\3!\3!\3!\3\"\3\"\3\"\3\"\3#\3#\3#\3"+
+		"#\3$\3$\3$\3$\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3"+
+		"&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3\'\3\'\3\'\3\'\3"+
+		"\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3(\3(\3(\3(\3)"+
+		"\3)\3)\3)\3*\3*\3*\3*\3+\3+\3+\3+\3,\3,\3,\3,\3,\4\u0080\u008c\2-\2\4"+
+		"\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNP"+
+		"RTV\2\5\3\3$$\4\2 !&&\4\2  \'\'\2\u0254\2]\3\2\2\2\4f\3\2\2\2\6h\3\2\2"+
+		"\2\b\u0099\3\2\2\2\n\u009f\3\2\2\2\f\u00a1\3\2\2\2\16\u00b2\3\2\2\2\20"+
+		"\u00b9\3\2\2\2\22\u00c4\3\2\2\2\24\u00cd\3\2\2\2\26\u00cf\3\2\2\2\30\u00e0"+
+		"\3\2\2\2\32\u00e5\3\2\2\2\34\u00e7\3\2\2\2\36\u00ef\3\2\2\2 \u00f7\3\2"+
+		"\2\2\"\u00ff\3\2\2\2$\u0107\3\2\2\2&\u010f\3\2\2\2(\u0117\3\2\2\2*\u011f"+
+		"\3\2\2\2,\u0127\3\2\2\2.\u012d\3\2\2\2\60\u0133\3\2\2\2\62\u0139\3\2\2"+
+		"\2\64\u013f\3\2\2\2\66\u0167\3\2\2\28\u018f\3\2\2\2:\u01b7\3\2\2\2<\u01df"+
+		"\3\2\2\2>\u01e4\3\2\2\2@\u01e9\3\2\2\2B\u01ee\3\2\2\2D\u01f2\3\2\2\2F"+
+		"\u01f6\3\2\2\2H\u01fa\3\2\2\2J\u020c\3\2\2\2L\u021e\3\2\2\2N\u0230\3\2"+
+		"\2\2P\u0234\3\2\2\2R\u0238\3\2\2\2T\u023c\3\2\2\2V\u0240\3\2\2\2X^\5\4"+
+		"\3\2Y^\5\6\4\2Z^\5\f\7\2[^\5\26\f\2\\^\7$\2\2]X\3\2\2\2]Y\3\2\2\2]Z\3"+
+		"\2\2\2][\3\2\2\2]\\\3\2\2\2^_\3\2\2\2_]\3\2\2\2_`\3\2\2\2`a\3\2\2\2ab"+
+		"\t\2\2\2b\3\3\2\2\2cg\5\30\r\2dg\5\32\16\2eg\5\64\33\2fc\3\2\2\2fd\3\2"+
+		"\2\2fe\3\2\2\2g\5\3\2\2\2hj\5<\37\2ik\7$\2\2ji\3\2\2\2jk\3\2\2\2kl\3\2"+
+		"\2\2ln\7\3\2\2mo\7$\2\2nm\3\2\2\2no\3\2\2\2oq\3\2\2\2pr\5B\"\2qp\3\2\2"+
+		"\2qr\3\2\2\2rt\3\2\2\2su\7$\2\2ts\3\2\2\2tu\3\2\2\2uv\3\2\2\2vx\5\b\5"+
+		"\2wy\7$\2\2xw\3\2\2\2xy\3\2\2\2y{\3\2\2\2z|\5\64\33\2{z\3\2\2\2{|\3\2"+
+		"\2\2|~\3\2\2\2}\177\7$\2\2~}\3\2\2\2\177\u0080\3\2\2\2\u0080\u0081\3\2"+
+		"\2\2\u0080~\3\2\2\2\u0081\u0082\3\2\2\2\u0082\u0084\7\4\2\2\u0083\u0085"+
+		"\7$\2\2\u0084\u0083\3\2\2\2\u0084\u0085\3\2\2\2\u0085\u0087\3\2\2\2\u0086"+
+		"\u0088\5B\"\2\u0087\u0086\3\2\2\2\u0087\u0088\3\2\2\2\u0088\u008a\3\2"+
+		"\2\2\u0089\u008b\7$\2\2\u008a\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c"+
+		"\u008d\3\2\2\2\u008c\u008a\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u0090\5\n"+
+		"\6\2\u008f\u0091\7$\2\2\u0090\u008f\3\2\2\2\u0090\u0091\3\2\2\2\u0091"+
+		"\u0093\3\2\2\2\u0092\u0094\5\64\33\2\u0093\u0092\3\2\2\2\u0093\u0094\3"+
+		"\2\2\2\u0094\7\3\2\2\2\u0095\u009a\5\36\20\2\u0096\u009a\5&\24\2\u0097"+
+		"\u009a\5.\30\2\u0098\u009a\5\66\34\2\u0099\u0095\3\2\2\2\u0099\u0096\3"+
+		"\2\2\2\u0099\u0097\3\2\2\2\u0099\u0098\3\2\2\2\u009a\t\3\2\2\2\u009b\u00a0"+
+		"\5\36\20\2\u009c\u00a0\5&\24\2\u009d\u00a0\5.\30\2\u009e\u00a0\5\66\34"+
+		"\2\u009f\u009b\3\2\2\2\u009f\u009c\3\2\2\2\u009f\u009d\3\2\2\2\u009f\u009e"+
+		"\3\2\2\2\u00a0\13\3\2\2\2\u00a1\u00a2\7\5\2\2\u00a2\u00a3\7 \2\2\u00a3"+
+		"\u00a4\7%\2\2\u00a4\u00a5\7 \2\2\u00a5\u00a6\7\6\2\2\u00a6\u00a7\7$\2"+
+		"\2\u00a7\u00a8\7\7\2\2\u00a8\u00a9\7$\2\2\u00a9\u00aa\5\16\b\2\u00aa\u00ab"+
+		"\7$\2\2\u00ab\u00ac\7\b\2\2\u00ac\u00ad\5\20\t\2\u00ad\u00ae\7\t\2\2\u00ae"+
+		"\r\3\2\2\2\u00af\u00b3\5\22\n\2\u00b0\u00b3\5\6\4\2\u00b1\u00b3\7$\2\2"+
+		"\u00b2\u00af\3\2\2\2\u00b2\u00b0\3\2\2\2\u00b2\u00b1\3\2\2\2\u00b3\u00b4"+
+		"\3\2\2\2\u00b4\u00b2\3\2\2\2\u00b4\u00b5\3\2\2\2\u00b5\17\3\2\2\2\u00b6"+
+		"\u00ba\5\24\13\2\u00b7\u00ba\5\6\4\2\u00b8\u00ba\7$\2\2\u00b9\u00b6\3"+
+		"\2\2\2\u00b9\u00b7\3\2\2\2\u00b9\u00b8\3\2\2\2\u00ba\u00bb\3\2\2\2\u00bb"+
+		"\u00b9\3\2\2\2\u00bb\u00bc\3\2\2\2\u00bc\21\3\2\2\2\u00bd\u00c5\5 \21"+
+		"\2\u00be\u00c5\5(\25\2\u00bf\u00c5\5\60\31\2\u00c0\u00c5\58\35\2\u00c1"+
+		"\u00c5\5D#\2\u00c2\u00c5\5P)\2\u00c3\u00c5\5J&\2\u00c4\u00bd\3\2\2\2\u00c4"+
+		"\u00be\3\2\2\2\u00c4\u00bf\3\2\2\2\u00c4\u00c0\3\2\2\2\u00c4\u00c1\3\2"+
+		"\2\2\u00c4\u00c2\3\2\2\2\u00c4\u00c3\3\2\2\2\u00c5\23\3\2\2\2\u00c6\u00ce"+
+		"\5\"\22\2\u00c7\u00ce\5*\26\2\u00c8\u00ce\5\62\32\2\u00c9\u00ce\5:\36"+
+		"\2\u00ca\u00ce\5F$\2\u00cb\u00ce\5R*\2\u00cc\u00ce\5L\'\2\u00cd\u00c6"+
+		"\3\2\2\2\u00cd\u00c7\3\2\2\2\u00cd\u00c8\3\2\2\2\u00cd\u00c9\3\2\2\2\u00cd"+
+		"\u00ca\3\2\2\2\u00cd\u00cb\3\2\2\2\u00cd\u00cc\3\2\2\2\u00ce\25\3\2\2"+
+		"\2\u00cf\u00d0\7\n\2\2\u00d0\u00d1\7!\2\2\u00d1\u00d2\7\13\2\2\u00d2\u00d3"+
+		"\t\3\2\2\u00d3\u00d4\7\f\2\2\u00d4\u00d5\7\37\2\2\u00d5\u00d6\7\13\2\2"+
+		"\u00d6\u00d7\7\27\2\2\u00d7\u00d8\7\f\2\2\u00d8\u00d9\7\37\2\2\u00d9\u00da"+
+		"\7\13\2\2\u00da\u00db\7\27\2\2\u00db\u00dc\7\r\2\2\u00dc\27\3\2\2\2\u00dd"+
+		"\u00e1\5\34\17\2\u00de\u00e1\5$\23\2\u00df\u00e1\5,\27\2\u00e0\u00dd\3"+
+		"\2\2\2\u00e0\u00de\3\2\2\2\u00e0\u00df\3\2\2\2\u00e1\31\3\2\2\2\u00e2"+
+		"\u00e6\5B\"\2\u00e3\u00e6\5N(\2\u00e4\u00e6\5H%\2\u00e5\u00e2\3\2\2\2"+
+		"\u00e5\u00e3\3\2\2\2\u00e5\u00e4\3\2\2\2\u00e6\33\3\2\2\2\u00e7\u00e8"+
+		"\7\16\2\2\u00e8\u00e9\5T+\2\u00e9\u00ea\7\f\2\2\u00ea\u00eb\5T+\2\u00eb"+
+		"\u00ec\7\f\2\2\u00ec\u00ed\5T+\2\u00ed\u00ee\7\r\2\2\u00ee\35\3\2\2\2"+
+		"\u00ef\u00f0\7\16\2\2\u00f0\u00f1\5T+\2\u00f1\u00f2\7\f\2\2\u00f2\u00f3"+
+		"\5T+\2\u00f3\u00f4\7\f\2\2\u00f4\u00f5\5T+\2\u00f5\u00f6\7\r\2\2\u00f6"+
+		"\37\3\2\2\2\u00f7\u00f8\7\16\2\2\u00f8\u00f9\5T+\2\u00f9\u00fa\7\f\2\2"+
+		"\u00fa\u00fb\5T+\2\u00fb\u00fc\7\f\2\2\u00fc\u00fd\5T+\2\u00fd\u00fe\7"+
+		"\r\2\2\u00fe!\3\2\2\2\u00ff\u0100\7\16\2\2\u0100\u0101\5T+\2\u0101\u0102"+
+		"\7\f\2\2\u0102\u0103\5T+\2\u0103\u0104\7\f\2\2\u0104\u0105\5T+\2\u0105"+
+		"\u0106\7\r\2\2\u0106#\3\2\2\2\u0107\u0108\7\17\2\2\u0108\u0109\5V,\2\u0109"+
+		"\u010a\7\f\2\2\u010a\u010b\5V,\2\u010b\u010c\7\f\2\2\u010c\u010d\5V,\2"+
+		"\u010d\u010e\7\r\2\2\u010e%\3\2\2\2\u010f\u0110\7\17\2\2\u0110\u0111\5"+
+		"V,\2\u0111\u0112\7\f\2\2\u0112\u0113\5V,\2\u0113\u0114\7\f\2\2\u0114\u0115"+
+		"\5V,\2\u0115\u0116\7\r\2\2\u0116\'\3\2\2\2\u0117\u0118\7\17\2\2\u0118"+
+		"\u0119\5V,\2\u0119\u011a\7\f\2\2\u011a\u011b\5V,\2\u011b\u011c\7\f\2\2"+
+		"\u011c\u011d\5V,\2\u011d\u011e\7\r\2\2\u011e)\3\2\2\2\u011f\u0120\7\17"+
+		"\2\2\u0120\u0121\5V,\2\u0121\u0122\7\f\2\2\u0122\u0123\5V,\2\u0123\u0124"+
+		"\7\f\2\2\u0124\u0125\5V,\2\u0125\u0126\7\r\2\2\u0126+\3\2\2\2\u0127\u0128"+
+		"\7\20\2\2\u0128\u0129\5T+\2\u0129\u012a\7\f\2\2\u012a\u012b\5T+\2\u012b"+
+		"\u012c\7\r\2\2\u012c-\3\2\2\2\u012d\u012e\7\20\2\2\u012e\u012f\5T+\2\u012f"+
+		"\u0130\7\f\2\2\u0130\u0131\5T+\2\u0131\u0132\7\r\2\2\u0132/\3\2\2\2\u0133"+
+		"\u0134\7\20\2\2\u0134\u0135\5T+\2\u0135\u0136\7\f\2\2\u0136\u0137\5T+"+
+		"\2\u0137\u0138\7\r\2\2\u0138\61\3\2\2\2\u0139\u013a\7\20\2\2\u013a\u013b"+
+		"\5T+\2\u013b\u013c\7\f\2\2\u013c\u013d\5T+\2\u013d\u013e\7\r\2\2\u013e"+
+		"\63\3\2\2\2\u013f\u0140\7\21\2\2\u0140\u0141\7\33\2\2\u0141\u0142\7\13"+
+		"\2\2\u0142\u0143\7 \2\2\u0143\u0144\7\f\2\2\u0144\u0145\7\33\2\2\u0145"+
+		"\u0146\7\13\2\2\u0146\u0147\7 \2\2\u0147\u0148\7\f\2\2\u0148\u0149\7\33"+
+		"\2\2\u0149\u014a\7\13\2\2\u014a\u014b\7 \2\2\u014b\u014c\7\f\2\2\u014c"+
+		"\u014d\7\33\2\2\u014d\u014e\7\13\2\2\u014e\u014f\7 \2\2\u014f\u0150\7"+
+		"\f\2\2\u0150\u0151\7\34\2\2\u0151\u0152\7\13\2\2\u0152\u0157\7!\2\2\u0153"+
+		"\u0154\7\f\2\2\u0154\u0155\7\34\2\2\u0155\u0156\7\13\2\2\u0156\u0158\7"+
+		"!\2\2\u0157\u0153\3\2\2\2\u0157\u0158\3\2\2\2\u0158\u015d\3\2\2\2\u0159"+
+		"\u015a\7\f\2\2\u015a\u015b\7\34\2\2\u015b\u015c\7\13\2\2\u015c\u015e\7"+
+		"!\2\2\u015d\u0159\3\2\2\2\u015d\u015e\3\2\2\2\u015e\u0163\3\2\2\2\u015f"+
+		"\u0160\7\f\2\2\u0160\u0161\7\34\2\2\u0161\u0162\7\13\2\2\u0162\u0164\7"+
+		"!\2\2\u0163\u015f\3\2\2\2\u0163\u0164\3\2\2\2\u0164\u0165\3\2\2\2\u0165"+
+		"\u0166\7\r\2\2\u0166\65\3\2\2\2\u0167\u0168\7\21\2\2\u0168\u0169\7\33"+
+		"\2\2\u0169\u016a\7\13\2\2\u016a\u016b\7 \2\2\u016b\u016c\7\f\2\2\u016c"+
+		"\u016d\7\33\2\2\u016d\u016e\7\13\2\2\u016e\u016f\7 \2\2\u016f\u0170\7"+
+		"\f\2\2\u0170\u0171\7\33\2\2\u0171\u0172\7\13\2\2\u0172\u0173\7 \2\2\u0173"+
+		"\u0174\7\f\2\2\u0174\u0175\7\33\2\2\u0175\u0176\7\13\2\2\u0176\u0177\7"+
+		" \2\2\u0177\u0178\7\f\2\2\u0178\u0179\7\34\2\2\u0179\u017a\7\13\2\2\u017a"+
+		"\u017f\7!\2\2\u017b\u017c\7\f\2\2\u017c\u017d\7\34\2\2\u017d\u017e\7\13"+
+		"\2\2\u017e\u0180\7!\2\2\u017f\u017b\3\2\2\2\u017f\u0180\3\2\2\2\u0180"+
+		"\u0185\3\2\2\2\u0181\u0182\7\f\2\2\u0182\u0183\7\34\2\2\u0183\u0184\7"+
+		"\13\2\2\u0184\u0186\7!\2\2\u0185\u0181\3\2\2\2\u0185\u0186\3\2\2\2\u0186"+
+		"\u018b\3\2\2\2\u0187\u0188\7\f\2\2\u0188\u0189\7\34\2\2\u0189\u018a\7"+
+		"\13\2\2\u018a\u018c\7!\2\2\u018b\u0187\3\2\2\2\u018b\u018c\3\2\2\2\u018c"+
+		"\u018d\3\2\2\2\u018d\u018e\7\r\2\2\u018e\67\3\2\2\2\u018f\u0190\7\21\2"+
+		"\2\u0190\u0191\7\33\2\2\u0191\u0192\7\13\2\2\u0192\u0193\7 \2\2\u0193"+
+		"\u0194\7\f\2\2\u0194\u0195\7\33\2\2\u0195\u0196\7\13\2\2\u0196\u0197\7"+
+		" \2\2\u0197\u0198\7\f\2\2\u0198\u0199\7\33\2\2\u0199\u019a\7\13\2\2\u019a"+
+		"\u019b\7 \2\2\u019b\u019c\7\f\2\2\u019c\u019d\7\33\2\2\u019d\u019e\7\13"+
+		"\2\2\u019e\u019f\7 \2\2\u019f\u01a0\7\f\2\2\u01a0\u01a1\7\34\2\2\u01a1"+
+		"\u01a2\7\13\2\2\u01a2\u01a7\7!\2\2\u01a3\u01a4\7\f\2\2\u01a4\u01a5\7\34"+
+		"\2\2\u01a5\u01a6\7\13\2\2\u01a6\u01a8\7!\2\2\u01a7\u01a3\3\2\2\2\u01a7"+
+		"\u01a8\3\2\2\2\u01a8\u01ad\3\2\2\2\u01a9\u01aa\7\f\2\2\u01aa\u01ab\7\34"+
+		"\2\2\u01ab\u01ac\7\13\2\2\u01ac\u01ae\7!\2\2\u01ad\u01a9\3\2\2\2\u01ad"+
+		"\u01ae\3\2\2\2\u01ae\u01b3\3\2\2\2\u01af\u01b0\7\f\2\2\u01b0\u01b1\7\34"+
+		"\2\2\u01b1\u01b2\7\13\2\2\u01b2\u01b4\7!\2\2\u01b3\u01af\3\2\2\2\u01b3"+
+		"\u01b4\3\2\2\2\u01b4\u01b5\3\2\2\2\u01b5\u01b6\7\r\2\2\u01b69\3\2\2\2"+
+		"\u01b7\u01b8\7\21\2\2\u01b8\u01b9\7\33\2\2\u01b9\u01ba\7\13\2\2\u01ba"+
+		"\u01bb\7 \2\2\u01bb\u01bc\7\f\2\2\u01bc\u01bd\7\33\2\2\u01bd\u01be\7\13"+
+		"\2\2\u01be\u01bf\7 \2\2\u01bf\u01c0\7\f\2\2\u01c0\u01c1\7\33\2\2\u01c1"+
+		"\u01c2\7\13\2\2\u01c2\u01c3\7 \2\2\u01c3\u01c4\7\f\2\2\u01c4\u01c5\7\33"+
+		"\2\2\u01c5\u01c6\7\13\2\2\u01c6\u01c7\7 \2\2\u01c7\u01c8\7\f\2\2\u01c8"+
+		"\u01c9\7\34\2\2\u01c9\u01ca\7\13\2\2\u01ca\u01cf\7!\2\2\u01cb\u01cc\7"+
+		"\f\2\2\u01cc\u01cd\7\34\2\2\u01cd\u01ce\7\13\2\2\u01ce\u01d0\7!\2\2\u01cf"+
+		"\u01cb\3\2\2\2\u01cf\u01d0\3\2\2\2\u01d0\u01d5\3\2\2\2\u01d1\u01d2\7\f"+
+		"\2\2\u01d2\u01d3\7\34\2\2\u01d3\u01d4\7\13\2\2\u01d4\u01d6\7!\2\2\u01d5"+
+		"\u01d1\3\2\2\2\u01d5\u01d6\3\2\2\2\u01d6\u01db\3\2\2\2\u01d7\u01d8\7\f"+
+		"\2\2\u01d8\u01d9\7\34\2\2\u01d9\u01da\7\13\2\2\u01da\u01dc\7!\2\2\u01db"+
+		"\u01d7\3\2\2\2\u01db\u01dc\3\2\2\2\u01dc\u01dd\3\2\2\2\u01dd\u01de\7\r"+
+		"\2\2\u01de;\3\2\2\2\u01df\u01e0\7\22\2\2\u01e0\u01e1\7\23\2\2\u01e1\u01e2"+
+		"\7 \2\2\u01e2\u01e3\7\r\2\2\u01e3=\3\2\2\2\u01e4\u01e5\7\22\2\2\u01e5"+
+		"\u01e6\7\23\2\2\u01e6\u01e7\7 \2\2\u01e7\u01e8\7\r\2\2\u01e8?\3\2\2\2"+
+		"\u01e9\u01ea\7\22\2\2\u01ea\u01eb\7\23\2\2\u01eb\u01ec\7 \2\2\u01ec\u01ed"+
+		"\7\r\2\2\u01edA\3\2\2\2\u01ee\u01ef\7\24\2\2\u01ef\u01f0\7!\2\2\u01f0"+
+		"\u01f1\7\r\2\2\u01f1C\3\2\2\2\u01f2\u01f3\7\24\2\2\u01f3\u01f4\7!\2\2"+
+		"\u01f4\u01f5\7\r\2\2\u01f5E\3\2\2\2\u01f6\u01f7\7\24\2\2\u01f7\u01f8\7"+
+		"!\2\2\u01f8\u01f9\7\r\2\2\u01f9G\3\2\2\2\u01fa\u01fb\7\25\2\2\u01fb\u01fc"+
+		"\7\35\2\2\u01fc\u01fd\7\13\2\2\u01fd\u01fe\7!\2\2\u01fe\u01ff\7\f\2\2"+
+		"\u01ff\u0200\7\36\2\2\u0200\u0201\7\13\2\2\u0201\u0202\7 \2\2\u0202\u0203"+
+		"\7\f\2\2\u0203\u0204\7\36\2\2\u0204\u0205\7\13\2\2\u0205\u0206\7 \2\2"+
+		"\u0206\u0207\7\f\2\2\u0207\u0208\7\36\2\2\u0208\u0209\7\13\2\2\u0209\u020a"+
+		"\7 \2\2\u020a\u020b\7\r\2\2\u020bI\3\2\2\2\u020c\u020d\7\25\2\2\u020d"+
+		"\u020e\7\35\2\2\u020e\u020f\7\13\2\2\u020f\u0210\7!\2\2\u0210\u0211\7"+
+		"\f\2\2\u0211\u0212\7\36\2\2\u0212\u0213\7\13\2\2\u0213\u0214\7 \2\2\u0214"+
+		"\u0215\7\f\2\2\u0215\u0216\7\36\2\2\u0216\u0217\7\13\2\2\u0217\u0218\7"+
+		" \2\2\u0218\u0219\7\f\2\2\u0219\u021a\7\36\2\2\u021a\u021b\7\13\2\2\u021b"+
+		"\u021c\7 \2\2\u021c\u021d\7\r\2\2\u021dK\3\2\2\2\u021e\u021f\7\25\2\2"+
+		"\u021f\u0220\7\35\2\2\u0220\u0221\7\13\2\2\u0221\u0222\7!\2\2\u0222\u0223"+
+		"\7\f\2\2\u0223\u0224\7\36\2\2\u0224\u0225\7\13\2\2\u0225\u0226\7 \2\2"+
+		"\u0226\u0227\7\f\2\2\u0227\u0228\7\36\2\2\u0228\u0229\7\13\2\2\u0229\u022a"+
+		"\7 \2\2\u022a\u022b\7\f\2\2\u022b\u022c\7\36\2\2\u022c\u022d\7\13\2\2"+
+		"\u022d\u022e\7 \2\2\u022e\u022f\7\r\2\2\u022fM\3\2\2\2\u0230\u0231\7\26"+
+		"\2\2\u0231\u0232\7\"\2\2\u0232\u0233\7\r\2\2\u0233O\3\2\2\2\u0234\u0235"+
+		"\7\26\2\2\u0235\u0236\7\"\2\2\u0236\u0237\7\r\2\2\u0237Q\3\2\2\2\u0238"+
+		"\u0239\7\26\2\2\u0239\u023a\7\"\2\2\u023a\u023b\7\r\2\2\u023bS\3\2\2\2"+
+		"\u023c\u023d\7\31\2\2\u023d\u023e\7\13\2\2\u023e\u023f\t\4\2\2\u023fU"+
+		"\3\2\2\2\u0240\u0241\7\30\2\2\u0241\u0242\7\13\2\2\u0242\u0243\t\4\2\2"+
+		"\u0243W\3\2\2\2\']_fjnqtx{\u0080\u0084\u0087\u008c\u0090\u0093\u0099\u009f"+
+		"\u00b2\u00b4\u00b9\u00bb\u00c4\u00cd\u00e0\u00e5\u0157\u015d\u0163\u017f"+
+		"\u0185\u018b\u01a7\u01ad\u01b3\u01cf\u01d5\u01db";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

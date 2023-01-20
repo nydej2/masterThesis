@@ -22,7 +22,6 @@ exitCommandChain(ctx){
   }
 
 enterCondition(ctx){
-  console.log("condition entered");
     this.executeIfBlock = false;
     this.executeElseBlock = false;
     switch(ctx.OPERATOR().getText()){
@@ -62,7 +61,6 @@ enterCondition(ctx){
         }
         break;
     }
-    console.log("condition if triggered " + this.executeIfBlock);
   }
 
 enterRelCommandFrom(ctx){
@@ -87,55 +85,7 @@ enterRelCommandTo(ctx){
   }
 }
 
-exitSetVariable(ctx){
 
-  var variables = [];
-
-  var varName = ctx.STRING()[0].getText();
-
-  //Workaround for assigning value dynamically depending on input type.
-  if(ctx.STRING()[1]){
-    console.log("yeeet " + ctx.STRING()[1]);
-    var varValue = ctx.STRING()[1];
-  }
-
-  if(ctx.DIGITS()){
-    var varValue = ctx.DIGITS();
-  }
-  if(ctx.SOMERULE()){
-    var varValue = ctx.SOMERULE().getText();
-  }
-
-  for(var i=0; i < ctx.BOOLEANSTRING().length; i++){
-    var booleanName = ctx.VARASSVALUES()[i].getText();
-    var booleanValue = ctx.BOOLEANSTRING()[i].getText();
-    variables.push({booleanName: booleanName, booleanValue: booleanValue})
-  }
-
-  this.Res = this.Res 
-  + "await gc.setVariable('" 
-  + varName 
-  + "',";
-
-  if(variables.find(o => o.booleanName === "isDynval").booleanValue == 'True'){
-    this.Res  = this.Res 
-    +"await gc.dynval('" + varValue + "', await gc.get_current_class_instance_uuid()),"
-  } else {
-    this.Res = this.Res 
-    + varValue + ",";
-  }
-  
-  this.Res = this.Res
-  + variables.find(o => o.booleanName === "instanceAdaptable").booleanValue.toLowerCase() + ");"
-
-  this.addZeilenUmbruch();
-}
-
-exitGetVariable(ctx){
-    console.log(ctx.STRING());
-}
-
-  
 exitRelCommandFrom(ctx){
     this.Res = this.Res + ");";
     this.addZeilenUmbruch();
@@ -146,6 +96,53 @@ exitRelCommandTo(ctx){
     this.addZeilenUmbruch();
   }
 
+  exftSetVariable(ctx){
+
+    var variables = [];
+  
+    var varName = ctx.STRING()[0].getText();
+  
+    //Workaround for assigning value dynamically depending on input type.
+    if(ctx.STRING()[1]){
+      var varValue = ctx.STRING()[1];
+    }
+  
+    if(ctx.DIGITS()){
+      var varValue = ctx.DIGITS();
+    }
+    if(ctx.DYNVALSTRING()){
+      var varValue = ctx.DYNVALSTRING().getText();
+    }
+  
+    for(var i=0; i < ctx.BOOLEANSTRING().length; i++){
+      var booleanName = ctx.VARASSPARAMS()[i].getText();
+      var booleanValue = ctx.BOOLEANSTRING()[i].getText();
+      variables.push({booleanName: booleanName, booleanValue: booleanValue})
+    }
+  
+    this.Res = this.Res 
+    + "await gc.setVariable('" 
+    + varName 
+    + "',";
+  
+    if(variables.find(o => o.booleanName === "isDynval").booleanValue == 'True'){
+      this.Res  = this.Res 
+      +"await gc.dynval('" + varValue + "', await gc.get_current_class_instance_uuid()),"
+    } else {
+      this.Res = this.Res 
+      + varValue + ",";
+    }
+    
+    this.Res = this.Res
+    + variables.find(o => o.booleanName === "instanceAdaptable").booleanValue.toLowerCase() + ");"
+  
+    this.addZeilenUmbruch();
+  }
+  
+  exitGetVariable(ctx){
+      console.log(ctx.STRING());
+  }
+  
 /**
  * CUBE CREATION FUNCTIONS 
  */
@@ -157,6 +154,7 @@ exitCube(ctx){
   }
 
 exitIfCube(ctx){
+
     if(this.executeIfBlock){
       this.exitCube(ctx);
     }
@@ -172,7 +170,10 @@ exitRelCube(ctx){
   this.cubeCreation(ctx);
   }
 
+  //Alternative implementation of providing functionality for applying dynamic input values.
+  /*
 cubeCreation(ctx){
+
   var dimensions = [];
   for(var i=0; i < ctx.DIGITS().length; i++){
     var dimension = ctx.DIMENSION3D()[i].getText();
@@ -220,6 +221,64 @@ cubeCreation(ctx){
 
   this.Res = this.Res + ")"
 }
+*/
+
+cubeCreation(ctx){
+
+  var dimensions = [];
+  for(var i=0; i < ctx.dimInput().length; i++){
+    var dimension = ctx.dimInput()[i].DIMENSION3D().getText();
+  
+    if(ctx.dimInput()[i].DYNINPUT()){
+      var dimensionValue = ctx.dimInput()[i].DYNINPUT().getText();
+    }
+
+    if(ctx.dimInput()[i].DIGITS()){
+      var dimensionValue = ctx.dimInput()[i].DIGITS().getText();
+    }
+
+    dimensions.push({dimension: dimension, dimensionValue :dimensionValue});
+  }
+
+  this.addAwait();
+  this.Res = this.Res + "gc.graphic_cube(";
+  
+  if(dimensions.find(o => o.dimension === this.widthString)){
+    var widthValue = dimensions.find(o => o.dimension === this.widthString).dimensionValue;
+    if(widthValue.includes('(')){
+      this.Res = this.Res + "await gc.getVariableValue(\'" + widthValue.substring(1, widthValue.length -1) + "\'),";
+    } else{
+      this.Res = this.Res + widthValue + ",";
+    }
+  }
+
+  if(dimensions.find(o => o.dimension === this.heightString)){
+    var heightValue = dimensions.find(o => o.dimension === this.heightString).dimensionValue;
+    if(heightValue.includes('(')){
+      this.Res = this.Res + "await gc.getVariableValue(\'" + heightValue.substring(1, heightValue.length -1) + "\'),";
+    } else{
+      this.Res = this.Res + heightValue + ",";
+    }
+  }
+
+  if(dimensions.find(o => o.dimension === this.depthString)){
+    var depthValue = dimensions.find(o => o.dimension === this.depthString).dimensionValue;
+    if(depthValue.includes('(')){
+      this.Res = this.Res + "await gc.getVariableValue(\'" + depthValue.substring(1, depthValue.length -1) + "\')";
+    } else{
+      this.Res = this.Res + depthValue;
+    }
+  }
+
+  if(this.color){
+    this.Res = this.Res + ",\'" + this.color + "\'";
+  } 
+  if (this.map){
+    this.Res = this.Res + ", \'" + this.map + "\'"; 
+  }
+
+  this.Res = this.Res + ")"
+}
 
 /**
  * SPHERE CREATION FUNCTIONS 
@@ -254,26 +313,56 @@ exitRelSphere(ctx){
 
 sphereCreation(ctx){
   var dimensions = [];
-  for(var i=0; i < ctx.DIGITS().length; i++){
-    var dimension = ctx.SPHEREDIMENSIONS()[i].getText();
-    var dimensionValue = ctx.DIGITS()[i].getText();
-    dimensions.push({dimension: dimension, dimensionValue :dimensionValue})
+  for(var i=0; i < ctx.sphereDimInput().length; i++){
+    var dimension = ctx.sphereDimInput()[i].SPHEREPARAMS().getText();
+    if(ctx.sphereDimInput()[i].DYNINPUT()){
+      var dimensionValue = ctx.sphereDimInput()[i].DYNINPUT().getText();
+    } else if(ctx.sphereDimInput()[i].DIGITS()){
+      var dimensionValue = ctx.sphereDimInput()[i].DIGITS().getText();
+    }
+    dimensions.push({dimension: dimension, dimensionValue :dimensionValue});
   }
-
-  this.Res = this.Res
-  + "graphic_sphere("
-  + "radius: " + dimensions.find(o => o.dimension === "radius").dimensionValue
-  + ", widthSegment: " +  dimensions.find(o => o.dimension === "widthSegment").dimensionValue
-  + ", heightSegment: " + dimensions.find(o => o.dimension === "heightSegment").dimensionValue
-
+  this.Res = this.Res + "await gc.graphic_sphere(";
+  if(dimensions.find(o => o.dimension === "radius")){
+    var radius = dimensions.find(o => o.dimension === "radius").dimensionValue;
+    if(radius.includes('(')){
+      this.Res = this.Res 
+      + "await gc.getVariableValue(\'" 
+      + radius.substring(1, radius.length -1) 
+      + "\')"; 
+    } else {
+      this.Res = this.Res + radius + ",";
+    }
+  }
+  if(dimensions.find(o => o.dimension === "widthSegment")){
+    var widthSegment = dimensions.find(o => o.dimension === "widthSegment").dimensionValue;
+    if(widthSegment.includes('(')){
+      this.Res = this.Res 
+      + "await gc.getVariableValue(\'" 
+      + widthSegment.substring(1, widthSegment.length -1) 
+      + "\')"; 
+    } else {
+      this.Res = this.Res + widthSegment + ",";
+    }
+  }
+  if(dimensions.find(o => o.dimension === "heightSegment")){
+    var heightSegment = dimensions.find(o => o.dimension === "heightSegment").dimensionValue;
+    if(heightSegment.includes('(')){
+      this.Res = this.Res 
+      + "await gc.getVariableValue(\'" 
+      + heightSegment.substring(1, heightSegment.length -1) 
+      + "\')"; 
+    } else {
+      this.Res = this.Res + heightSegment;
+    }
+  }
   if(this.color){
-    this.Res = this.Res + ", color: \"" + this.color + "\"";
+    this.Res = this.Res + ",\'" + this.color + "\'";
   } 
   if (this.map){
-    this.Res = this.Res + ", map: \"" + this.map + "\""; 
+    this.Res = this.Res + ",\'" + this.map + "\'"; 
   }
   this.Res = this.Res + ")"
-
 }
 
 /**
@@ -308,21 +397,48 @@ exitRelPane(ctx){
 
 planeCreation(ctx){
   var dimensions = [];
-  for(var i=0; i < ctx.DIGITS().length; i++){
-    var dimension = ctx.DIMENSION3D()[i].getText();
-    var dimensionValue = ctx.DIGITS()[i].getText();
-    dimensions.push({dimension: dimension, dimensionValue :dimensionValue})
+  for(var i=0; i < ctx.dimInput().length; i++){
+    var dimension = ctx.dimInput()[i].DIMENSION3D().getText();
+  
+    if(ctx.dimInput()[i].DYNINPUT()){
+      var dimensionValue = ctx.dimInput()[i].DYNINPUT().getText();
+    }
+
+    if(ctx.dimInput()[i].DIGITS()){
+      var dimensionValue = ctx.dimInput()[i].DIGITS().getText();
+    }
+
+    dimensions.push({dimension: dimension, dimensionValue :dimensionValue});
   }
 
   this.Res = this.Res
-  + "gc.graphic_plane(" 
-  + this.widthString + ": " + dimensions.find(o => o.dimension === this.widthString).dimensionValue + "," 
-  + this.heightString + ": " + dimensions.find(o => o.dimension === this.heightString).dimensionValue
+  + "await gc.graphic_plane("; 
+
+  if(dimensions.find(o => o.dimension === this.widthString)){
+    var widthValue =  dimensions.find(o => o.dimension === this.widthString).dimensionValue;
+    if(widthValue.includes('(')){
+      this.Res = this.Res + "await gc.getVariableValue(\'" 
+      + widthValue.substring(1, widthValue.length -1) + "\'),";
+    } else {
+      this.Res = this.Res + widthValue+ ',';
+    }
+  }
+
+  if(dimensions.find(o => o.dimension === this.heightString)){
+    var heightValue =  dimensions.find(o => o.dimension === this.heightString).dimensionValue;
+    if(heightValue.includes('(')){
+      this.Res = this.Res + "await gc.getVariableValue(\'" 
+      + heightValue.substring(1, heightValue.length -1) + "\')";
+    } else {
+      this.Res = this.Res + heightValue ;
+    }
+  }
+
   if(this.color){
-    this.Res = this.Res + ", color: \"" + this.color + "\"";
+    this.Res = this.Res + ",\'" + this.color + "\'";
   } 
   if (this.map){
-    this.Res = this.Res + ", map: \"" + this.map + "\""; 
+    this.Res = this.Res + ",\'" + this.map + "\'"; 
   }
 
   this.Res = this.Res + ")";
@@ -396,15 +512,15 @@ exitRelText(ctx){
 
 textCreation(ctx){
   var textDimDigits = [];
-    for(var i=0; i < ctx.TEXTDIMDIGITS().length; i++){
-      var dimension = ctx.TEXTDIMDIGITS()[i].getText();
+    for(var i=0; i < ctx.TEXTPARAMDIGITS().length; i++){
+      var dimension = ctx.TEXTPARAMDIGITS()[i].getText();
       var dimensionValue = ctx.DIGITS()[i].getText();
       textDimDigits.push({dimension: dimension, dimensionValue :dimensionValue})
     }
 
   var textDimString = [];
-    for(var i=0; i < ctx.TEXTDIMSTRING().length; i++){
-      var dimension = ctx.TEXTDIMSTRING()[i].getText();
+    for(var i=0; i < ctx.TEXTPARAMSTRING().length; i++){
+      var dimension = ctx.TEXTPARAMSTRING()[i].getText();
       var dimensionValue = ctx.STRING()[i].getText();
       textDimString.push({dimension: dimension, dimensionValue :dimensionValue})
     }
@@ -420,13 +536,13 @@ textCreation(ctx){
 
   //Optional parameters
   if(textDimString.find(o => o.dimension === "posNameX")){
-    this.Res = this.Res + "," + textDimString.find(o => o.dimension === "posNameX").dimensionValue;
+    this.Res = this.Res + ", \'" + textDimString.find(o => o.dimension === "posNameX").dimensionValue + "\'";
   }
   if(textDimString.find(o => o.dimension === "posNameY")){
-    this.Res = this.Res + "," + textDimString.find(o => o.dimension === "posNameY").dimensionValue 
+    this.Res = this.Res + ", \'" + textDimString.find(o => o.dimension === "posNameY").dimensionValue + "\'"; 
   }
   if(textDimString.find(o => o.dimension === "posNameZ")){
-    this.Res = this.Res + "," + textDimString.find(o => o.dimension === "posNameZ").dimensionValue
+    this.Res = this.Res + ", \'" + textDimString.find(o => o.dimension === "posNameZ").dimensionValue + "\'";
   }
   this.Res = this.Res + ")";
   ; 
@@ -461,19 +577,18 @@ exitElseColor(ctx){
 
 exitMap(ctx){
     this.map = "data:image/png;base64,";
-    this.map = this.map + ctx.MAP
-    ();
+    this.map = this.map + ctx.MAPLEXER();
   }
 
 exitIfMap(ctx){
   if(this.executeIfBlock){
-    this.map = ctx.STRING();
+    this.map = ctx.MAPLEXER();
   }
 }
 
 exitEleseMap(ctx){
   if(this.executeElseBlock){
-    this.map = ctx.STRING();
+    this.map = ctx.MAPLEXER();
   }
 }
 

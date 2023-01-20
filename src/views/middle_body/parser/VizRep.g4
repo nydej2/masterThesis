@@ -4,102 +4,90 @@ grammar VizRep;
  * Parser Rules
  */
  
- commandChain	  : (command | NEWLINE | relation | condition | setVariable)+ (EOF | NEWLINE);
+ commandChain	  : (command | relation | condition | setVariable | NEWLINE)+ (EOF | NEWLINE);
 
- relation       : line NEWLINE? 'START' NEWLINE? color? NEWLINE? relCommandFrom NEWLINE? relCommandFrom? NEWLINE+? 'END' NEWLINE? color? NEWLINE+? relCommandTo NEWLINE? relCommandTo?;
+ command	      : shapeCommand | styleCommand | text;
 
- relMiddle      : line NEWLINE+? 'START' NEWLINE+? shapeCommand shapeCommand? 'MIDDLE' NEWLINE+? text 'END' NEWLINE+? shapeCommand shapeCommand? ;
-
- condition      : 'IF(' DIGITS OPERATOR DIGITS ')' NEWLINE 'THEN' NEWLINE ifBlock NEWLINE 'ELSE' elseBlock 'END IF';
-
- setVariable    : 'SET: ' STRING ':' (SOMERULE | STRING | DIGITS) ',' VARASSVALUES ':' BOOLEANSTRING ',' VARASSVALUES ':' BOOLEANSTRING  ';';
-
-/* The if and else block is necessary since otherwise there is no chance that the context 
- * of te child nodes are aware if they belong to a conditional statement
- */
- ifBlock        : (ifCommand | relation | NEWLINE)+;
-
- elseBlock      : (elseCommand | relation | NEWLINE)+;
-
-  /* I know its unlucky that we cannot reuse the same shapesCommand / styleCommand parser rules we've already defined. However 
-  *  It seems simpler than catching all the cases(conditions, relations, standart) in one shape e.g. Cube. this would be possible
-  *  too by accessing parent elements. 
-  */
- ifCommand      : (ifCube | ifSphere | ifPlane | ifText | ifColor | ifMap | ifPen);
-
- elseCommand    : (elseCube | elseSphere | elsePlane | elseText | elseColor | elseMap | elsePen);
-
- command	    : shapeCommand | styleCommand;
-
- shapeCommand   : cube | sphere | plane | text;
-
- styleCommand   : color | map | pen;
+ relation       : line NEWLINE? 'START' NEWLINE? color? NEWLINE? relCommandFrom NEWLINE? text? NEWLINE+? 
+                  'END' NEWLINE? color? NEWLINE+? relCommandTo NEWLINE? text?;
 
  relCommandFrom : relCube | relSphere | relPane | relText;
 
  relCommandTo   : relCube | relSphere | relPane | relText;
+
+ condition      : 'IF(' DIGITS OPERATOR DIGITS ')' NEWLINE 'THEN' NEWLINE ifBlock NEWLINE 'ELSE' elseBlock 
+                  'END IF';
+
+/* The if and else blocks are necessary since it's the most straight forward way to differenciate which node belongs to what 
+conditional block
+ */
+
+ ifBlock        : (ifCommand | relation | NEWLINE)+;
+
+ elseBlock      : (elseCommand | relation | NEWLINE)+;
+
+ ifCommand      : (ifCube | ifSphere | ifPlane | ifText | ifColor | ifMap | ifPen);
+
+ elseCommand    : (elseCube | elseSphere | elsePlane | elseText | elseColor | elseMap | elsePen);
+
+ setVariable    : 'SET: ' STRING ':' (DYNVALSTRING | STRING | DIGITS) ',' VARASSPARAMS ':' BOOLEANSTRING ',' 
+                  VARASSPARAMS ':' BOOLEANSTRING  ';';
+
+ shapeCommand   : cube | sphere | plane;
+
+ styleCommand   : color | map | pen;
  
- /*It is necessary to distinct between regular DIMENSION3D and dynamic DIMENSION3DDYN becaue we must be able to distinct in the in the semantic actions(i.e. HtmlVizRepLinstener) */
- cube	    	    : 'CUBE:' ((DIMENSION3D ':' DIGITS) | (DIMENSION3DDYN ':' 'GET:' STRING)) ',' ((DIMENSION3D ':' DIGITS) | (DIMENSION3DDYN ':' 'GET:' STRING)) ',' ((DIMENSION3D ':' DIGITS) | (DIMENSION3DDYN ':' 'GET:' STRING)) ';';
+ cube	    	    : 'CUBE:' dimInput ',' dimInput ',' dimInput';';
+ relCube        : 'CUBE:' dimInput ',' dimInput ',' dimInput ';';
+ ifCube         : 'CUBE:' dimInput ',' dimInput ',' dimInput ';';
+ elseCube       : 'CUBE:' dimInput ',' dimInput ',' dimInput ';';
 
- relCube        : 'CUBE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
+ sphere         : 'SPHERE:' sphereDimInput ',' sphereDimInput ',' sphereDimInput ';';
+ relSphere      : 'SPHERE:' sphereDimInput ',' sphereDimInput ',' sphereDimInput ';';
+ ifSphere       : 'SPHERE:' sphereDimInput ',' sphereDimInput ',' sphereDimInput ';';
+ elseSphere     : 'SPHERE:' sphereDimInput ',' sphereDimInput ',' sphereDimInput ';';
 
- ifCube         : 'CUBE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
+ plane          : 'PLANE:' dimInput ',' dimInput ';';
+ relPane        : 'PLANE:' dimInput ',' dimInput ';';
+ ifPlane        : 'PLANE:' dimInput ',' dimInput ';';
+ elsePlane      : 'PLANE:' dimInput ',' dimInput ';';
 
- elseCube       : 'CUBE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
-
- sphere         : 'SPHERE:' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ';';
-
- relSphere      : 'SPHERE:' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ';';
-
- ifSphere       : 'SPHERE:' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ';';
-
- elseSphere     : 'SPHERE:' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ',' SPHEREDIMENSIONS ':' DIGITS ';';
-
- plane          : 'PLANE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
-
- relPane        : 'PLANE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
-
- ifPlane        : 'PLANE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
-
- elsePlane      : 'PLANE:' DIMENSION3D ':' DIGITS ',' DIMENSION3D ':' DIGITS ';';
-
- text           : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)?';';
-
- relText        : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)?';';
-
- ifText        : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)?';';
-
- elseText        : 'TEXT:' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS ',' TEXTDIMDIGITS ':' DIGITS
-                 ',' TEXTDIMSTRING ':' STRING (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? (',' TEXTDIMSTRING ':' STRING)? ';';
-
+ text           : 'TEXT:' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS
+                  ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS',' TEXTPARAMSTRING ':' STRING (',' TEXTPARAMSTRING 
+                  ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)?';';
+ relText        : 'TEXT:' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS
+                  ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS',' TEXTPARAMSTRING ':' STRING (',' TEXTPARAMSTRING 
+                  ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)?';';
+ ifText        : 'TEXT:' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS
+                  ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS',' TEXTPARAMSTRING ':' STRING (',' TEXTPARAMSTRING 
+                  ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)?';';
+ elseText        : 'TEXT:' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS ',' TEXTPARAMDIGITS
+                  ':' DIGITS ',' TEXTPARAMDIGITS ':' DIGITS',' TEXTPARAMSTRING ':' STRING (',' TEXTPARAMSTRING 
+                  ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)? (',' TEXTPARAMSTRING ':' STRING)?';';
+                  
  line           : 'LINE:' 'lineWidth:' DIGITS ';';
-
  ifLine         : 'LINE:' 'lineWidth:' DIGITS ';';
-
  elseLine       : 'LINE:' 'lineWidth:' DIGITS ';';  
 
- pen            : 'PEN:' PENPARAMSBOOL ':' STRING ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ';';
- 
- ifPen          : 'PEN:' PENPARAMSBOOL ':' STRING ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ';';
- 
- elsePen        : 'PEN:' PENPARAMSBOOL ':' STRING ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ';';
-
- color          : 'COLOR: fill:' STRING ';'; 
-
+ color          : 'COLOR: fill:' STRING ';';
  ifColor        : 'COLOR: fill:' STRING ';'; 
+ elseColor      : 'COLOR: fill:' STRING ';';
 
- elseColor      : 'COLOR: fill:' STRING ';'; 
+ pen            : 'PEN:' PENPARAMSBOOL ':' STRING ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ',' 
+                  PENPARAMS ':' DIGITS ';';
+ ifPen          : 'PEN:' PENPARAMSBOOL ':' STRING ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ',' 
+                  PENPARAMS ':' DIGITS ';';
+ elsePen        : 'PEN:' PENPARAMSBOOL ':' STRING ',' PENPARAMS ':' DIGITS ',' PENPARAMS ':' DIGITS ',' 
+                  PENPARAMS ':' DIGITS ';';
+ 
 
- map            : 'MAP: map:' MAP ';';
+ map            : 'MAP: map:' MAPLEXER ';';
+ ifMap          : 'MAP: map:' MAPLEXER ';';
+ elseMap        : 'MAP: map:' MAPLEXER ';';
 
- ifMap          : 'MAP: map:' STRING ';';
+ dimInput       : DIMENSION3D ':' (DYNINPUT | DIGITS);
 
- elseMap        : 'MAP: map:' STRING ';';
-
+ sphereDimInput : SPHEREPARAMS ':' (DYNINPUT | DIGITS);
  
  /*
  * Lexer Rules
@@ -111,29 +99,27 @@ fragment UPPERCASE  : [A-Z] ;
 
 BOOLEANSTRING   : ('True' | 'False');
 
-SPHEREDIMENSIONS: ('radius' | 'widthSegment' | 'heightSegment');
+SPHEREPARAMS: ('radius' | 'widthSegment' | 'heightSegment');
 
 DIMENSION3D			: (DIMENSION2D | 'depth');
 
-DIMENSION3DDYN  : ('heightDyn' | 'depthDyn' | 'widthDyn');
-
 DIMENSION2D			: ('height' | 'width');
 
-TEXTDIMDIGITS   : ('xRel' | 'yRel' | 'zRel' | 'size');
+TEXTPARAMDIGITS : ('xRel' | 'yRel' | 'zRel' | 'size');
 
-TEXTDIMSTRING   : ('text' | 'posNameX' | 'posNameY' | 'posNameZ');
+TEXTPARAMSTRING : ('text' | 'posNameX' | 'posNameY' | 'posNameZ');
 
 PENPARAMSBOOL   : 'dashed';
 
 PENPARAMS       : ('dashScale'|'gapSize' | 'dashSize') ;
 
-VARASSVALUES    : ('instanceAdaptable' | 'isDynval');
+VARASSPARAMS    : ('instanceAdaptable' | 'isDynval');
 
 DIGITS				  : [0-9.-]+;
 
 STRING 				  : (LOWERCASE | UPPERCASE | '_')+;
 
-MAP             : ([a-zA-Z0-9_/.+=])+;
+MAPLEXER        : ([a-zA-Z0-9_/.+=])+;
 
 WHITESPACE      : (' ' | '\t')+  -> skip;
 
@@ -141,4 +127,8 @@ NEWLINE         : ('\r'? '\n' | '\r')+ ;
 
 OPERATOR        : ('<=' | '==' | '>=' | '<' | '>');
 
-SOMERULE        : (STRING | DIGITS | '-')+;
+DYNVALSTRING     : (STRING | DIGITS | '-')+;
+
+DYNINPUT        : '(' STRING ')';
+
+

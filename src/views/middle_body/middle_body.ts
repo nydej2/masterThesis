@@ -44,7 +44,7 @@ export class MiddeBody{
     START 
     TEXT: xRel: 1, yRel: 2, zRel: 3, size: 4, text: someString, posNameX: a, posNameY: b, posNameZ: c;
     PLANE: width: 12, height: 7;
-    END
+    ENDq
     CUBE: height:14, width: 1, depth:7;`;
 */
 
