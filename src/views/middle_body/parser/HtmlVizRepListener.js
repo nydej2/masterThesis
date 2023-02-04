@@ -96,7 +96,7 @@ exitRelCommandTo(ctx){
     this.addZeilenUmbruch();
   }
 
-  exftSetVariable(ctx){
+  exitSetVariable(ctx){
 
     var variables = [];
   
